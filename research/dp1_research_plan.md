@@ -1,6 +1,6 @@
 # 次数1の非可換del Pezzo曲面：研究方針
 
-2026-11-15 / integration-v3（大域次元公理の冗長性を整理）。再開時は`00_research_plan.md`、本書、`research/dp1_research_notes.md`、二つの現行TeX論文を読む。一般原則と保存許可は上位計画に置き、この文書には次数1固有の計画だけを記す。
+2026-11-15 / integration-v3（大域次元公理の冗長性を整理）。再開時は`00_research_plan.md`、本書、`research/dp1_research_notes.md`、二つの現行TeX論文を読む。一般原則と保存許可は本リポジトリの00_research_plan.mdに置き、この文書には次数1固有の計画だけを記す。
 
 ## 目標と達成基準
 
@@ -10,7 +10,7 @@ quiverを分類対象に含めず、Ext有限・noetherianな非零abel圏、Ser
 
 ## dense resonanceでの確定結果（次数1も含む）
 
-`papers/nc_del_pezzo_resonance_hearts.tex`：Rainsのsimple-root既約sheaf存在条件の下、m=chi(e,M)に対して全tau-orbitでHom=max(m,0)、Ext¹=max(-m,0)、Ext²=0を証明。Rainsの導来双対R adによりm>0のExt¹消滅も解決。m<0では反標準AZ ampleが失敗し、自然導来切断の像はanticanonical qgrの次元(-m)の境界外アフィン表現[-1]、m>0では次元mの表現がdegree0、m=0ではMは導来的に不可視（genuine smooth avatarではm0共鳴が不在）。正負それぞれの共鳴が次数1の一般位置楕円blowup族でもdense。導来非同値・qgr特異化は従わない。既存`papers/dp1_anticanonical_models.tex`が主張する全q導来同値の独立監査は未実施。一般の研究ノートは`research/resonance_hearts.md`。
+[Rains共鳴の公表原稿](https://github.com/uedakazushi/nc-cubic-moduli/blob/main/papers/nc_del_pezzo_resonance_hearts.tex)：Rainsのsimple-root既約sheaf存在条件の下、m=chi(e,M)に対して全tau-orbitでHom=max(m,0)、Ext¹=max(-m,0)、Ext²=0を証明。Rainsの導来双対R adによりm>0のExt¹消滅も解決。m<0では反標準AZ ampleが失敗し、自然導来切断の像はanticanonical qgrの次元(-m)の境界外アフィン表現[-1]、m>0では次元mの表現がdegree0、m=0ではMは導来的に不可視（genuine smooth avatarではm0共鳴が不在）。正負それぞれの共鳴が次数1の一般位置楕円blowup族でもdense。導来非同値・qgr特異化は従わない。既存`papers/dp1_anticanonical_models.tex`が主張する全q導来同値の独立監査は未実施。一般の研究ノートは[Rains共鳴の研究ノート](https://github.com/uedakazushi/nc-cubic-moduli/blob/main/research/resonance_hearts.md)。
 
 ## Rains resonanceの非既約sheafと導来比較の検証条件
 
