@@ -8,6 +8,9 @@
 
 [現行研究ノート](research/dp1_research_notes.md) / [テーマ固有の計画](research/dp1_research_plan.md) / [検証状態](research/dp1_validation.md) / [再現手順](research/dp1_reproduction.md) / [Codex指示](AGENTS.md)
 
+## 現行の価値最大化型研究戦略
+2026-11-16版の [研究方針](00_research_plan.md) と [テーマ固有の計画](research/dp1_research_plan.md) に、P0（証明・先行研究監査）、P1（10次元局所dg/Moritaモジュライ）、P2（内在的abelian heart）、P3（特異境界・compactified Jacobian）、P4/P5（weighted認識・weak境界）の優先順を明示した。**有限A∞表示の成分性と全intrinsic abelian moduliの成分性は別問題**である。完全分類だけに固執せず独立に公表できる結果を完成させる。
+
 ## 主要な成果と未解決点
 次数1 del Pezzoの一点によるdg gluing、HH^2=10・HH^3=0、KS比較、Gabriel–Krull rank、追加仮定下の非可換重み付き6次超曲面認識、滑らかな楕円境界での導来比較を保持する。全intrinsic abelianモジュライの既約成分性、特異楕円境界、weak境界、非局所自由gluingなどは未完成。既存原稿の証明と移管後の独立再監査を区別する。
 
