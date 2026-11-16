@@ -1,16 +1,27 @@
-# dP1：再現手順と資料間の参照
+# dP1：再現手順
 
-2026-11-15 / integration-v1
+2026-11-16 / reproduction-v2。リポジトリrootを作業ディレクトリにする。
 
-リポジトリrootで以下を実行する。
+## 原稿
 
 ```sh
-latexmk papers/nc_del_pezzo_degree1_moduli.tex
 latexmk papers/dp1_anticanonical_models.tex
+latexmk papers/nc_del_pezzo_degree1_moduli.tex
 ```
 
-既存の`.latexmkrc`に従い、PDF、aux、SyncTeX等は`build/`へ出力する。外部bibliographyファイルや画像を必要とせず、TeXソースだけで本文を再生成できる。必要な依存：LuaLaTeX、ltjsarticle、amsmath、amsthm、mathtools、booktabs、enumitem、hyperref、geometry、fix-cm（必要に応じてTeX Live標準パッケージ）。
+`.latexmkrc`によるLuaLaTeXを使用する。必要なTeXパッケージはltjsarticle/LuaTeX-ja、amsmath、amssymb、amsthm、mathtools、enumitem、booktabs、hyperref、geometry、fix-cm。PDF/aux/SyncTeX等はbuild/へ生成し、Gitで追跡しない。
 
-論文 `nc_del_pezzo_degree1_moduli.tex` は全体論文、`dp1_anticanonical_models.tex` は共鳴に焦点を当てた専門論文である。重複する説明は、それぞれの論文が独立に読めるための最小限にしてある。研究再開時の現行方針は `00_research_plan.md` → `research/dp1_research_plan.md` → `research/dp1_research_notes.md` の順。研究過去版を要しない。
+反標準モデル論文は `papers/sections/elliptic_rank_filtration.tex` を読み込む。この依存ファイルを省略しない。外部bibliographyファイルや画像は不要。二つの公表原稿は数学的内容を削らず保持し、rankの完全な証明は反標準モデル論文§6に置く。
 
-`research/dp1_validation.md` は実際に実行した検証の状態を明記する。既存の三次曲面・三次三様体の計算資産はこれら2論文の再組版には不要。
+## 厳密な多項式検算と参照検査
+
+```sh
+python -m pip install -r requirements-research.txt
+python scripts/check_elliptic_rank.py
+```
+
+Python3とSymPy1.14.0を使用。Hilbert差分、principal quotientの多項式、Euler差分、rank二次係数を記号計算し、反標準モデル論文のinputを展開してlabel/ref/citeの閉包を検査する。固定入力データは不要。この計算は圏論的証明・有限長性・導来同値の機械検証ではない。
+
+## 再開
+
+`00_research_plan.md` → `research/dp1_research_plan.md` → `research/dp1_research_notes.md` → 両TeX → `research/dp1_validation.md`。旧ZIP・過去会話・外部の旧ノートを前提にしない。必要な既知入力の書誌と適用範囲は本文と研究ノートにある。実際に完了した組版・検証はvalidationを参照し、未実施分を実施済みと扱わない。

@@ -1,89 +1,75 @@
-# 次数1の非可換del Pezzo曲面：価値最大化型研究計画
+# 次数1 nc del Pezzo：価値最大化型研究計画
 
-2026-11-16 / dp1-strategy-v2。再開時は `00_research_plan.md` を最初に読む。本書は本研究固有の現行戦略であり、一般原則・保存許可は同ファイルに置く。GitHub mainが現行正本。対象は次数1に限定し、一般次数のRains共鳴・heart比較は `nc-cubic-moduli` を正本として参照する。
+2026-11-16 / dp1-strategy-v3。一般原則と保存許可は `00_research_plan.md`。以下は本研究固有の現行計画である。
 
-## 1. 何を最優先で最大化するか
+## 1. 到達基準と論理的な段階
 
-個別の既存構成の再実行でも、無条件の完全分類という最難問への固執でもなく、**重要性・新規性・証明の確実性・研究効率・公表可能性を総合した研究全体の価値**を最大化する。中心は、可換次数1 del Pezzo曲面を含む10次元のdg構成を、heartと構造対象を備えた内在的な非可換del Pezzo曲面のモジュライへ結び付けること。すでに得られた独立結果は完全分類の完成を待たず、適切な論文として完成・公表する。
+中心は、可換次数1 del Pezzoを含む10次元dg族を、構造対象とabelian heartを指定した内在的モジュライへ接続すること。重要性、新規性、正確性、理解の深化、実現可能性、公表可能性を総合し、全分類が未完成でも独立に価値のある定理を完成・公表する。
 
-本研究では三段階を厳密に区別する：
-1. `(S,p)` の実際のsmooth proper dg族、HH・KS・有限directed表示での成分性。
-2. 指定されたabelian heart、`O`、Serre作用、AZ-ampleness、Gabriel--Krull rankに関する **intrinsic abelian moduli** への射。
-3. その射の成分性／全射性／分類（標識忘却・自己同型を含む）。
-第1段階から第2・3段階へは自動では移らない。全Morita変形を有限非曲率A-infinity chartと同一視する際も比較証明が要る。
+区別する段階は、(a) 実際のdg族とHH/KS、(b) 有限directed A∞表示、(c) pointed Morita変形、(d) 相対abelian heartを備えたintrinsic moduli、(e) 全射性・標識忘却・完全分類である。前段階の成分定理を後段階へ無条件に移さない。
 
-成功条件は優先順に (A) 局所形式モジュライ定理と明示的な同型groupoid、(B) 楕円領域のintrinsic heartの成立・認識、(C) 境界退化への自然な延長、(D) 条件を弱めた反標準環認識、(E) 適切に定式化した全分類。高リスクな(E)のために(A)--(D)の公表を停滞させない。
+## 2. 現行の主張と証明の所在
 
-## 2. 現在の数学的資産と主張の状態
+- **今回証明を構成・点検した環論的結果**：反標準モデル論文 `sec:elliptic-rank`。中心正則g∈R₁と整なGorenstein種数1 THCR境界を持つ右noetherian環について、Hilbert多項式、Gabriel–Krull filtration、構造対象のrank one/torsion-free性、rank=2/d×二次係数を証明。σの位数は問わず、nodal/cuspidal境界を含む。導来比較・AS被覆・有限hdimから独立。新規性未確認。
+- **条件付きの新しい接続**：同稿 `cor:elliptic-intrinsic-heart` と `prop:elliptic-numerical-rank`。既存の環構成と導来比較を入力し、全内在的公理と数値rank一致を得る。上流入力の全独立監査は未完了。
+- **既存本文に証明あり**：主稿 `thm:universal-gluing`、`thm:gluing-hh-ks`、`thm:finite-chart-component`。全点(S,p)のdg gluing、古典fiber、HH²=10、HH³=0、KS同型、有限presentation chartの成分性。全Morita/intrinsic成分性ではない。
+- **条件付き既存結果**：主稿 `thm:weighted-hypersurface-recognition`、`cor:central-sextic`。中心g、ASregular境界被覆、低次数関係式、必要に応じ負次数導分消滅を仮定する。抽象公理からのこれらの存在は未証明。
+- **既存導来比較**：反標準モデル論文 `thm:main` はsmooth genuine S / smooth E / 全qを扱う。証明は保持したが独立全面監査未完了。新しいrank定理によって自動的に検証済みとはならない。
 
-- **本文に証明あり・今回の全独立監査なし**：`papers/nc_del_pezzo_degree1_moduli.tex` の `thm:universal-gluing`、`thm:gluing-hh-ks`、`thm:finite-chart-component`。smooth genuine Sの全pに対し `N_p=L_{O_S}(I_p(-K_S))` を用いるsmooth proper dg族、基点bでの古典fiber、HH²=10、HH³=0、KS同型、有限型directed A-infinity presentation chart内の既約成分を扱う。**全pointed Morita変形**や**全intrinsic abelian stack**の成分性は未証明。
-- **本文に証明あり・追加仮定に依存**：同稿のGabriel--Krull rankと成長、Serre-heartからのhomological dimension=2、中心正則一次切断とASregular境界被覆を仮定するweighted sextic認識・中心性判定。一般の内在的公理から中心元、境界、被覆が現れることは未証明。
-- **本文に証明あり・独立再監査が必要**：`papers/dp1_anticanonical_models.tex` のsmooth genuine S / smooth E / q∈Pic⁰(E)のRains型gluingについて、Serre orbit生成と `T_q ≃ Db(qgr R_q)`、hdim qgr=2（有限位数qを含む）。Rainsの既知入力、traceと有限性の組合せ、全qを含む主張の新規性は個別監査が必要。numerical resonance、AZ-ampleness、t-exactness、derived equivalenceを混同しない。
-- **未完成**：qgr heartのintrinsic rank-one/torsion-free判定、非曲率chartと全Morita変形の同定、有限presentation quotientとintrinsic groupoidの比較、nodal/cuspidal E、特異点での非局所自由gluing、weak del Pezzoの(-2)壁。
-- **原稿内での既知入力**：Rains構成・Hilb¹、Artin--Zhang再構成、Kuznetsov HH、Orlov gluing等。本文に証明があることと今回の検証済み状態は別。現行確認記録は `research/dp1_validation.md`。
+## 3. P0：上流証明の監査と原稿の整合
 
-## 3. 先行研究：新規性の境界
+最初にRainsの環構成、finite-order境界でのYZ入力、Indでのorbit生成、境界trace、pseudo-perfect moduleの表現可能性を照合する。対象となるラベルは反標準モデル論文の `prop:ring-orbit`, `lem:finiteness`, `thm:null`, `lem:trace`, `prop:ff`, `prop:ess`。各入力について左右のmodule規約、smoothness、genuine/weak、有限/無限位数、中心元の次数を明記する。
 
-最優先の一次資料照合対象：
-- Okawa--Ueda, *Marked Artin--Schelter surfaces of del Pezzo types*, arXiv:2508.04986, Def. 1.1, Thm. 6.4：strong helix標識付きAS型の楕円データへの双有理対応。Oだけを標識したintrinsic moduliとは異なる。
-- Rains, *The birational geometry of noncommutative surfaces*, arXiv:1907.11301, Thm. 4.30、§5：gluing、次数1の点とPicard、一次変形の先行背景。
-- Rains, *The noncommutative geometry of elliptic difference equations*, arXiv:1607.08876：smooth proper surface、Hilb¹、abelian equivalence；適用時q≠1と構造対象保存を点検。
-- Rains, *Filtered deformations of elliptic algebras*, arXiv:2107.13540, §2--3, 5--6：filtered変形と次数1 weighted family。既知の環提示と本稿の逆向き認識を峻別。
-- **Rains, *The (noncommutative) geometry of difference equations*, arXiv:2504.16187, §16.4, Lemma 16.12：次数1の反標準環の生成元・関係式に関する具体的な先行結果。生成元・weighted sextic表示の単なる再発見を新定理としない。§12等の非可換surface/同型問題も逐次照合。**
-- Etingof--Ginzburg, *Noncommutative del Pezzo surfaces and Calabi--Yau algebras*, JEMS 12 (2010), 1371--1416, DOI:10.4171/JEMS/235：E8変形・quantizationの既知範囲。
-- Ascher--Bejleri, *Compact moduli of degree one del Pezzo surfaces*, Math. Ann. 384 (2022), 881--911, DOI:10.1007/s00208-021-02279-3、および *Moduli of double covers and degree one del Pezzo surfaces*, Eur. J. Math. 7 (2021), 557--569：可換境界コンパクト化との比較。
-- Toën--Vaquié, *Moduli of objects in dg-categories*, Ann. Sci. Éc. Norm. Supér. 40 (2007), 387--444, DOI:10.1016/j.ansens.2007.05.001：**固定されたdg圏の対象のmoduli**の定理なので、変化するdg圏そのもののmoduli stackの存在を無条件に与えるものとして流用しない。
+HH/KS側ではKuznetsovのresidual HH同定、混合bar cochain、相対transfer、finite chartのgaugeとstabilizerを監査する。単なるHH²の次元一致やHH³=0から任意のMorita変形への形式普遍性を結論しない。
 
-一次資料の全証明を今回読了したという意味ではなく、参照箇所の厳密な適用審査はP0の作業とする。個別結果の既知性と本研究の独立新規性は、定理ごとに確認する。
+主稿に残る「楕円qgrのrank認識が未解決」という記述は、反標準モデル論文§6への参照へ整理する必要がある。現行の数学的状態は本計画と同節の定理を優先し、証明を重複させない。既存の有効な証明・例・障害は削除しない。
 
-## 4. 直近のP0：論文に直結する証明監査（最高優先）
+達成基準：主要入力の仮定を一次資料で照合し、依存する結論と未監査箇所を分離した公表用本文を得ること。
 
-(A) `thm:universal-gluing`：普遍対角イデアルによる相対perfectness、bでのderived evaluation、pが特異点でも意味を持つmutated ideal、Orlov gluingのsmooth/properの相対性。
-(B) `thm:gluing-hh-ks`：`HH*(B_S)`のKuznetsov同定、bar triangle、接写像の自然性、baseの10方向と `HH²` の一致。HH³=0だけで任意のMorita変形の非障害性を結論しない。
-(C) `lem:relative-directed-model` と `thm:finite-chart-component`：相対split contraction、strict unitと有限性、曲率、`G`のstabilizer、`Z`のobstruction、family→chartのbase change。有限chartの成分とintrinsic quotientを分離。
-(D) `dp1_anticanonical_models.tex`：Rains入力の全仮定（特にtorsion q/finite order）、Indでのorbit生成、trace、target有限性、pseudo-perfect表現可能性、essential surjectivity。
-(E) `thm:weighted-hypersurface-recognition`：weighted正則性判定、normality、低次数持ち上げ、Rains §16.4との重複・追加分の同定。
-各監査結果は「証明に書かれている／今回確認した／未検証／文献で既知／新規性未確定」を `research/dp1_validation.md` に反映する。反例があれば依存主張と要約も同時に訂正。
+## 4. P1：局所形式モジュライ
 
-## 5. P1：普遍点族を局所形式モジュライにする
+目標（未証明）：(S,p)族から、適切にframed/rigidifiedな例外対象付きsmooth proper dg圏の変形groupoidへの写像を構成し、形式局所同値または局所étale性を証明する。
 
-**目標定理（未証明）**：smooth degree1 Sとpの族 `U`（次元10）から、適切にrigidifyしたexceptional object付きsmooth proper dg categoryの形式変形関手または有限型atlasへの写像を作り、形式局所同値（自己同型groupoidを含む）または十分な局所étale性を証明する。全Morita deformationとの比較が難しければ、**有限directed presentation**の実際の既約成分性を独立した公表定理として完成させる。
+具体的な順序：変形functorを定義し、full exceptional collectionのExt²/Ext¹消滅から持上げを行い、derived Nakayamaでsemiorthogonality/fullnessを検査する。k¹¹相対normalized cochainsの非曲率directed A∞変形と全Morita変形の比較を閉じる。その後HH²でsmall extensionの持上げを調整する。HH¹=0でもinner stabilizerは残るのでraw [Z/G]を10次元DM stackと呼ばない。
 
-着手：
-1. 変形対象を「dg category + e + enhancement + 必要なら相対full exceptional collection」のどのgroupoidにするか定義し、framed/rigidified版とunframed版を分ける。
-2. `(S,p)`相対gluingから有限A∞表示への比較を構成し、`HH²`接空間、`HH³`障害、`HH¹`とinner stabilizerの関係を明示。curved/Moritaとの差の補題を証明。
-3. 古典基点bの局所模型、Bertini involutionの作用（8方向自明、点の2方向-1）、coarseとstackの差を検証。coarse tangentをHH²と同一視しない。
-4. avatar `(S,D,P)`との相対Poincaré正規化とidentity section収縮のcompatibilityを確認。点ごとの同型を族の同型と取り違えない。
+基点bでのBertini involution（8方向自明・点方向の2次元に-1）とcoarse quotientを比較する。Poincaré bundleのbase twistを除き、avatar族と普遍点族の相対同値を構成する。幾何点で一致することと族の降下を区別する。
 
-**判断基準**：global stackの構成に固執せず、厳密な形式局所定理と有限chart成分定理が独立に成立すれば第一論文を完成。全Morita比較に根本障害があれば対象functorを明示的に狭めて論文を成立させる。
+全Morita比較が難しい場合も、有限directed chartの成分定理を正確な独立成果として公表する。global stackの存在の問題で局所成果を停滞させない。
 
-## 6. P2：反標準heartのintrinsic性（P1と並走する短い橋）
+## 5. P2：fiberwise認識から相対heartへ
 
-**目標定理（未証明）**：smooth genuine S / smooth E / qに対応する `A_q=qgr R_q` の `pi R_q` が、Gabriel--Krull rank one、torsion-free、Hilbert関数、Serre/shift、AZ-amplenessを全て満たすこと。次に同じdg category上のRains heartと反標準qgr heartの関係、qのresonanceごとのt-exactness/heart wallを判定する。
+**解決した部分**：中心一次元と所定の種数1境界を持つ環のqgrでは、構造対象の内在的rank one/torsion-free性を追加仮定にする必要がない。既存導来比較の下では数値rankと一致する。
 
-着手：graded domain Rのgeneric quotient、rank filtration、`pi R`へのtorsion map消滅を検証。現在の `sec:intrinsic-rank` は **条件を仮定した場合**の結果であり、その条件を `qgr R_q` が満たすことを新たに証明する。Rainsのnumerical resonanceではm≷0の導来切断のcohomologyに注意し、derived equivalenceからheart一致を推論しない。weak markingがOのみであることを保ち、ordered rulings/7 exceptional curvesのforgetful groupoid（W(E8)・Autを含む）のgeneric degree/fiberを正確に記述する。
+**未解決の核心**：幾何点ごとの公理から、相対flat abelian category、base change、fpqc降下、同型groupoidへの射を構成すること。
 
-**判断基準**：反標準heartが内在的定義を満たすこと、あるいはそれが失敗する明確な反例が得られることのいずれも高価値。global分類を待たず論文化可能な形でまとめる。
+最初は有限Artin基底A、flat graded A代数R_A、相対中心元g_AとTHCR境界を指定した変形問題に限定する。各次数のflatness、有限生成・noetherian性、relative section functorと高次消滅の一様性を別々に検証する。主稿 `prop:formal-hilbert` は固定nごとの自由性を与えるが、全nの一様な開条件を与えない。
 
-## 7. P3：nodal/cuspidal境界と非局所自由gluing
+相対rankは各幾何fiberで定義する。S×Spec(k[ε]/ε²)の構造層は、総圏をk線形圏と見た絶対generic quotientで長さ2を持つ。このため総圏へ絶対rank-one公理をそのまま課す定義は自明変形を除外する。研究ノートのこの例を最初の整合性試験に使う。
 
-`Bl_b(S)→P¹` のsmooth locusの相対Picardを普遍点族 `p↦O_D(b-p)` で記述し、相対compactified Jacobianに延長する。以下を混同しない：p=b、smooth D上のp、nodal/cuspidal Dの滑らかなp、Dの特異点p。
-- Dの特異点では `N_p=i_*(I_{p,D}⊗O_D(H))` がrank-one torsion-freeで非局所自由になり、滑らかなline bundleのrestriction式を流用できない。
-- まずrelative perfect moduleで `N_p` と`(S,p)`の族が与えるgroupoidを確認。次にsingular THCR・中心元・Serre trace・cohomological dimensionを場合分けして比較する。
-- 境界への延長を明示した定理が得られれば第二論文。単純なsingular ringの計算に終始せずモジュライの退化の幾何を主張できる形へまとめる。
+Rains heartとanticanonical heartの一致、共鳴でのt-exactness、弱標識忘却は別々の問題である。ordered rulings・七例外曲線・W(E8)・Autによるgroupoidを、構造対象Oだけの標識と照合する。
 
-## 8. P4/P5：高リスクだが大きな成果につながる方向
+## 6. P3：特異境界とcompactified Jacobian
 
-P4: 抽象 `(A,O,tau)` のRから `Z(R)_1≠0` の自然な中心正則境界、種数1境界の幾何性、ASregular weighted coverの存在を導く。最初はopen subfunctorの条件付き認識を目標とし、arbitrary intrinsic objectへの無条件拡張は後回し。Hilbert型(1,1,2,3)と**最小生成元の重み**を区別し、Rains 2025 Lemma16.12/EGに対する真正の追加結果を抽出する。中心性に負次数導分消滅を用いる場合も条件を明示。
+Bl_b(S)→P¹の相対Picardをp↦O_D(b-p)で普遍点族と比較し、相対compactified Jacobianへの延長を目指す。b、smooth D上のp、nodal/cuspidal Dのsmooth点、特異点pを区別する。
 
-P5: weak Sの(-2)曲線での `O_C(-1)` のorbit直交、qgrのhomological singularityとderived非同値を分離して判定。可換dP1のAscher--Bejleri compactificationと整合する非可換境界のモデルを探る。非零orbit直交だけから「任意の導来同値が不存在」としない。
+環論的rank定理は整なnodal/cuspidal境界に適用できる。しかしN_p=i_*(I_{p,D}⊗O_D(H))が非局所自由になる点で、F_q(M)=Li*M⊗q^{-1}を流用できない。relative perfect module、boundary functor、trace、finite cohomological dimension、導来比較の順に検証する。曲線上のrank-one torsion-free sheafのモジュライを、心のモジュライと同一視しない。
 
-完全分類は、P1・P2で局所変形・heart・groupoidが成立し、P3・P4で適切な境界認識が得られた場合に主要目標へ格上げする。期待値が低ければ既に証明された成果の公表を優先する。
+## 7. P4/P5：境界認識・完全分類・weak境界
 
-## 9. 公表単位・継続・再現
+抽象(A,O,τ)のorbit環RからZ(R)₁≠0、種数1商、ASregular被覆を導くことは未解決。まず指定境界付きの部分functorで認識を完成し、仮定を弱める。Hilbert型(1,1,2,3)と最小生成元の重みを区別する。Rains 2025 §16.4・EGの既知提示を再発見しただけの結果を新定理としない。
 
-第一候補論文：`papers/nc_del_pezzo_degree1_moduli.tex` を**局所変形・intrinsic heartへの接続**を核として整理。第二候補：`papers/dp1_anticanonical_models.tex` を**滑らかな楕円領域の反標準導来比較**の独立論文としてP0監査後に完成。weighted recognitionを独立の中心定理にできる場合のみ別論文化し、既存の有効な証明は削除せず適切な現行論文に保持する。退化境界は成果が確立してから独立論文を検討。
+weak Sの(-2)曲線によるO_C(-1)のorbit直交、自然導来切断の核、任意の導来同値の不存在、qgrのhomological singularityは別々に扱う。可換コンパクト化との比較はAscher–Bejleriを出発点とする。全分類を主要目標に格上げする条件は、局所変形・相対heart・groupoid・境界認識が接続されたことである。
 
-再開順：`00_research_plan.md` → 本書 → `research/dp1_research_notes.md` → 2本の現行TeX → `research/dp1_validation.md` と `research/dp1_reproduction.md`。日本語LuaLaTeX。Gitはソースのみ、PDF・ZIP・過去版・ビルド生成物は追跡しない。各主要証明の根拠と未解決は現行ノート・原稿へ統合し、版を積み重ねない。作業区切りにテスト、commit、push、リモート検証を区別する。GitHub Actions、PR、force pushは用いない。
+## 8. 文献照合と公表単位
 
-**次の具体的な一手**：`qgr R_q` のGabriel--Krull rank-one/torsion-free性の証明に着手しつつ、`thm:gluing-hh-ks` と `thm:finite-chart-component` の変形比較を独立に監査する。いずれも現在の中心目標へ直結し、短い公表可能な定理へ切り出せる。
+直接使用・比較する一次資料は、AOU arXiv:1411.7770 Appendix A、Artin–Van den Bergh J.Algebra133(1990)249–271 Theorems1.3–1.4、Keeler arXiv:math/9912051v2 Theorem1.2、Chirvasitu–Kanda–Smith DOI10.1017/fms.2020.60 Theorem2.4/Corollary2.8、RSS arXiv:1308.2216v2 Proposition2.4である。確認範囲は検証文書に記す。
+
+構成・新規性比較はRains arXiv:1907.11301v1 Theorem4.30/§5、1607.08876v4 Propositions9.29/11.48/12.22、2107.13540v2 §2–6、2504.16187 §16.4、Okawa–Ueda arXiv:2508.04986 Definition6.1/Theorem6.4、Etingof–Ginzburg arXiv:0709.3593v4による。最後の2025年Rains文献は重点再照合対象であり、今回全証明を読了したとは扱わない。
+
+変形比較にはKuznetsov arXiv:0904.4330、Orlov arXiv:1402.7364、Lowen arXiv:math/0407019、Keller–Lowen IMRN2009 3221–3235、Hille–Perling arXiv:1110.5843、Belmans–Okawa–Ricolfi arXiv:2002.03303を用いる。Toën–Vaquié DOI10.1016/j.ansens.2007.05.001は固定dg圏の対象のモジュライであり、変動するdg圏のglobal stackの存在と混同しない。
+
+公表は主稿（普遍点・局所変形・内在的認識）と反標準モデル論文（導来比較・rank認識・共鳴）の二本を中心とする。weighted recognitionや退化境界は独立した中心定理が確立してから分割を判断する。新規性の確認前に完成した新分類と称さない。
+
+## 9. 次の具体的な着手と再現
+
+上流のRains環入力を監査し、Artin基底上のrelative qgrモデルの定義を二重数自明族で試験する。並行して主稿のrank未解決表示を現行定理へ統合する。検算は `python scripts/check_elliptic_rank.py`、組版はrootで `latexmk papers/dp1_anticanonical_models.tex`。ソースの依存閉包と検証範囲は `research/dp1_reproduction.md` / `research/dp1_validation.md` にある。

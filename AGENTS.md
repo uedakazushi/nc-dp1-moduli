@@ -1,18 +1,25 @@
 # Codex研究指示：次数1の非可換del Pezzoモジュライ
 
-2026-11-16 / dp1-codex-v2。GitHub mainを研究の正本とする。**最初に `00_research_plan.md` と `research/dp1_research_plan.md` を読む。** 次に `research/dp1_research_notes.md`、2本の現行TeX、検証・再現資料を読み、現状の証明済み・仮定付き・未完成・計算観察・新規性未確認を区別する。
+2026-11-16 / dp1-codex-v3。最初に `00_research_plan.md`、`research/dp1_research_plan.md`、現行研究ノート、両論文、検証・再現資料を読む。研究全体の数学的価値を最優先にする。完全分類の完成を待って独立した成果の公表を停滞させない。
 
-最優先原則は研究価値の最大化。既知のRains・Okawa--Ueda・Etingof--Ginzburgの構成を繰り返すだけではなく、intrinsic abelian moduli、局所Morita変形、heartの認識、退化の幾何を比較する。完全分類は長期目標とし、独立に公表できるP1--P3の成果を先に完成させる。
+## 現在閉じた部分
 
-優先手順：
-1. P0: `thm:universal-gluing`, `thm:gluing-hh-ks`, `thm:finite-chart-component` と反標準導来比較 `thm:main` の仮定、bar/trace、相対A∞ transfer、先行一次資料を監査し、ギャップ・既知性を明記。Rains arXiv:2504.16187 §16.4を特に確認。
-2. P1: finite directed chartと、framed/rigidified pointed Morita変形を比較。HH²=10・HH³=0・KS同型だけでglobal intrinsic成分性を宣言しない。自己同型/Bertini・coarse vs stackを扱う。
-3. P2: `qgr R_q` のGabriel--Krull rank-one/torsion-free性、AZ-ample heart、original Rains heartとの差、標識忘却groupoidを証明。
-4. P3: 特異反標準曲線と非局所自由gluing、相対compactified Jacobianを検討。
-5. P4/P5: 中心元／ASregular被覆の自動認識、weak境界。最初の成果の公表を遅らせない。
+`papers/dp1_anticanonical_models.tex` §6（`papers/sections/elliptic_rank_filtration.tex`）は、中心正則一次元と整なGorenstein種数1 THCR境界からHilbert多項式、Gabriel–Krull filtration、πRのrank-one/torsion-free性、rank=2/d×二次係数を証明する。σの位数、ASregular被覆、導来比較を仮定しない。整なnodal/cuspidal境界を含む。これを再び未解決と扱わない。独立の新規性は未確定。
 
-**守る区別**：numerical ampleness vs AZ ampleness、dg derived equivalence vs abelian equivalence、finite chart component vs intrinsic moduli component、Kuranishi stack vs coarse moduli、原稿中の証明 vs 今回の独立検証。誤りは依存する原稿・要約にも直ちに反映。一般次数のheart/resonanceは `nc-cubic-moduli` の現行正本を参照し、本repoに重複資産を増やさない。
+既存Rains環・全q導来比較を入力した内在的公理と数値rank一致は、入力を明示した帰結である。既存導来比較全体の独立監査は未完了。今回の環論的証明で上流を検証済みにしてはいけない。
 
-原稿は日本語LuaLaTeX。重要な研究の区切り・目安15分のcheckpointで、現行方針・ノート・公表原稿・検証状態を整合させ、適切な組版と計算を検証する。過去の原稿や証明を消すことによる形式上の軽量化は行わない。PDF、ZIP、LaTeX中間物、変更履歴、古いbundleを追跡しない。
+## 次の作業
 
-mainに直接通常のfast-forward pushし、**生成・検証・commit・push・remote SHA確認**を区別する。PR、GitHub Actions、force pushはしない。競合時はremoteを読み直して統合する。GitHubが正本で、Libraryはpush失敗時の緊急避難。自動の背景作業は約束しない。
+1. 主稿の楕円qgr-rank未解決表示を反標準モデル論文§6への参照に整理し、有効な既存証明は保持する。
+2. Rains環構成、finite-orderのYZ入力、Ind orbit生成、trace、pseudo-perfect表現可能性の一次資料を監査する。
+3. Artin基底上の相対flat ring/qgr、基底変更、heart、指定OとSerre作用、同型groupoid・fpqc降下を構成する。総圏の絶対GK長さを相対rankに使わない。二重数自明族のgeneric lengthが2となる例を試験に使う。
+4. 全Morita変形とfinite directed A∞ chartの比較、curvature、inner stabilizer、Bertini quotientを処理する。
+5. 特異境界での環の存在・導来比較・非局所自由gluingを調べる。rank認識の拡張済み範囲と混同しない。
+
+numerical ampleness / AZ-ampleness、derived / abelian equivalence、finite chart / intrinsic成分、stack / coarseを常に区別する。HH²=10・HH³=0・KS同型だけで全分類を宣言しない。Rains、Okawa–Ueda、EGの既知構成との差分を確認する。
+
+## 検証と保存
+
+日本語LuaLaTeX。rootで `python scripts/check_elliptic_rank.py` と必要な `latexmk` を実行し、成功・未実施を区別する。SymPy検算は圏論的証明ではない。研究の区切り、目安15分のcheckpointで方針・ノート・原稿・検証情報を整合させ、mainへ直接通常のfast-forwardで保存し、remote SHAを確認する。PR、GitHub Actions、force pushは使わない。他者の並行変更は取得して統合する。
+
+GitではPDF、ZIP、中間物、旧版、履歴、キャッシュを追跡しない。GitHub mainが正本で、LibraryはGitHub保存失敗時の緊急避難のみ。背景の自動作業は約束しない。

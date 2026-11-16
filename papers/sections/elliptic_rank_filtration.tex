@@ -1,0 +1,238 @@
+\section{整な種数1境界からの内在的rankの認識}\label{sec:elliptic-rank}
+
+この節は前節までの導来比較とは独立した環論的結果である．
+Abdelgadir--Okawa--Ueda\cite[Appendix~A]{AOU}は非可換射影平面について
+Gabriel--Krull filtrationと増大度のfiltration，および二つのrankの一致を扱う．
+ここでは中心\emph{一次}元のある楕円境界の場合に，有限長商圏の単純対象を
+用いる証明を与える．次数1の反標準環も含み，境界自己同型の有限位数・無限位数を区別しない．
+環論的部分では，滑らかな楕円境界に加え，整なnodal/cuspidal種数1境界も許す．
+既知の次元論との関係があり，この定式化の独立の新規性は未確定である．
+
+\subsection{Hilbert多項式と有限長のfiltration}
+
+$R$を連結局所有限な右noetherian $\mathbb N$次数付き$k$代数とし，
+$g\in R_1$を中心正則元とする．次を仮定する：
+\begin{equation}\label{eq:rank-boundary-assumption}
+ B=R/gR\simeq B(E,L,\sigma),\qquad d=\deg L>0,
+\end{equation}
+ここで$E$は整な射影Gorenstein曲線で$p_a(E)=1$，
+$\sigma\in\operatorname{Aut}(E)$である．特に滑らかな楕円曲線，
+整なnodal/cuspidal種数1曲線を含む．
+$R$が次数1で生成されること，AS-regular被覆の存在，導来圏のsmoothnessは仮定しない．
+$\mathcal C=\qgr R$，$\pi:\operatorname{gr}R\to\mathcal C$，
+$\OO_R=\pi R$と書く．$\mathcal C_0$は有限長対象，$\mathcal C_1$は
+$\mathcal C/\mathcal C_0$で有限長になる対象のSerre部分圏である．
+$M(a)_n=M_{n+a}$というshiftの規約を用いる．
+
+\begin{lemma}[中心一次元によるHilbert多項式]\label{lem:elliptic-hilbert-polynomial}
+任意の有限生成次数付き右$R$加群$M$に対し，
+$\dim_kM_n=p_M(n)$が$n\gg0$で成り立つ次数高々2の数値多項式$p_M$が存在する．
+$p_M$は$\pi M$だけに依存し，短完全列に加法的である．
+$p_M=0$であることと$\pi M=0$であることは同値である．また
+\[
+ p_R(n)=1+\frac d2n(n+1).
+\]
+\end{lemma}
+\begin{proof}
+まず有限生成次数付き$B$加群$V$を考える．
+Artin--Van den Berghのtwisted section再構成\cite[Theorems~1.3--1.4]{AV}
+（同定理の再掲は\cite[Theorem~2.4]{CKS}）により，$V$は十分高い次数で
+ある$\mathcal F\in\coh E$のtwisted sectionsに一致する．
+左加群と右加群の規約は必要に応じopposite ringと$\sigma^{-1}$で交換する．
+整な射影曲線では因子の数値類はdegreeで決まり，$\sigma$はこれを保つので，
+Keeler\cite[Theorem~1.2]{Keeler}により正次数の$L$は$\sigma$-ampleである．
+$\Psi$を対応するshiftとすると，Serre消滅と曲線上のRiemann--Rochから
+\[
+ \dim_kV_n=h^0(E,\Psi^n\mathcal F)
+ =d\,\operatorname{rank}_E(\mathcal F)n+\chi(E,\mathcal F)
+ \quad(n\gg0).
+\]
+この式は$\mathcal F$のtorsionを許す．$\sigma$の位数は使わない．
+
+$T=\{m\in M:mg=0\}$，$V=M/Mg$と置く．
+右noetherian性から$T,V$は有限生成$B$加群であり，完全列
+\begin{equation}\label{eq:elliptic-difference-sequence}
+ 0\longrightarrow T(-1)\longrightarrow M(-1)
+ \xrightarrow{\,g\,}M\longrightarrow V\longrightarrow0
+\end{equation}
+を得る．従って
+\begin{equation}\label{eq:elliptic-difference}
+ \dim M_n-\dim M_{n-1}=\dim V_n-\dim T_{n-1}.
+\end{equation}
+右辺は十分大きい$n$で一次以下の多項式である．差分を足し合わせれば結論を得る．
+ここで$M$の$g$-torsion-freenessを仮定せず，$T$の項を落としていない．
+有限次元加群を変えても$p_M$は不変である．
+Serre商の同型は有限次元の核・余核を持つ射のroofで表されるため，
+$p_M$は$\pi M$だけに依存する．完全列の加法性も同様である．
+非零多項式は最終的に正の整数を取るので最高次係数は正であり，
+$p_M=0$なら$M_n=0$ for $n\gg0$である．
+最後に$E$のGorenstein性と$p_a(E)=1$から$\omega_E\simeq\OO_E$である．
+実際，degree 0の可逆層$\omega_E$の非零切断は零点を持てない．
+従って正次数の可逆層の$H^1$はSerre双対性により零であり，
+$\dim B_n=nd$ ($n>0$)を得る．$\dim R_0=1$と$g$の正則性から
+$\dim R_n=1+dn(n+1)/2$となる．
+\end{proof}
+
+$F=\pi M$に対して$p_F=p_M$と書き，
+\[
+ \mathcal D_i=\{F\in\mathcal C:\deg p_F\leq i\}\quad(i=0,1,2)
+\]
+と置く．零多項式の次数は$-\infty$とする．
+加法性と最高次係数の正値性により$\mathcal D_i$はSerre部分圏であり，
+shiftで不変，$\mathcal D_2=\mathcal C$である．
+
+\begin{theorem}[Gabriel--Krull filtrationの認識]\label{thm:elliptic-filtration}
+仮定\eqref{eq:rank-boundary-assumption}の下で
+\[
+ \mathcal C_0=\mathcal D_0,\qquad
+ \mathcal C_1=\mathcal D_1.
+\]
+従って有限長性はHilbert関数の有界性と同値であり，
+$\mathcal C/\mathcal C_0$における有限長性はHilbert関数が$O(n)$であることと同値である．
+\end{theorem}
+\begin{proof}
+$\mathcal D_0$の非零対象のHilbert多項式は正整数の定数である．
+従って定数値は任意の真の部分対象列に沿って厳密に変化し，その長さを上から抑える．
+これにより$\mathcal D_0\subset\mathcal C_0$となる．
+
+逆に$F\in\mathcal C$を単純対象とする．中心性から自然な射
+\[
+ \gamma_F:F(-1)\xrightarrow{\,g\,}F
+\]
+がある．$F(-1)$も単純だから，この射は零または同型である．
+同型の場合は$p_F(n)=p_F(n-1)$となり，$p_F$は定数である．
+零の場合は$F\simeq\pi(M/Mg)$であり，$\qgr B\simeq\coh E$の像に属する．
+restriction of scalarsによる$\qgr B\to\qgr R$は完全忠実かつexactで，
+その像は部分対象と商対象について閉じている\cite[Corollary~2.8]{CKS}．
+よって対応する$\coh E$の対象も単純であり，閉点のskyscraper sheafとなる．
+そのHilbert関数は定数である．組成列と加法性により$\mathcal C_0\subset\mathcal D_0$を得る．
+
+次に$\mathcal D_1/\mathcal D_0$を考える．
+非零対象の一次係数は正整数であり，短完全列に加法的である．
+この係数が部分対象列の長さを抑えるので，全ての対象は有限長である．
+従って$\mathcal D_1\subset\mathcal C_1$となる．
+
+逆包含には商関手$Q_0:\mathcal C\to\mathcal C/\mathcal D_0$を用いる．
+$Q_0F$が非零単純対象であるとする．
+$Q_0\gamma_F:Q_0(F(-1))\to Q_0F$も零または同型である．
+同型の場合，$\ker\gamma_F$と$\operatorname{coker}\gamma_F$は$\mathcal D_0$に属し，
+\[
+ p_F(n)-p_F(n-1)=p_{\operatorname{coker}\gamma_F}(n)
+                       -p_{\ker\gamma_F}(n)
+\]
+は定数である．従って$\deg p_F\leq1$である．
+零の場合は$\operatorname{im}\gamma_F\in\mathcal D_0$である一方，
+$\operatorname{coker}\gamma_F\simeq\pi(M/Mg)$は$B$加群に由来し，一次以下のHilbert多項式を持つ．
+従ってこの場合も$p_F=p_{\operatorname{im}\gamma_F}+p_{\operatorname{coker}\gamma_F}$は一次以下となる．
+以上により$\mathcal C/\mathcal D_0$の全ての単純対象は
+$\mathcal D_1/\mathcal D_0$に属する．これはSerre部分圏なので，有限長対象も全て含む．
+$\mathcal C_0=\mathcal D_0$を用いて$\mathcal C_1\subset\mathcal D_1$を得る．
+\end{proof}
+
+\subsection{構造対象のrank oneとtorsion-free性}
+
+\begin{theorem}[内在的rankと反標準増大度]\label{thm:elliptic-rank}
+同じ仮定の下で，$\OO_R$は$\mathcal C_1$に関してtorsion-freeであり，
+$\mathcal C/\mathcal C_1$における像は非零単純対象である．
+この商圏は一つの単純対象の有限直和からなるsemisimple圏である．
+任意の$F\in\mathcal C$に対して
+\begin{equation}\label{eq:elliptic-intrinsic-rank}
+ \operatorname{length}_{\mathcal C/\mathcal C_1}(F)
+ =\frac{2}{d}\,[n^2]p_F(n)\in\mathbb Z_{\geq0}.
+\end{equation}
+左辺は商関手による$F$の像の長さを意味する．
+特に$\mathcal C_2=\mathcal C$である．
+\end{theorem}
+\begin{proof}
+まず$R$は整域である．実際，$B$は整域であり，非零斉次元を
+$g$の最大冪で割ったinitial termの積は$B$で非零である．
+正の次数の$g$についてこの最大冪は有限なので，$R$の非零斉次元の積は非零となる．
+最高次成分を取れば一般の元についても同じである．
+
+$\OO_R$の非零部分対象は，ある非零斉次右イデアル$I\subset R$の像$\pi I$で表せる．
+これはSerre商における部分対象の持上げ，または十分高いtailからの射の像を取ることで分かる．
+$0\ne a\in I_s$を取れば，整域性から$R(-s)\simeq aR\subset I$である．
+一方
+\[
+ \dim(R/aR)_n=p_R(n)-p_R(n-s)=ds\,n+O(1).
+\]
+従って$R/I$も一次以下の増大度を持ち，$\pi(R/I)\in\mathcal C_1$である．
+$I$は二次増大度を持つため$\pi I\notin\mathcal C_1$である．
+これにより$\OO_R$は$\mathcal C_1$に属する非零部分対象を持たず，
+その商圏での像は非零単純対象となる．
+
+$Q_1:\mathcal C\to\mathcal C/\mathcal C_1$とする．
+$g$の余核$\pi B$は$\mathcal C_1$に属するので
+$Q_1\OO_R(-1)\simeq Q_1\OO_R$であり，全てのshiftが同型になる．
+各$F=\pi M$には有限生成性から有限直和$\bigoplus_j\OO_R(-a_j)\twoheadrightarrow F$がある．
+従って$Q_1F$は一つの単純対象の有限直和の商であり，semisimpleかつ有限長である．
+
+その長さを$r$とする．上の全射の像から，除法環
+$\End(Q_1\OO_R)$上の基底となる$r$成分を選ぶと，射
+\[
+ P=\bigoplus_{j=1}^{r}\OO_R(-a_j)\longrightarrow F
+\]
+の$Q_1$像は同型となる．その核は$\mathcal C_1$に属するが，$P$はtorsion-freeなので核は零である．
+余核は$\mathcal C_1$に属するから，Hilbert多項式の加法性により
+$p_F(n)=rd\,n^2/2+O(n)$となる．これが\eqref{eq:elliptic-intrinsic-rank}である．
+\end{proof}
+
+\begin{remark}[仮定と適用範囲]
+この二つの定理は，導来比較，有限homological dimension，
+高次Serre消滅，weighted AS-regular coverを用いない．
+中心的でない正規一次元，可約・非被約境界への拡張は本節の主張に含めない．
+整なnodal/cuspidal境界では環論的rank認識は適用できるが，
+そのような環を所定のgluingから構成することや，導来比較を延長することは別問題である．
+また有限長対象のHilbert多項式の定数値をその組成列の長さと同一視していない．
+境界の外にある単純対象では両者が異なる可能性がある．
+\end{remark}
+
+\subsection{次数1の内在的定義への接続と数値rank}
+
+\begin{corollary}[楕円領域でのrank公理]\label{cor:elliptic-intrinsic-heart}
+命題\ref{prop:ring-orbit}と補題\ref{lem:finiteness}の環$R_q$について，
+$\pi R_q$はGabriel--Krull rank oneでtorsion-freeである．
+さらに定理\ref{thm:main}の導来比較を入力とすると，$d=1$の場合の
+$(\qgr R_q,\pi R_q)$は，別稿で定義した弱標識付き反標準ample非可換次数1曲面の
+全ての公理を満たす．
+\end{corollary}
+\begin{proof}
+環の仮定は命題\ref{prop:ring-orbit}と補題\ref{lem:finiteness}で与えられるので，
+定理\ref{thm:elliptic-rank}を適用する．
+残りのnoetherian性，Ext有限性，$\pi R_q$のexceptionality，Serre関手
+$(-1)[2]$，Artin--Zhang ample pair，所定のHilbert関数は前節までの結果による．
+\end{proof}
+
+\begin{proposition}[導来比較の下での数値rankとの一致]\label{prop:elliptic-numerical-rank}
+定理\ref{thm:main}を入力とする．$X\in\TT_q$の数値類を
+$r=\rk[X]$，$\alpha=c_1[X]$，$m=\chi(e,X)$と書くと，任意の整数$n$について
+\begin{equation}\label{eq:elliptic-euler-polynomial}
+ \chi(e,\tau^nX)=m+n(H\cdot\alpha)+\frac{dr}{2}n(n+1).
+\end{equation}
+特に$\Phi_qX=F\in\qgr R_q$であるとき，$F$の内在的rankは$r$に等しい．
+一般の$X$では$\sum_i(-1)^i\rk_{\mathrm{intr}}H^i(\Phi_qX)=r$である．
+\end{proposition}
+\begin{proof}
+\eqref{eq:divisor}を$\tau^nX$に適用し，$\RHom(e,-)$のEuler標数を取ると
+\[
+ \chi(e,\tau^nX)-\chi(e,\tau^{n-1}X)
+ =\chi(E,\Psi^nF_qX).
+\]
+\eqref{eq:restriction}と半直交分解から，$F_qX$のrankは$r$，degreeは$H\cdot\alpha$である．
+$q$のdegreeが0であることを用いた．楕円曲線上のRiemann--Rochにより
+右辺は$H\cdot\alpha+ndr$となる．$n=0$の値$m$から差分を解けば
+全ての整数$n$について\eqref{eq:elliptic-euler-polynomial}を得る．
+
+$F$がheartの対象なら，$\chi$と有限cohomological dimensionによる高次Serre消滅，
+および高次数でのsection再構成により
+$\chi(\OO_R,F(n))=p_F(n)$ for $n\gg0$である．
+導来比較は$e$とshiftを保つため，二次係数を
+\eqref{eq:elliptic-intrinsic-rank}と比較すると所望の一致を得る．
+一般の有界複体についてはEuler標数と$K_0$の加法性を用いる．
+元のRains heartに対する$\Phi_q$の$t$-exactnessは仮定せず，結論もしない．
+\end{proof}
+
+本節の環論的定理の証明と，導来比較を用いた最後の二つの帰結の検証範囲は区別する．
+環論的定理は本節の仮定のみで完結する．最後の帰結は前節の導来比較の入力が成立する範囲での主張であり，
+その既存証明の独立全面監査を代替しない．また，幾何点ごとの公理の成立から，
+相対abelian heart，基底変更，fpqc降下，モジュライ成分性は自動的には従わない．

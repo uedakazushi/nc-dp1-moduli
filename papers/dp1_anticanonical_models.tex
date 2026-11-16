@@ -32,10 +32,10 @@
 \newcommand{\thick}{\operatorname{thick}}
 \newcommand{\Ind}{\operatorname{Ind}}
 \newcommand{\id}{\operatorname{id}}
-\title{楕円境界を持つ非可換del Pezzo曲面の\\反標準モデルと共鳴}
+\title{楕円境界を持つ非可換del Pezzo曲面の\\反標準モデル，内在的rankと共鳴}
 \author{}
-\date{2026年11月15日 JST・統合版1.1\\研究原稿：楕円境界上の導来比較と未解決の退化境界}
-\hypersetup{pdftitle={楕円境界を持つ非可換del Pezzo曲面の反標準モデルと共鳴}}
+\date{2026年11月16日 JST・版1.2\\研究原稿：環論的rank認識と導来比較の入力を区別する}
+\hypersetup{pdftitle={楕円境界を持つ非可換del Pezzo曲面の反標準モデル，内在的rankと共鳴}}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -44,13 +44,19 @@
 滑らかな可換del Pezzo曲面$S$と滑らかな反標準曲線$E$から得られる
 Rains型gluing $\TT_q$について，構造対象$e$のSerre orbitが$\TT_q$を生成することを示す．
 反標準環$R_q$の導来切断関手が，$e$を$\pi R_q$に送る同値
-$\TT_q\simeq\Db(\qgr R_q)$を与えることを，境界のtraceと飽和性を用いて証明する．
-$\qgr R_q$のホモロジー次元は2となる．有限位数の境界自己同型も除外しない．
+$\TT_q\simeq\Db(\qgr R_q)$を与えることを，境界のtraceと飽和性を用いて論じる．
+この比較が成立すれば$\qgr R_q$のホモロジー次元は2となる．
+これとは独立に，中心正則一次元による商が整なGorenstein種数1曲線のtwisted homogeneous
+coordinate ringであるnoetherian環について，Gabriel--Krull filtrationが
+Hilbert多項式の次数filtrationに一致することを証明する．構造対象は内在的rank oneで
+torsion-freeであり，任意の対象のrankは二次の最高次係数から読める．
+境界自己同型の有限位数・無限位数のいずれも含み，整なnodal/cuspidal境界にも適用できる．
+導来比較の下ではこのrankが元の数値rankに一致する．
 数値的な共鳴式の指数は，固定した規約の下でEuler標数に対応する．
 したがって稠密な非零指数の共鳴は，この範囲で導来特異性の稠密な発生を意味しない．
-weak del Pezzoの$(-2)$曲線，特異な反標準境界，非局所自由なgluingに関する
-問題は別に残す．原稿中の新しい組合せの証明を点検したが，文献に対する新規性と
-独立した第三者による検証は未確認である．
+weak del Pezzoの$(-2)$曲線，特異境界での導来比較，非局所自由なgluingに関する
+問題は別に残す．環論的rank認識は本稿で証明を検証した結果であり，
+既存の全$q$導来比較の独立全面監査とは区別する．文献上の新規性は未確定である．
 \end{abstract}
 
 \section{問題，結果の範囲，先行研究}
@@ -71,16 +77,22 @@ Rains\cite[\S4, pp.~34--35]{RF}は，effective rootが生じる
 無条件に同一視しない．特に数値的non-amplenessから，abel圏の不一致や
 導来非同値を直ちに推論することはできない．
 
-本稿の主結果は，Rainsのgluingと反標準環に関する既知結果
+本稿の導来比較は，Rainsのgluingと反標準環に関する既知結果
 \cite[\S4, Proposition~5.1, Corollary~3.8]{RF}を入力とし，
-古典的avatar $S$の反標準因子が\emph{ample}である場合に，導来比較を閉じることである．
+古典的avatar $S$の反標準因子が\emph{ample}である場合を扱う．
 重要なのは，非可換側の元のheartでの反標準amplenessを仮定しない点である．
 Rogalski--Sierra--Stafford\cite[Lemma~6.8]{RSSDown}の開部分による滑らかさ判定は
 近接する既知結果だが，同論文の全体仮定はdegree $\geq3$と無限位数を含むため，
 次数1へそのまま適用しない．以下の証明では，次数1も許す
 \cite[Proposition~2.4]{RSSBlow}とbalanced dualizing complexの結果\cite{YZ}を使う．
 
-\begin{theorem}[主結果]\label{thm:main}
+第\ref{sec:elliptic-rank}節の環論的定理は導来比較に依存しない．
+先行するAbdelgadir--Okawa--Ueda\cite[Appendix~A]{AOU}の非可換射影平面での
+内在的rankを，中心一次元を持つ整な種数1境界へ接続する．
+本稿では中心元の核を含む差分公式と商圏の単純対象を用いて全ての加群を扱う．
+この一般化の独立の新規性を主張せず，次数1の内在的定義に必要な仮定を明確にすることを目的とする．
+
+\begin{theorem}[導来比較：既存証明の独立全面監査は未完了]\label{thm:main}
 $S$を滑らかな可換del Pezzo曲面，$E\in|-K_S|$を滑らかな曲線とし，
 $q\in\Pic^0(E)$とする．第\ref{sec:data}節の規約のRains型圏を
 $\TT_q=\Db(\AA_q)$，その構造対象を$e$とする．
@@ -473,6 +485,8 @@ Euler標数非零なら少なくとも一つのcohomology空間は非零であ�
 ただし全ての共鳴点でheartが必ず変わるとは主張しない．
 数値的ampleness，AZ-ampleness，二つのheartの一致は別々に判定する．
 
+\input{papers/sections/elliptic_rank_filtration.tex}
+
 \section{モジュライへの帰結と残る境界}\label{sec:limits}
 滑らかなdel Pezzo $S$，滑らかな$E\in|-K_S|$，$q\in\Pic^0(E)$を動かす
 elliptic avatarのパラメータ空間において，定理\ref{thm:main}は
@@ -510,12 +524,12 @@ $N_p=L_{\OO_S}(I_p(-K_S))$と本稿の構成が一致する．
 全退化境界を含むclosedness定理はまだ与えていない．
 
 \paragraph{内在的定義への位置付け．}
-$\qgr R$はnoetherian，Ext-finite，homological dimension 2であり，
-$\OO_R$はexceptional，反標準作用は$(1)$，そのpairはAZ-ampleで，
-反標準Hilbert seriesも所定のものになる．
-ただし，既存原稿のGabriel--Krull filtrationによるrank-one条件とtorsion-freenessの認識を
-本稿の証明に自動的な結論として追加しない．元のRainsの数値的rankと
-新しいheartの内在的rankの比較は別の課題である．
+定理\ref{thm:elliptic-rank}により，環の仮定が成立する限り，$\OO_R$の
+Gabriel--Krull rank-one条件とtorsion-freenessに追加の認識仮定は不要である．
+導来比較を入力とすれば，系\ref{cor:elliptic-intrinsic-heart}が次数1の全内在的公理を与え，
+命題\ref{prop:elliptic-numerical-rank}が元の数値rankとの一致を与える．
+未解決の核心は，この幾何点ごとの認識の相対化，heartの降下，
+同型groupoidと10次元族の成分性である．全$q$導来比較の独立監査は引き続き必要である．
 
 \paragraph{singularという語の注意．}
 本稿は$\qgr R$の有限homological dimensionを滑らかさの判定として用いた．
@@ -528,20 +542,46 @@ $\Db(\coh Y)$のdg smoothnessを混同してはいけない．
 「$Y$が特異だから$\Db(\coh Y)$はdg smoothでない」という推論は使わない．
 
 \section{証明状態と再開箇所}
-本稿の新しい推論は定理\ref{thm:null}，第\ref{sec:comparison}節の比較，
-命題\ref{prop:det}，系\ref{cor:zero-index}である．
-入力となるRainsの構成，Ext計算，graded algebraの有限性，飽和性は一次資料の
-定理と仮定を照合した．特に有限位数を無限位数の文献で処理せず，
-補題\ref{lem:finiteness}で別に扱った．
-本文には完全な論証を記したが，独立の第三者査読や形式検証は実施していない．
-文献上すでに同値な形の結果が存在するかは未確認であり，新規性を主張しない．
+第\ref{sec:elliptic-rank}節のHilbert差分，有限長filtration，構造対象の純性と
+rank認識は2026年11月16日に本文で証明を構成し，各推論を検証した．
+環論的定理は導来比較とは独立である．数値rankの式は境界triangleから直接導き，
+内在的rankとの比較には導来同値と高次Serre消滅を明示的に入力する．
+Artin--Van den Berghのtwisted section再構成，AOU Appendix~A，
+RSS Proposition~2.4の適用範囲を区別し，RSSの無限位数条件を有限位数へ流用していない．
 
-研究の次の焦点は，elliptic領域での稠密共鳴ではなく，
-特異反標準曲線と非局所自由gluing，およびweak avatarの直交圏である．
-既存のintrinsic原稿のrank・weighted sextic認識・10次元族の成分問題は保持し，
-本稿をそれらのheart比較の入力として使う．
+定理\ref{thm:null}，第\ref{sec:comparison}節，命題\ref{prop:det}，系\ref{cor:zero-index}は
+既存原稿の証明を保持したものである．既往の著者点検と今回の独立全面監査を混同せず，
+これら全てを今回新たに検証済みとはしない．独立の第三者査読，形式検証，
+本節の結果も含む文献上の新規性の網羅的確認は未実施である．
+
+研究の次の焦点は，導来比較の入力の監査と，相対abelian heart・基底変更・降下である．
+特異反標準曲線，非局所自由gluing，weak avatarの直交圏は別の未解決課題として保持する．
+一般の内在的公理から中心的な楕円境界を取り出す問題は，本節の環論的定理では解決していない．
 
 \begin{thebibliography}{99}
+\bibitem{AV}
+M.~Artin and M.~Van den Bergh,
+\emph{Twisted homogeneous coordinate rings},
+J. Algebra \textbf{133} (1990), 249--271.
+使用箇所：Theorems~1.3--1.4のtwisted section再構成と$\sigma$-ampleな場合の圏同値．
+\url{https://doi.org/10.1016/0021-8693(90)90269-T}.
+\bibitem{Keeler}
+D.~S.~Keeler, \emph{Criteria for $\sigma$-ampleness},
+arXiv:math/9912051v2 (2000), Theorem~1.2.
+\url{https://arxiv.org/abs/math/9912051}.
+\bibitem{CKS}
+A.~Chirvasitu, R.~Kanda and S.~P.~Smith,
+\emph{Maps from Feigin and Odesskii's elliptic algebras to twisted homogeneous coordinate rings},
+Forum Math. Sigma \textbf{9} (2021), e4, 1--50.
+使用箇所：Theorem~2.4（Artin--Van den Berghの定理の再掲），Corollary~2.8．
+\url{https://doi.org/10.1017/fms.2020.60}.
+\bibitem{AOU}
+T.~Abdelgadir, S.~Okawa and K.~Ueda,
+\emph{Compact moduli of noncommutative projective planes},
+arXiv:1411.7770v1 (2014).
+比較箇所：Appendix~A, Definitions~A.3--A.4, Propositions~A.5--A.6．
+原典の非可換射影平面の定理を本稿の環へ無条件に適用せず，別証明を与える．
+\url{https://arxiv.org/abs/1411.7770}.
 \bibitem{RF}
 E.~M.~Rains, \emph{Filtered deformations of elliptic algebras},
 arXiv:2107.13540v2 (2022).

@@ -1,28 +1,40 @@
-# dP1 統合原稿の検証状態
+# dP1：現行の検証状態
 
-2026-11-16 / validation-v2（既往の2026-11-15検査は下記に明記）
+2026-11-16 / validation-v3。証明の記載、今回の点検、機械的検算、組版、外部査読を区別する。
 
-## 2026-11-16 現状評価と証明監査の境界
+## 今回証明を構成・点検した事項
 
-- GitHub mainの研究方針、2本の論文の主要定理と証明、ノート、既往の組版検証記録を読んで現状を評価した。
-- Okawa--Ueda、Rains、Etingof--Ginzburg、可換dP1のコンパクト化の関連一次資料を探索。特にRains arXiv:2504.16187 §16.4の次数1反標準環の既知結果との重複を次の監査対象とした。一次資料の全証明・全適用条件を今回独立に照合し終えたわけではない。
-- **今回はTeXの新たな組版・数値検算・主張の独立全面検証を実行していない。** 以下に記す2026-11-15の組版成功は以前の作業の記録であり、今回のチェック結果ではない。
-- `HH²=10, HH³=0, KS`、有限A∞ chart成分性、smooth elliptic derived comparison、weighted sextic認識は、本文で主張・証明された範囲と、全Morita/intrinsic moduliへの未完成の比較を区別する。研究価値最大化型の今後の監査順は `research/dp1_research_plan.md` を参照。
+反標準モデル論文§6、`papers/sections/elliptic_rank_filtration.tex`：
+- `lem:elliptic-hilbert-polynomial`：Ann_M(g)を含む完全列からHilbert多項式を得る。g-torsion-freeを仮定していない。
+- `thm:elliptic-filtration`：有限長対象と商圏の単純対象への中心gの作用から、GK filtrationと多項式次数filtrationを一致させる。
+- `thm:elliptic-rank`：斉次右イデアル内のaR、商の一次増大度、generic simple generatorからrank one、torsion-free、二次係数との一致を証明する。
+- 整なGorenstein種数1境界に一般化した。σ-ampleness、RR、ω_E≅O_E、境界の単純層を確認し、nodal/cuspidalを含める。可約・非被約境界や非中心normal元を含めない。
+- `prop:elliptic-numerical-rank`：境界triangleからEuler差分を導く。数値rankと内在的rankの比較には既存導来同値を明示的に入力する。
 
-## 数学
+ここでの点検は本文中の推論の数学的点検であり、独立した第三者査読・形式証明ではない。結果の独立の新規性は未確定である。
 
-- 本文は2026-11-14版のdP1研究ソース2件を内容と証明を削らず移植したもの。共鳴比較・KS計算・有限表示での成分性などは「既存原稿に証明を記載している」結果である。
-- GitHub統合に際し、本文の全証明を独立に再監査したわけではない。新規性・外部査読・形式化は未確認。
-- 元のRains共鳴条件は数値的amplenessの条件であり、AZ-ampleness、abel equivalence、dg derived equivalence、qgrのhomological smoothnessを区別する。
-- 特異境界・非局所自由gluing、弱del Pezzo境界の収縮先、全intrinsic moduliへの成分性・同値は未証明。
+## 一次資料の確認範囲
 
-## 資料の参照
+AOU arXiv:1411.7770v1 Appendix AのDefinitions A.3–A.4、Propositions A.5–A.6を本文・ページ画像で確認。非可換射影平面の定理を楕円環へそのまま適用せず別証明を与えた。
 
-移植元：`intrinsic_nc_del_pezzo_20261114_v4.zip`内の`intrinsic_nc_del_pezzo.tex`と`anticanonical_resonance.tex`。TeX中の参照先ファイル名を現行repoの`papers/`名へ置換。旧ZIP自体はGitに含めない。
+RSS arXiv:1308.2216v2 Proposition2.4を本文・ページ画像で確認。無限位数仮定を確認し、新しいrank証明には用いていない。既存導来比較での有限位数の扱いは依然独立監査対象。
 
-## 組版・チェック
+Keeler arXiv:math/9912051v2 Theorem1.2を本文・ページ画像で確認。整な曲線の数値因子類はdegreeで決まり、自己同型の作用が自明なので正次数Lはσ-ample。
 
-- 2026-11-15にリポジトリの `.latexmkrc` と同等の設定を用い、LuaLaTeX/latexmk で二つの原稿を組版した。主論文31ページ、共鳴論文9ページで、いずれも最終実行の終了コードは0。
-- 主論文の最初の組版は実行時間制限で中断し、破損した一時auxを削除してclean buildで成功した。一時生成物はGitに含めない。
-- 両TeXのlabel/refを静的に走査し、参照切れと重複labelは検出されなかった。ログにoverfull/undefined/multiply-definedの警告も検出されなかった。
-- 組版は数学の独立再検証を意味しない。PDFと中間生成物はGit追跡しない。
+Artin–Van den Berghの原論文全体は今回取得・監査していない。Theorems1.3–1.4の再掲をChirvasitu–Kanda–Smith, Forum Math. Sigma9(2021)e4, Theorem2.4で本文確認し、Corollary2.8の境界圏埋込みも確認した。同論文PDFのwebページ画像取得は502で失敗したため、この資料は本文テキストでの確認にとどまる。引用は原論文と確認した再掲を併記した。
+
+## 今回実行した機械的検査・組版
+
+`python scripts/check_elliptic_rank.py` をSymPy1.14.0で実行：4件の多項式恒等式、38個の一意なlabel、52件の参照、11種類の引用keyの閉包を確認した。これは有限長性や導来同値を機械的に証明するものではない。
+
+`latexmk papers/dp1_anticanonical_models.tex` をLuaLaTeXで実行し、版1.2の14ページPDFを生成、終了コード0を確認した。最終ログにundefined/multiply-defined/overfull/underfullの警告は検出しなかった。PDFのページ画像をレンダリングし、本文・新rank節の配置を確認した。PDFと中間生成物はGitに含めない。
+
+## 今回実行していないこと
+
+主稿全体の再組版・独立全面監査、全q導来比較の一次入力を通した全面再検証、Morita変形との全比較、相対heart・降下、全intrinsic成分性、網羅的な新規性調査は未実施・未完了である。主稿に残る特殊楕円qgr-rankの未解決表示の横断的参照整理も残る。現行のrank結果は反標準モデル論文§6が正本。
+
+## 保持する既存検証情報
+
+既往の2026-11-15検証では主稿31ページ、反標準モデル論文9ページのLuaLaTeX組版成功とlabel/refの閉包が記録されている。これは今回の主稿の再検査を意味しない。既存のgluing、HH/KS、有限chart、weighted認識、全q導来比較には証明が記載されているが、今回新たに全て検証したとはしない。
+
+ファイル生成・検算・組版とGitHubへの保存は別の状態である。保存の成否は実際のcommit/main到達確認により報告し、この文書だけから推定しない。
