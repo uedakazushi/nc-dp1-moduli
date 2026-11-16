@@ -1,6 +1,6 @@
 # 研究方針：次数1の非可換del Pezzo曲面
 
-2026-11-16 / dp1-plan-v1。再開時にはこのファイルを最初に読む。GitHub main を現行の研究正本とする。
+2026-11-16 / dp1-plan-v2。再開時にはこのファイルを最初に読む。GitHub main を現行の研究正本とする。
 
 ## I. 恒常的な研究原則と保存許可
 数学的重要性、新規性、理解の深化、応用可能性、正確性、実現可能性を総合し、研究目標と方針を柔軟に変更する。重要な変更では理由、解決済みの事項と残された元の問題を現行方針に簡潔に整理するが、変更履歴を蓄積しない。証明済み、追加仮定に依存、未完成、予想、計算的観察を明確に区別する。仮定、既知入力、証明の所在、未解決箇所を明示し、原稿に証明があること・今回の検証・計算・外部査読を混同しない。誤りは依存する主張と要約にも反映し、有用な障害・反例は現行ノートに保持する。
@@ -11,22 +11,27 @@
 
 mainに通常のfast-forwardで直接pushし、remote SHAを確認する。GitHub Actions、PR、force pushは使用しない。他者の並行更新を失わず、競合時は取得して内容を統合する。背景処理の自動実行は約束しない。
 
-## II. 本研究固有の目標
-非可換次数1 del Pezzo曲面を、quiverやblowdown標識を分類対象に加えず、Ext有限・noetherian Abel圏、Serre関手、心を保つ `tau=S^{-1}[2]`、Gabriel–Krull rank-one torsion-free exceptional構造対象、Artin–Zhang ample pair、および次数1の反標準Hilbert関数から内在的に認識する。反標準環、重み(1,1,2,3)の次数6超曲面、楕円境界・Rains gluing、dg変形、abelian moduli stack、同型群oid・慣性と既約成分を比較する。
+## II. 本研究固有の中心目標と達成基準
+次数1の非可換del Pezzo曲面の**内在的モジュライ理論**を、既存の幾何的構成・graded algebra・導来変形と比較して確立する。数学的重要性、新規性、理解の深化、正確性、実現可能性、公表可能性を総合した研究価値の最大化を最優先とし、完全分類の達成のみを成功基準にはしない。特に `(S,p)` による10次元smooth proper dg族の局所変形を厳密に記述し、構造対象 `O` とheartを指定したintrinsic abelian moduliへの橋を作る。
 
-成果は `papers/nc_del_pezzo_degree1_moduli.tex` と `papers/dp1_anticanonical_models.tex` に保持する。共鳴の一般次数・四つのheart比較の主原稿は別の現行リポジトリ https://github.com/uedakazushi/nc-cubic-moduli を正本として参照する。依存する結果は特定の版と仮定を明記し、別のリポジトリの最新版を無条件に入力しない。
+必要な区別：①有限directed A∞表示の成分、②pointed Morita/dg圏の局所moduli、③abelian heartと構造対象を含むintrinsic moduli、④標識を忘れた完全分類。①から④への無条件の移行は禁止する。Rains/Okawa--Ueda/Etingof--Ginzburgの既知構成と新規な部分を分離する。局所定理・heart認識・境界の定理は完成次第独立に公表する。
 
-## III. 現在の主要到達点
-- smooth classical degree1 del Pezzo曲面Sと点pによる直交圏と例外対象のdg gluing、HH^2=10、HH^3=0、Kodaira–Spencer写像の同型を含む形式局所候補族を論文化した。これは全intrinsic abelian moduliの既約成分性を意味しない。
-- Gabriel–Krull rankと反標準切断増大の関係、構造対象の認識、追加条件の下のweighted sextic正規超曲面表示、楕円境界の中心性、指定avatarと一点Hilbert schemeによる構成・復元を保持する。
-- smooth genuine avatarと滑らかな楕円境界からのRains型gluingに限定し、反標準ring qgrとの全q導来比較を記述。有限位数qも排除しない。数値的ampleness、AZ-ampleness、heartの一致と導来同値を区別する。
-- 各証明の検証状態は `research/dp1_validation.md`。移管前の原稿の証明を今回新たに独立全面検証したとは扱わない。
+## III. 現行の成果と確実性
+- `papers/nc_del_pezzo_degree1_moduli.tex`：smooth genuine次数1 Sとpの相対dg gluing、古典基点、HH²=10・HH³=0・KS同型、有限directed A∞ chartの成分性を本文に証明として記載。全Morita変形やintrinsic abelian moduliの成分を確立したものではない。
+- 同稿：Gabriel--Krull rank、Artin--Zhang再構成、中心正則gとASregular境界被覆を明示的に仮定したweighted sextic認識と中心性の十分条件。一般内在的対象からのgや被覆の存在は未証明。
+- `papers/dp1_anticanonical_models.tex`：smooth genuine S・smooth E・q∈Pic⁰(E)に限定したRains gluingと反標準qgrの導来比較・hdim2（有限位数qも含む）を本文で主張し証明を記載。全退化境界は含まず、独立の全面監査と先行研究上の新規性確認は未完了。
+- 今回の研究計画策定は既存原稿の読解と外部一次資料の探索であり、全証明の独立再監査・新たな組版・計算実行を意味しない。検証履歴の実態は `research/dp1_validation.md` を参照する。
 
-## IV. 未解決の核心と優先的着手
-1. 構成した10次元dg変形族からsmooth properなabelian heartとrank-one構造対象を復元し、実際のintrinsic moduliの既約成分であることを証明する。有限A-infinity chartと相対同型群oidを比較する。
-2. 楕円境界の存在と幾何性、重み付き6次超曲面・中心元の認識の仮定を可能な限り弱める。境界を持たない/特異な例を独立に検討する。
-3. 退化境界・非局所自由gluing・weak del Pezzoの根壁でのheart、基底変更、fpqc降下、自然性を調べる。
-4. Rains/anticanonicalモデルの一般次数の定理との関係を厳密にし、次数1固有の新規性を一次資料に照らして検証する。
+## IV. 優先順位と具体的な着手
+- **P0：証明と新規性の監査。** `thm:universal-gluing`、`thm:gluing-hh-ks`、`thm:finite-chart-component`、導来比較主定理を一次資料とともに照合。特にRainsの2025年論文 §16.4 の次数1反標準環との重複を調べる。
+- **P1：局所形式モジュライ。** finite A∞とMorita変形の比較、gauge/inner stabilizerとBertini involution、generic finiteness、avatarの相対Poincaré正規化を検証し、10次元族の局所形式普遍性と適切な成分定理を目指す。
+- **P2：intrinsic heart。** smooth elliptic Rains gluingからの `qgr R_q` についてGabriel--Krull rank-one/torsion-free性を示し、AZ-ampleness・元heartとの相違・弱標識忘却のgroupoidを確定する。
+- **P3：特異境界。** `Bl_b(S)→P¹` の相対Picard/compactified Jacobianと普遍点族を自然変換の水準で比較。nodal/cuspidal Eと非局所自由sheaf、traceと導来比較の適用範囲を調べる。
+- **P4/P5：高リスクの分類とコンパクト化。** 中心元・楕円境界・weighted ASregular被覆の自動性の検証、weak Sの(-2)壁でのorbit直交とsingularity判定。独立に公表可能なP1--P3をこれらの完成待ちにしない。
 
-## V. 研究再開と再現
-本書 → `research/dp1_research_plan.md` → `research/dp1_research_notes.md` → 二本のTeX原稿 → `research/dp1_validation.md` / `research/dp1_reproduction.md` の順に読む。依存関係の詳細は各論文の文献表および参照節。 `latexmk papers/nc_del_pezzo_degree1_moduli.tex` および `latexmk papers/dp1_anticanonical_models.tex` でLuaLaTeX再生成する。必要な範囲の組版・検算、参照閉包を実施して状態を明記する。
+優先順位・到達条件・証明箇所・文献比較の詳細は `research/dp1_research_plan.md`。最初の実作業はP0のHH/KS・finite chart監査と、P2のrank-one/torsion-free補題の証明である。
+
+## V. 再開・再現・保存
+再開順：本書 → `research/dp1_research_plan.md` → `research/dp1_research_notes.md` → 2本のTeX原稿 → `research/dp1_validation.md`・`research/dp1_reproduction.md`。共鳴と一般次数のheart比較は `https://github.com/uedakazushi/nc-cubic-moduli` を正本として参照し、その最新版を仮定なしに使用しない。
+
+`latexmk papers/nc_del_pezzo_degree1_moduli.tex`、`latexmk papers/dp1_anticanonical_models.tex` でLuaLaTeX再生成する。版ごとに原稿を重複保持せず、必要な内容・証明を現行の論文とノートに統合。GitHub mainへの保存を第一にし、既存の一般原則に従いpush成功時にはLibraryへの重複保存を行わず、push失敗時のみ緊急避難に用いる。GitHub Actions、PR、force pushは使わない。
