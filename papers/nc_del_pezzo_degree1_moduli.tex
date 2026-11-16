@@ -1,0 +1,2207 @@
+\RequirePackage{fix-cm}
+\documentclass[11pt,a4paper]{ltjsarticle}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,enumitem}
+\usepackage[unicode,hidelinks]{hyperref}
+\hypersetup{pdftitle={非可換del Pezzo曲面の内在的構造と次数1変形族}}
+\setlength{\emergencystretch}{2em}
+\setlist{nosep}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{定義案}
+\newtheorem{question}[theorem]{認識問題}
+\newtheorem{remark}[theorem]{注意}
+\newcommand{\OO}{\mathcal O}
+\renewcommand{\AA}{\mathcal A}
+\newcommand{\BB}{\mathcal B}
+\newcommand{\TT}{\mathcal T}
+\newcommand{\SSer}{\mathbb S}
+\newcommand{\Db}{D^{\mathrm b}}
+\newcommand{\RHom}{\operatorname{RHom}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\coh}{\operatorname{coh}}
+\newcommand{\qgr}{\operatorname{qgr}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Hilb}{\operatorname{Hilb}}
+\newcommand{\Perf}{\operatorname{Perf}}
+\newcommand{\Nat}{\operatorname{Nat}}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Bl}{\operatorname{Bl}}
+\title{非可換del Pezzo曲面の内在的構造と\\次数1変形族}
+\author{}
+\date{2026年11月15日 JST・統合版4.2\\研究原稿：内在的な全モジュライと完全分類は未完成}
+\begin{document}
+\maketitle
+\begin{abstract}
+構造対象を選んだabel圏から非可換del Pezzo曲面を定義する問題と，
+次数1の可換曲面を含む非可換変形の成分を構成する問題を区別して扱う．
+滑らかな次数1 del Pezzo曲面$S$と点$p\in S$から，
+$\BB_S=\OO_S^\perp$と$N_p=L_{\OO_S}(I_p(-K_S))$を用いて，
+quiverを選ばないsmooth proper dg圏と例外対象の族を構成する．
+反標準pencilの基点では可換曲面を回復する．全ての$p$でHochschild二次が
+10次元，三次が零であることと，普遍点の族のKodaira--Spencer写像が同型であることを示す．
+有限なdirected $A_\infty$構造の局所表示で成分を認識する議論を与え，
+内在的なabel圏のモジュライとの比較に残る仮定を明示する．
+Gabriel--Krull filtrationの商圏における長さをrankと定義し，rank oneでtorsion-freeな
+構造対象とArtin--Zhang amplenessから，generic quotientのsemisimplicity，
+反標準環の整域性，および全対象のrankと切断増大度の一致を証明する．
+さらに，中心的な反標準切断と境界のAS-regular coverを仮定すれば，
+重み$(1,1,2,3)$型のAS-regular環内の正規な次数6超曲面表示を構成する．
+滑らかな楕円境界では負次数導分の消滅により中心的表示へ強められる．
+Rainsの直交部分圏のgluingと一点Hilbert schemeをそれぞれ構成と復元に用いる．
+固定された可換幾何学的実現の下で，非自明なPicard元によるgluingから反標準因子と
+その上の可逆層を復元する補題を証明する．また，次数1の点の数値類と，
+反標準因子をHomの跳躍軌跡として検出する式を与える．
+順序付きblowdown標識と構造対象だけの標識の相違，
+および数値的amplenessとArtin--Zhang amplenessの区別を明示する．
+別稿の導来比較定理により，滑らかなdel Pezzo avatarと滑らかな楕円境界の範囲では，
+稠密なroot resonanceにおいても反標準環のqgrは元のsmooth proper圏と導来同値であり，
+ホモロジー次元2の反標準ampleなheartを与える．
+抽象公理からの中心的楕円境界の存在と幾何性，退化境界でのheartの認識，
+同値に関する復元の自然性は，独立した未解決課題として残す．
+本文の主張の状態と今回の確認範囲を分けて記す．文献に対する新規性は主張しない．
+\end{abstract}
+
+\section{問題と分類対象}
+係数体は$\mathbb C$とする．求めたい対象は，quiverや例外コレクションを
+データに含めない非可換曲面$\AA$と，その構造層に相当する対象$\OO$である．
+弱標識付き対象の同型は，$\OO$を$\OO'$に送る$\mathbb C$線形な
+\emph{exact abelian equivalence}とする．derived equivalenceだけでは同じ同型概念にならない．
+dg構成を使う際には，$\Db(\AA)$の標準的または指定されたdg enhancementを用いる．
+
+当面の主目標は，滑らかな可換次数1 del Pezzoを含む10次元の変形族を
+明示し，適切な局所モジュライにおける成分性を認識することである．
+第\ref{sec:pointed-dg-family}節の族は曲面上の一点だけで記述される．
+その構成，Hochschild計算，Kodaira--Spencer写像はquiverの選択に依存しない．
+有限な構造係数による成分判定には補助的な例外コレクションを用いるが，
+この局所表示での結果を，全てのabel圏を分類する定理とは同一視しない．
+
+直接の先行結果はRains\cite[Theorem 4.30と直後のRemarks]{RainsBirational}
+のgluingと一次変形の記述である．次数1の反標準基点を用いた
+曲線と$\Pic^0$の同定も同論文\S5で用いられている．
+Okawa--Ueda\cite[Definition 6.1, Theorem 6.4]{OU}は，強いhelix標識を持つ
+Artin--Schelter曲面について楕円データとの双有理対応を与える．
+次数1では線束のスカラー自己同型を剛体化したパラメータの次元は10である．
+従って本稿の課題は10次元の候補族を初めて作ることではなく，
+構造対象だけの標識，quiverに依存しない族，および内在的な変形問題を比較することである．
+Etingof--Ginzburg\cite{EG}のfiltered変形とweighted sextic表示は
+代数的表示の比較対象であり，projective categoryのモジュライとの同一視を仮定しない．
+
+添付研究ノート\cite{Attached}の次数1 avatarは
+\begin{equation}\label{eq:marked-avatar}
+ (S;h_1,h_2;E_1,\ldots,E_7;D,P)
+\end{equation}
+である．$S$は$H=-K_S$がnef and big，$H^2=1$である滑らかな射影曲面で，
+互いに交わらない七本の素な$(-1)$曲線$E_j$を縮約すると
+$\mathbb P^1\times\mathbb P^1$になる．$h_1,h_2$は順序付きrulingの引戻しである．
+曲線型では$D\in|H|$，$P\in\Pic^0(D)\setminus\{\OO_D\}$で，
+\begin{equation}\label{eq:root-conditions}
+ H^\bullet\bigl(D,\OO_D(H-E_j)\otimes P^{-1}\bigr)=0
+ \qquad(1\leq j\leq7)
+\end{equation}
+を課す．同ノートではこれらの条件から$D$の被約性が導かれている．
+古典型は$D,P$を持たない標識付き$S$で，
+$H^\bullet(S,\OO_S(H-E_j))=0$を課す．
+同型は全てのrulingと例外曲線の順序を保つ．
+
+本稿は同ノートの全Ginzburg正則性証明を再検証したものではない．
+確認したのは第10--11節の分類対象と同値関係，および本稿で再証明する
+被約種数1曲線上の消滅である．
+その標識付き分類と，$\OO$だけを標識した分類は別の問題である．
+
+\section{反標準作用を用いた内在的定義案}
+通常のSerre functorの規約を
+\begin{equation}\label{eq:serre}
+ \SSer_S(F)=F\otimes\omega_S[2]
+\end{equation}
+とする．従って標準作用と反標準作用はそれぞれ
+\begin{equation}\label{eq:tau}
+ \theta=\SSer[-2],\qquad
+ \tau=\theta^{-1}=\SSer^{-1}[2]
+\end{equation}
+である．$\SSer[2]$を反標準作用として使わない．
+
+\begin{definition}[反標準ample版]\label{def:fano}
+次数$d$の弱標識付き反標準ample非可換曲面の候補を，以下を満たす
+$(\AA,\OO)$とする．
+\begin{enumerate}
+\item $\AA$は本質的に小さい$\mathbb C$線形noetherian Ext-finite abel圏である．
+\item $\Db(\AA)$はSerre functorを持ち，
+$\theta=\SSer[-2]$は$\AA$を保つexact autoequivalenceである．
+\item $\AA_0$を有限長対象のSerre部分圏，$\AA_1$を$\AA/\AA_0$で
+有限長となる対象のSerre部分圏とする．$\AA/\AA_1$における$\OO$の像は
+非零単純対象であり，$\Hom(T,\OO)=0$ for $T\in\AA_1$とする．
+すなわち$\OO$は内在的な意味でrank oneかつtorsion-freeである．
+\item $\OO$はexceptionalである：
+$\Hom(\OO,\OO)=\mathbb C$，$\Ext^i(\OO,\OO)=0$ for $i>0$．
+\item $(\OO,\tau)$はArtin--Zhangのample pairである．
+\item $n\geq0$に対して
+\begin{equation}\label{eq:hilbert-dim}
+ \dim\Hom(\OO,\tau^n\OO)=1+\frac d2n(n+1)
+\end{equation}
+が成立する．
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[反Serre作用のheart保存からの大域次元]
+\label{prop:serre-heart-hdim}
+$\AA\ne0$であり，$\Db(\AA)$にSerre関手$\SSer$が存在して，
+$\tau=\SSer^{-1}[2]$が$\AA$を$\AA$へ写すとする．
+このとき$\operatorname{hdim}\AA=2$であり，
+任意の$M,N\in\AA$，$i\in\mathbb Z$について
+\begin{equation}\label{eq:serre-automatic-ext}
+\Ext^i_{\AA}(M,N)\simeq
+\Hom_{\Db(\AA)}(\tau N,M[2-i])^*
+\end{equation}
+が成り立つ．ここでは$\tau|_{\AA}$の本質的全射性さえ必要ない．
+\end{proposition}
+\begin{proof}
+Serre双対性から
+\[
+\Hom_{\Db(\AA)}(M,N[i])
+\simeq\Hom_{\Db(\AA)}(N[i],\SSer M)^*
+\simeq\Hom_{\Db(\AA)}(\tau N,M[2-i])^*
+\]
+を得る．$i>2$なら$\tau N,M$はheartの対象であり，
+右辺は負次数のHomなので零．従って$\operatorname{hdim}\AA\le2$である．
+非零$N\in\AA$に対して$M=\tau N$とすれば
+\[
+\Ext^2_{\AA}(\tau N,N)\simeq\End_{\AA}(\tau N)^*\ne0.
+\]
+よって$\operatorname{hdim}\AA=2$である．
+\end{proof}
+
+この定義案自体はquiverを選ばない．$\OO$の存在だけを要求してその選択を忘れた対象を
+unmarkedと呼び，実際に$\OO$を指定した対象をweakly markedと呼べる．
+ただし，この候補クラスが既知の幾何学的非可換del Pezzoを尽くすこと，
+また既知構成族以外の対象を含まないことは，本稿では主張しない．
+
+\paragraph{rankの正規化．}
+rankは商圏$\AA/\AA_1$における長さで定義する．
+この定義は\cite[Proposition A.6]{AOUCompact}による非可換射影平面の特徴付けを
+抽象化したものであり，quiverも数値格子も選ばない．
+第\ref{sec:intrinsic-rank}節では，この定義案の下で全対象のrankが有限となり，
+$\AA/\AA_1$が除法環上の有限次元加群圏であること，および
+\[
+ \dim\Hom(\OO,\tau^nF)=\frac d2\rk(F)n^2+O(n)
+\]
+を直接証明する．この結論に高次cohomologyの消滅は不要である．
+Euler形式についての同じ主張とは区別する．
+
+dg gluingとmoduliを扱う際には，必要に応じてsmooth properなdg enhancementの存在を
+追加で仮定する．これは上の定義案や次節のArtin--Zhang再構成に含めない補強条件である．
+また$\OO$のexceptionalityは$n=0$の消滅であり，
+$\Ext^{>0}(\OO,\tau^nF)$の一般の漸近的消滅は別に扱う．
+
+\section{反標準環の再構成}
+\begin{theorem}[Artin--Zhangの適用]\label{thm:az}
+$\AA$をnoetherian Hom-finite abel圏，$\OO$を
+$\End(\OO)=\mathbb C$である対象とし，$(\OO,\tau)$がampleであると仮定する．
+\begin{equation}\label{eq:orbit}
+ R=R(\AA,\OO)=\bigoplus_{n\geq0}\Hom_{\AA}(\OO,\tau^n\OO)
+\end{equation}
+に，$a\in R_m$，$b\in R_n$に対して
+\begin{equation}\label{eq:multiplication}
+ a*b=\tau^n(a)\circ b
+\end{equation}
+で積を入れる．このとき$R$は右noetherianで$\chi_1$を満たし，
+\begin{equation}\label{eq:az}
+ (\AA,\OO,\tau)\simeq(\qgr R,\pi R,(1))
+\end{equation}
+である．
+\end{theorem}
+\begin{proof}
+積の結合律は$\tau$の合成との両立性から従う．
+$\Gamma_*(F)_m=\Hom(\OO,\tau^mF)$への右作用は
+$f\cdot b=\tau^n(f)\circ b$（$b\in R_n$）であり，上の積と整合する．
+$\OO$はnoetherian，$\End(\OO)=\mathbb C$はnoetherian，
+$\Hom(\OO,F)$は有限次元であり，ample条件は仮定である．
+従ってArtin--Zhang\cite[Theorem 4.5(1)]{AZ}を適用する．
+その定理の仮定と結論は\cite[Theorem 7.3]{Orbifold}にも再掲されている．
+\end{proof}
+
+最初からsection ring \eqref{eq:orbit}を使うので，
+任意のgraded presentationに生じる低次の有限変更を定義に持ち込まない．
+ただしこの定理が与えるのはcategoryと環の再構成であり，
+環が所望のavatarから来るという認識定理ではない．
+
+\begin{proposition}\label{prop:hilbert}
+滑らかな可換del Pezzo曲面$S$の次数を$d$とすると，
+反標準環のHilbert seriesは
+\begin{equation}\label{eq:hilbert}
+ H_d(t)=\frac{1+(d-2)t+t^2}{(1-t)^3}.
+\end{equation}
+次数1では
+\begin{equation}\label{eq:hilbert-one}
+ H_1(t)=\frac{1-t+t^2}{(1-t)^3}
+ =\frac{1-t^6}{(1-t)^2(1-t^2)(1-t^3)}
+ =1+2t+4t^2+7t^3+11t^4+\cdots.
+\end{equation}
+\end{proposition}
+\begin{proof}
+$H=-K_S$と置く．Riemann--RochとKodaira消滅より
+$h^0(S,nH)=1+\frac d2 n(n+1)$である．
+$\sum_{n\geq0}n(n+1)t^n=2t/(1-t)^3$を用いて和を取れば
+\eqref{eq:hilbert}を得る．次数1の第二表示は多項式恒等式である．
+\end{proof}
+
+\eqref{eq:hilbert-one}は可換な重み$(1,1,2,3)$・次数6超曲面のHilbert seriesに
+一致するが，一般の非可換環の生成元・関係式をHilbert seriesだけで指定しない．
+反標準環は可換な次数1の場合さえ通常のAS-regular環ではない．
+曲面categoryのホモロジー次元2と，座標環の有限global dimensionは区別する．
+
+\section{内在的なrankと反標準切断の増大度}\label{sec:intrinsic-rank}
+
+\subsection{Gabriel--Krull filtration と仮定}
+本節のrankは外部の数値格子を選ばずに定義する．
+\cite[Definitions A.3--A.4, Proposition A.6]{AOUCompact}では，
+3次元quadratic AS-regular algebraの非可換射影平面について，
+この内在的な長さとHilbert多項式から定まるrankの一致が証明されている．
+その証明済みの対象範囲と，以下の抽象的な定義および補題とは区別する．
+
+$\AA$を$k$線形noetherian Hom-finite abel圏とする．
+$\AA_0$を有限長対象のSerre部分圏とし，$\AA_1$を，
+$\AA/\AA_0$における像が有限長である対象のSerre部分圏とする．
+商関手を
+\[
+ q:\AA\longrightarrow\mathcal Q:=\AA/\AA_1
+\]
+と書く．$qF$の長さが有限であるとき
+\[
+ \rk(F):=\operatorname{length}_{\mathcal Q}(qF)
+\]
+と定める．$F$がtorsion-freeであるとは，
+全ての$T\in\AA_1$に対して$\Hom(T,F)=0$となることをいう．
+これは$F$が$\AA_1$に属する非零部分対象を持たないことと同値である．
+
+正確な自己同値$\tau:\AA\to\AA$と対象$\OO$について，以下を仮定する．
+\begin{enumerate}
+ \item $q\OO$は非零単純対象であり，$\OO$はtorsion-freeである．
+ \item $(\OO,\tau)$はArtin--Zhangのample pairである．
+ \item $n\geq0$に対して
+ \begin{equation}\label{eq:rank-hilbert-input}
+ h_{\OO}(n):=\dim_k\Hom(\OO,\tau^n\OO)
+   =p(n):=1+\frac{n(n+1)}2
+ \end{equation}
+ が成り立つ．
+\end{enumerate}
+特に，$\End(\OO)=k$および$\Hom(\OO,\tau\OO)\ne0$を仮定している．
+以下のrankに関する結論のためには，この段階で
+$\AA_2=\AA$，他の対象のrankの有限性，数値的Riemann--Roch公式，
+あるいは高次cohomologyの消滅を仮定する必要はない．
+
+ample条件のうち用いる内容を明記する．任意の$F\in\AA$には有限直和からの全射
+\begin{equation}\label{eq:rank-az-generation}
+ \bigoplus_{i=1}^{s}\tau^{-a_i}\OO\longrightarrow F,
+ \qquad a_i\geq0
+\end{equation}
+が存在する．また固定した全射$U\to V$に対して
+\begin{equation}\label{eq:rank-az-surjectivity}
+ \Hom(\OO,\tau^nU)\longrightarrow\Hom(\OO,\tau^nV)
+\end{equation}
+は$n\gg0$で全射となる．後者は高次Ext群の消滅を主張する条件ではない．
+
+\subsection{rank-one対象とgeneric quotient}
+
+\begin{lemma}\label{lem:rank-one-monomorphism}
+正確な自己同値は$\AA_0$および$\AA_1$を保つ．
+rank oneのtorsion-free対象$E,F$の間の非零射$f:E\to F$は単射であり，
+$\operatorname{coker}f$は$\AA_1$に属する．
+従って全ての$\tau^n\OO$はrank oneかつtorsion-freeである．
+\end{lemma}
+
+\begin{proof}
+正確な自己同値とその逆は部分対象，商対象，組成列を保つので，有限長性を保つ．
+まず$\AA_0$を保ち，商圏上の自己同値も有限長性を保つため$\AA_1$を保つ．
+非零像$\operatorname{im}f\subset F$はtorsion-free性により$\AA_1$に属さない．
+従って$qf:qE\to qF$は単純対象間の非零射であり，同型である．
+$\ker f$と$\operatorname{coker}f$は$\AA_1$に属し，
+前者はtorsion-freeな$E$の部分対象だから零である．
+\end{proof}
+
+\begin{proposition}\label{prop:generic-semisimple}
+$\mathcal Q$の全ての対象は$q\OO$の有限直和である．
+特に$\mathcal Q$は単純対象の同型類を一つだけ持つsemisimple length圏であり，
+除法環
+\[
+ \mathcal D:=\End_{\mathcal Q}(q\OO)
+\]
+に対して$\mathcal Q\simeq\operatorname{mod}_{\mathrm{fg}}\mathcal D$となる．
+$\AA$の全ての対象のrankが有限であり，rankは短完全列に加法的，
+非負整数値，かつ$\tau$で不変である．また
+\[
+ \rk(F)=0\ \Longleftrightarrow\ F\in\AA_1,
+ \qquad \AA_2=\AA.
+\]
+$\rk(\OO)=1$なので，rankは$K_0(\AA)\to\mathbb Z$という全射を与え，
+$[\OO]$は$K_0(\AA)$のprimitiveな元である．
+\end{proposition}
+
+\begin{proof}
+$\Hom(\OO,\tau\OO)\ne0$より非零射を一つ取ると，
+補題\ref{lem:rank-one-monomorphism}から$q\OO\simeq q\tau\OO$を得る．
+$\tau$とその逆を適用すれば，全ての$n\in\mathbb Z$に対して
+$q\tau^n\OO\simeq q\OO$となる．
+任意の$F$に\eqref{eq:rank-az-generation}を適用すると，$qF$は
+単純対象$q\OO$の有限直和の商である．有限semisimple対象の商はsemisimpleであるため，
+$qF\simeq(q\OO)^{\oplus r}$となる．
+商圏の各対象はある$qF$で表されるので，これが全ての対象を尽くす．
+Schurの補題と$\Hom_{\mathcal Q}(q\OO,-)$によって除法環上の加群圏との同値を得る．
+rankの性質は商関手の正確性と有限長の加法性による．
+$\AA_2=\AA$は，$\AA/\AA_1$の全ての対象が有限長であることの言い換えである．
+最後に$1\mapsto[\OO]$はrankの切断なので，
+$K_0(\AA)=\mathbb Z[\OO]\oplus\ker(\rk)$である．
+\end{proof}
+
+\begin{remark}
+非零torsion-free対象のrankは正である．
+この段階ではrankが数値的$K$群を経由することは主張しない．
+Euler形式が定義され，$\OO$がexceptionalなら，
+$\chi(\OO,\OO)=1$から$[\OO]$の数値的$K$群におけるprimitivityも別途従う．
+\end{remark}
+
+\subsection{orbit algebraと負の切断}
+
+\begin{proposition}\label{prop:orbit-domain-negative}
+$m>0$に対して$\Hom(\OO,\tau^{-m}\OO)=0$である．
+右加群の規約で
+\[
+ R=\bigoplus_{n\geq0}\Hom(\OO,\tau^n\OO),\qquad
+ a*b=\tau^{\deg b}(a)\circ b
+\]
+と置くと，$R$はconnected，局所有限，右noetherianなgraded domainであり，
+Artin--Zhangの$\chi_1$を満たす．
+\end{proposition}
+
+\begin{proof}
+$0\ne f:\OO\to\tau^{-m}\OO$があると仮定する．
+$\tau^mf:\tau^m\OO\to\OO$は補題\ref{lem:rank-one-monomorphism}により単射なので，
+合成による線形写像
+\[
+ \Hom(\OO,\tau^m\OO)\hookrightarrow\End(\OO)=k
+\]
+が単射となる．しかし左辺の次元は$p(m)>1$であり，矛盾する．
+次に非零斉次元$a,b\in R$は対象間の単射を表すので，
+$\tau^{\deg b}(a)\circ b$も非零である．
+一般の非零元の積については最高次の非零斉次成分の積が非零なので，$R$はdomainである．
+右noetherian性と$\chi_1$はArtin--Zhang再構成定理による．
+\end{proof}
+
+\begin{remark}
+非零$g\in R_1$は左右の零因子ではない．
+しかし上の証明は$g$のnormal性またはcentral性を与えない．
+したがって$R/(g)$を所定の楕円曲線の座標環と同定すること，
+あるいは次数6のweighted hypersurface表示を得ることは，別の認識問題である．
+\end{remark}
+
+\subsection{rankと切断増大度の一致}
+任意の$F\in\AA$および$n\in\mathbb Z$について
+$h_F(n):=\dim_k\Hom(\OO,\tau^nF)$と置く．
+
+\begin{lemma}\label{lem:torsion-linear-growth}
+$T\in\AA_1$なら$h_T(n)=O(n)$である．
+\end{lemma}
+
+\begin{proof}
+$T=0$なら明らかである．
+\eqref{eq:rank-az-generation}による全射
+$\bigoplus_i\tau^{-a_i}\OO\to T$を取り，零である成分を除く．
+各非零成分$f_i:\tau^{-a_i}\OO\to T$の核を$K_i$とする．
+$qT=0$だから$qK_i\simeq q\tau^{-a_i}\OO$である．
+従って$K_i$は非零rank-one torsion-free対象である．
+再びample生成条件を$K_i$に用いれば，ある$b_i\geq0$と非零射
+$\tau^{-b_i}\OO\to K_i$を得る．これは単射であり，合成によって
+\[
+ 0\longrightarrow\tau^{-b_i}\OO
+   \longrightarrow\tau^{-a_i}\OO
+   \longrightarrow C_i\longrightarrow0
+\]
+を得る．$f_i\ne0$なので核$K_i$は真部分対象である．
+命題\ref{prop:orbit-domain-negative}と$\End(\OO)=k$から$b_i>a_i$である．
+各$C_i$は$\operatorname{im}f_i$に全射し，従って
+$\bigoplus_iC_i\to T$は全射である．
+
+固定した全射$\tau^{-a_i}\OO\to C_i$に
+\eqref{eq:rank-az-surjectivity}を適用すると，$n\gg0$で
+\[
+ h_{C_i}(n)=p(n-a_i)-p(n-b_i)
+          =(b_i-a_i)n+O(1)
+\]
+を得る．さらに$\bigoplus_iC_i\to T$に同じ条件を適用して
+$h_T(n)\leq\sum_i h_{C_i}(n)=O(n)$となる．
+\end{proof}
+
+\begin{proposition}\label{prop:rank-leading-hom}
+任意の$F\in\AA$について
+\begin{equation}\label{eq:rank-leading-hom}
+ h_F(n)=\frac{\rk(F)}2 n^2+O(n),\qquad
+ \rk(F)=\lim_{n\to\infty}\frac{2h_F(n)}{n^2}
+\end{equation}
+が成り立つ．この結論は高次Ext群の消滅を使わない．
+\end{proposition}
+
+\begin{proof}
+$r=\rk(F)$と置く．
+\eqref{eq:rank-az-generation}の全射の$q$像は，
+除法環$\mathcal D$上の有限次元ベクトル空間の全射に対応する．
+その生成列の中から基底となる$r$成分を選ぶと，制限写像
+\[
+ P':=\bigoplus_{j=1}^{r}\tau^{-a_j}\OO\longrightarrow F
+\]
+の$q$像は同型となる．その核は$\AA_1$に属するが，
+$P'$はtorsion-freeなので核は零である．従って
+\[
+ 0\longrightarrow P'\longrightarrow F\longrightarrow T\longrightarrow0,
+ \qquad T\in\AA_1
+\]
+を得る．固定した全射$F\to T$について
+\eqref{eq:rank-az-surjectivity}を使うと，$n\gg0$で
+\[
+ h_F(n)=\sum_{j=1}^{r}p(n-a_j)+h_T(n)
+       =\frac r2n^2+O(n)
+\]
+となる．$r=0$の場合も補題\ref{lem:torsion-linear-growth}で同じ結論を得る．
+\end{proof}
+
+\begin{remark}
+上の証明は，graded moduleのliftとそのsaturationの比較や，
+Goldie rankとの同定を経由しない．特に，商圏で定義したrankを
+Hilbert増大度で先に仮定し，後から両者が一致すると述べる循環はない．
+一般の次数$d>0$について$p(n)=1+dn(n+1)/2$を仮定した場合も同じ証明が働き，
+\eqref{eq:rank-leading-hom}の先頭係数は$d\rk(F)/2$となる．
+\end{remark}
+
+\subsection{Serre双対性から従う消滅と残る問題}
+定義\ref{def:fano}と命題\ref{prop:serre-heart-hdim}から，
+$\AA$のhomological dimensionは既に2である．
+以下ではSerre関手$\SSer=\tau^{-1}[2]$を用いる．
+
+\begin{proposition}\label{prop:rank-ext-two-vanishing}
+任意の$F\in\AA$について$\Ext^2(\OO,\tau^nF)=0$が$n\gg0$で成り立つ．
+$F\in\AA_1$なら，この消滅は全ての$n\in\mathbb Z$で成り立つ．
+特に$\Ext^2(\OO,\tau^n\OO)=0$は全ての$n\geq0$で成り立つ．
+\end{proposition}
+
+\begin{proof}
+Serre双対性により
+\[
+ \Ext^2(\OO,\tau^nF)
+ \simeq\Hom(F,\tau^{-n-1}\OO)^*.
+\]
+固定した全射$\bigoplus_i\tau^{-a_i}\OO\to F$を取ると，右辺の双対を取る前の空間は
+\[
+ \bigoplus_i\Hom(\OO,\tau^{a_i-n-1}\OO)
+\]
+に単射する．$n\geq\max_i a_i$なら全ての指数が負なので，
+命題\ref{prop:orbit-domain-negative}から零である．
+$F\in\AA_1$なら$\tau^{-n-1}\OO$のtorsion-free性から全ての$n$で零となる．
+$F=\OO$の場合は負の切断の消滅を直接用いればよい．
+\end{proof}
+
+\begin{corollary}[高次消滅の軌道への縮約]\label{cor:orbit-vanishing-reduction}
+全ての$F\in\AA$について$\Ext^1(\OO,\tau^nF)=0$ for $n\gg0$であることと，
+$\Ext^1(\OO,\tau^n\OO)=0$ for $n\gg0$であることは同値である．
+\end{corollary}
+\begin{proof}
+後者を仮定し，ample生成条件で
+$0\to K\to P\to F\to0$，$P=\bigoplus_j\tau^{-a_j}\OO$を取る．
+長完全列の
+\[
+ \Ext^1(\OO,\tau^nP)\longrightarrow\Ext^1(\OO,\tau^nF)
+ \longrightarrow\Ext^2(\OO,\tau^nK)
+\]
+の両端は，仮定と命題\ref{prop:rank-ext-two-vanishing}により$n\gg0$で零となる．
+逆向きは$F=\OO$とすればよい．
+\end{proof}
+
+\begin{remark}\label{rem:rank-euler-gap}
+命題\ref{prop:rank-leading-hom}は$\Hom$の増大度に関する結論であり，
+Euler形式に関する同じ結論を無条件には述べていない．実際$n\gg0$で
+\[
+ \chi(\OO,\tau^nF)
+ =\frac{\rk(F)}2n^2+O(n)
+   -\dim_k\Ext^1(\OO,\tau^nF).
+\]
+特に$\OO$がexceptionalであっても，そこで直接指定されているのは
+$\Ext^1(\OO,\OO)=0$である．
+Serre双対性は
+\[
+ \Ext^1(\OO,\tau^n\OO)
+ \simeq\Ext^1(\OO,\tau^{-n-1}\OO)^*
+\]
+を与えるが，この対称性だけから全ての正の$n$に対する消滅は出ない．
+本節は，全圏論的仮定の組合せからその消滅がさらに従う可能性を否定するものではない．
+ただし，その自動性を本節では証明していない．
+系\ref{cor:orbit-vanishing-reduction}により，この消滅問題は$F=\OO$に縮約される．
+高次Serre消滅，適切なAS-Gorenstein性，正則normal/central元の存在，
+およびweighted hypersurfaceとしての認識は，個別に検討すべき主張である．
+\end{remark}
+
+
+\section{楕円境界の正則被覆からの重み付き超曲面認識}
+\label{sec:weighted-recognition}
+
+$\dim R_1=2$は$\OO\to\tau\OO$という射の空間の次元であり，
+$\tau$と両立する自然変換$\eta:\id_{\AA}\to\tau$の存在とは異なる．
+両立性を$\eta_{\tau F}=\tau(\eta_F)$と書けば，その$\OO$での成分$g$について
+自然性から$g\in Z(R)_1$を得る．逆に，Artin--Zhang再構成の下で
+中心元は右加群への乗法によりこのような自然変換を定める．
+従って問題の一つは
+\[
+ 0\ne g\in Z(R)_1
+\]
+の存在を定義案\ref{def:fano}から導けるかどうかである．
+整域性により，その存在が分かれば正則性は自動的である．
+
+この節では，反標準切断と境界環の正則被覆が存在するという追加仮定の下で，
+次数1の反標準環を重み付き超曲面として認識する．
+結論を導くのは低次数の関係式とそのsyzygyであり，quiverは使わない．
+一方，内在的定義案だけからこの節の境界の存在を導くことは，まだ証明していない．
+以下，次数付き環は非負次数の連結局所有限$k$代数で，$k$は体とする．
+正則元とは左右いずれからの乗法も単射である元をいう．
+
+\subsection{重みを許した中心拡大の有限次数判定}
+
+Cassidy--Shelton\cite[Theorems~3.6--3.7]{CS}は，中心拡大の正則性を
+第三syzygyの次数から判定する．同論文の基本設定では代数の生成元は全て次数1である．
+従って，重み付きの場合にその定理をそのまま適用するのではなく，
+本稿で必要な場合の行列構成と正則性の証明を以下に書く．
+
+\begin{lemma}[重み付き中心拡大の判定]\label{lem:weighted-central-extension}
+$C$が有限個の正次数生成元$x_1,\ldots,x_r$を持ち，
+$\deg x_i=a_i>0$とする．最小斉次関係式を$r_1,\ldots,r_s$，
+$\deg r_j=b_j\geq2$とし，左$C$加群$k$に完全列
+\begin{equation}\label{eq:weighted-base-resolution}
+0\longrightarrow C(-\ell)
+ \xrightarrow{M_3}\bigoplus_{j=1}^{s}C(-b_j)
+ \xrightarrow{M_2}\bigoplus_{i=1}^{r}C(-a_i)
+ \xrightarrow{M_1}C\longrightarrow k\longrightarrow0
+\end{equation}
+があるとする．各加群を行ベクトルで表し，写像は右から行列を掛けるものとする．
+自由代数$T=k\langle x_1,\ldots,x_r\rangle$に行列を持ち上げ，
+$M_1=(x_1,\ldots,x_r)^{\mathrm t}$，
+$M_2M_1=(r_1,\ldots,r_s)^{\mathrm t}$としてよい．
+
+$g$を次数1の中心変数，$p_j\in T[g]_{b_j-1}$とし，
+\begin{equation}\label{eq:lifted-presentation}
+ A=T[g]/(r_j+gp_j\mid1\leq j\leq s)
+\end{equation}
+と置く．ここで$T[g]$は$g$を中心とする多項式拡大であり，
+表示\eqref{eq:lifted-presentation}に追加の関係式は課さない．
+もし$g:A_n\to A_{n+1}$が$0\leq n\leq\ell-1$で単射ならば，
+$g$は$A$の正則元である．
+\end{lemma}
+
+\begin{proof}
+$A/gA=C$である．$f_2=(p_1,\ldots,p_s)^{\mathrm t}$とすれば
+$M_2M_1+gf_2=0$が$A$上で成り立つ．また$M_3M_2$は$C$上で零なので，
+適当な斉次行列$f_3$を選んで
+\[
+ M_3M_2-gf_3=0
+\]
+とできる．この選択に$g$の正則性は必要ない．
+\eqref{eq:weighted-base-resolution}の自由加群を$Q_i$，
+同じ次数シフトを持つ自由$A$加群を$Q_i^A$と書き，
+\[
+ \widehat Q_0=A,\qquad
+ \widehat Q_i=Q_i^A\oplus Q_{i-1}^A(-1)\quad(1\leq i\leq4)
+\]
+と置く．ここで$Q_4^A=0$とする．微分の行列を
+\begin{align*}
+ \widehat M_1&=\begin{pmatrix}M_1\\g\end{pmatrix},&
+ \widehat M_2&=\begin{pmatrix}M_2&f_2\\-gI&M_1\end{pmatrix},\\
+ \widehat M_3&=\begin{pmatrix}M_3&f_3\\gI&M_2\end{pmatrix},&
+ \widehat M_4&=\begin{pmatrix}-gI&M_3\end{pmatrix}
+\end{align*}
+で定める．次数シフトが各行列の大きさと次数を指定する．
+その合成で零であることが直ちには分からない成分は
+\[
+ h=M_3f_2+f_3M_1
+\]
+だけである．これは$Q_3^A=A(-\ell)$から$Q_0^A(-1)=A(-1)$への写像の
+係数なので，$h\in A_{\ell-1}$である．
+さらに中心性と二つの行列等式から
+\[
+ gh=M_3(gf_2)+(gf_3)M_1
+   =-M_3M_2M_1+M_3M_2M_1=0.
+\]
+仮定により$h=0$となり，$\widehat Q$は複体である．
+この計算では生成元の次数$a_i$を1と仮定していない．
+
+表示\eqref{eq:lifted-presentation}の関係式は，持ち上げた$r_j+gp_j$と
+$gx_i-x_ig$で尽くされる．従って，生成元を列挙する$\widehat M_1$の核は
+これらの関係式の列を持つ$\widehat M_2$の像であり，
+\begin{equation}\label{eq:lifted-low-homology}
+ H_0(\widehat Q)=k,\qquad H_1(\widehat Q)=0
+\end{equation}
+である．ここでは分解の最小性は主張していない．
+
+$\overline Q=\widehat Q/g\widehat Q$と置くと
+\begin{equation}\label{eq:reduced-homology}
+ H_0(\overline Q)=k,\qquad
+ H_1(\overline Q)=k(-1),\qquad
+ H_i(\overline Q)=0\quad(i\geq2)
+\end{equation}
+となる．必要な低次数の検証を記す．
+$\overline Q_1=Q_1\oplus C(-1)$のcycle$(u,v)$では$uM_1=0$なので，
+\eqref{eq:weighted-base-resolution}により$u=wM_2$と書ける．
+境界$(wM_2,w\overline f_2)$を引くと第一成分が零になる．
+第二成分の境界は$C_+(-1)$を含み，
+$\overline f_2$の各成分は次数$b_j-1>0$であるため，残る商はちょうど$k(-1)$である．
+次に$\overline Q_2=Q_2\oplus Q_1(-1)$のcycle$(u,v)$を取る．
+$uM_2=0$から$u=wM_3$であり，
+$u\overline f_2+vM_1=0$と
+$M_3\overline f_2+\overline f_3M_1=0$から
+$(v-w\overline f_3)M_1=0$を得る．従って
+$v-w\overline f_3=zM_2$と書け，
+$(u,v)$は$(w,z)\in\overline Q_3$の境界である．
+$H_3,H_4$の消滅も同じ完全列から従う：
+$Q_3\oplus Q_2(-1)$のcycleの第一成分は$M_3$の単射性により零であり，
+第二成分は$M_3$の像である．
+
+$L=\Ann_A(g)$と置く．$g$は中心なので，これは両側イデアルである．
+複体の完全列
+\[
+ 0\longrightarrow g\widehat Q\longrightarrow\widehat Q
+ \longrightarrow\overline Q\longrightarrow0
+\]
+と\eqref{eq:lifted-low-homology}，\eqref{eq:reduced-homology}から
+$H_1(g\widehat Q)=0$を得る．
+また$H_0(g\widehat Q)=gA/gA_+=k(-1)$である．
+ここで$g\ne0$は次数0における単射性から従い，
+$g$の次数が1であることから最後の同型が従う．
+
+各$\widehat Q_i$は自由左$A$加群なので，もう一つの完全列
+\[
+ 0\longrightarrow L\otimes_A\widehat Q(-1)
+ \longrightarrow\widehat Q(-1)
+ \xrightarrow{\,g\,}g\widehat Q\longrightarrow0
+\]
+を得る．$H_1(g\widehat Q)=0$であり，
+$H_0(\widehat Q(-1))\to H_0(g\widehat Q)$は
+$1$を$g$に送る$k(-1)$の同型である．従って
+\[
+ H_0(L\otimes_A\widehat Q(-1))=0,
+ \qquad L/LA_+=0.
+\]
+$L$は次数について下に有界であるから，非零斉次元の最小次数を取る議論により$L=0$となる．
+中心性により左右の零因子条件が一致し，$g$は正則である．
+\end{proof}
+
+\subsection{次数6超曲面の持ち上げ}
+
+\begin{theorem}[境界被覆を仮定した次数1超曲面認識]
+\label{thm:weighted-hypersurface-recognition}
+$R$を連結局所有限次数付き$k$代数，$g\in R_1$を中心正則元とする．
+$B=R/gR$が
+\begin{equation}\label{eq:boundary-cover}
+ B\simeq C/(\Omega_0)
+\end{equation}
+と表示されると仮定する．ここで$C$は左右noetherianな3次元AS-regular代数で，
+AS指数は6，Hilbert級数は
+\[
+ \Hilb_C(t)=\frac1{(1-t)(1-t^2)(1-t^3)}
+\]
+とする．$\Omega_0\in C_6$は斉次正規正則元であると仮定する．
+さらに$C$の最小斉次関係式の次数は全て6未満とする．
+
+このとき，左右noetherianな4次元AS-regular代数$A$と
+斉次正規正則元$\Omega\in A_6$が存在し，
+\begin{equation}\label{eq:recognized-hypersurface}
+ R\simeq A/(\Omega),\qquad A/gA\simeq C,
+ \qquad \Omega\bmod g=\Omega_0
+\end{equation}
+を満たす．ここで$g\in A_1$は中心正則元であり，$A$のAS指数は7，
+\begin{equation}\label{eq:recognized-hilbert}
+ \Hilb_A(t)=\frac1{(1-t)^2(1-t^2)(1-t^3)},\qquad
+ \Hilb_R(t)=\frac{1-t^6}{(1-t)^2(1-t^2)(1-t^3)}
+ =\frac{1-t+t^2}{(1-t)^3}
+\end{equation}
+である．
+\end{theorem}
+
+\begin{proof}
+$C$の最小生成元$x_i$と最小関係式$r_j$を取り，その次数を$a_i,b_j$とする．
+連結AS-regular代数の最小分解とAS-Gorenstein条件から，$k$の左最小分解は
+\eqref{eq:weighted-base-resolution}で$\ell=6$とした形を持つ．
+右最小分解も同様であり，双対性により$\{b_j\}$と$\{6-a_i\}$は重複度込みで一致する．
+特に生成元の次数は6未満である．最小関係式に線形成分はないので$b_j\geq2$である．
+
+$x_i\bmod\Omega_0\in B$を斉次元$\widetilde x_i\in R$へ持ち上げる．
+$g,\widetilde x_i$は$R$を生成する．実際，$B$で生成元の多項式として表示し，
+その持ち上げとの差を$g$で割って次数に関して帰納すればよい．
+各$r_j(\widetilde x)$は$gR$に入るので，適当な次数$b_j-1$の多項式$p_j$を用いて
+\[
+ r_j(\widetilde x)+g p_j(\widetilde x,g)=0
+\]
+と書ける．これらの関係式だけを課した\eqref{eq:lifted-presentation}の代数を$A$とする．
+すると次数付き全射$\pi:A\twoheadrightarrow R$と$A/gA=C$を得る．
+この段階で$g$が$A$上で正則であるとはまだ仮定しない．
+
+$n<6$では$C_n\to B_n$は同型である．
+$A_n\to R_n$も$n<6$で同型であることを次数に関して帰納して示す．
+全射性は既に分かっているので，$u\in\ker(\pi_n)$を取る．
+その$C_n$での像は$B_n$で零になるので，$u=gv$，$v\in A_{n-1}$と書ける．
+$g\pi(v)=0$と$R$上の正則性から$\pi(v)=0$となり，帰納法により$v=0$である．
+従って$A_n\simeq R_n$である．
+特に，$0\leq n\leq5$に対して$gu=0$，$u\in A_n$ならば，
+$R$上の正則性と$A_n\simeq R_n$により$u=0$となる．
+この議論は$A_6\to R_6$の単射性を用いない．
+補題\ref{lem:weighted-central-extension}を$\ell=6$として適用でき，
+$g$は$A$上でも正則である．
+
+次に$A$のnoetherian性を確認する．$g$の中心性と正則性から
+\[
+ \operatorname{gr}_{(g)}A
+ =\bigoplus_{m\geq0}g^mA/g^{m+1}A\simeq C[u]
+\]
+となり，右辺は左右noetherianである．
+斉次左イデアル$J\subset A$に誘導された$g$進filtrationを入れ，
+そのinitial idealの有限個の二重斉次生成元を$J$に持ち上げる．
+$J$の任意の斉次元はこれらを用いた減算により$g$進次数を逐次増加させて簡約できる．
+全次数を固定すると$g$進次数は全次数を超えられないので，この簡約は有限回で停止する．
+従って$J$は有限生成である．右イデアルも同様であり，
+一般のイデアルには通常の全次数filtrationによるinitial idealの議論を適用して，
+$A$が左右noetherianであることを得る．
+
+補題の複体$\widehat Q$は，$g$の正則性を得た後では$k$の長さ4の自由分解となる．
+実際，$g\widehat Q\simeq\widehat Q(-1)$と
+\eqref{eq:reduced-homology}から，$i\geq2$で
+$H_i(\widehat Q)\simeq H_i(\widehat Q)(-1)$となる．
+次数が下に有界なのでこれらは零であり，$H_1=0$は既に確認した．
+右加群についても同じ議論が成り立つ．
+
+完全列$0\to A(-1)\xrightarrow{g}A\to C\to0$から
+$\Ext_A^q(C,A)$は$q=1$でのみ非零で，その値は$C(1)$である．
+従ってchange-of-rings spectral sequenceは退化し，
+\[
+ \Ext_A^i(k,A)\simeq\Ext_C^{i-1}(k,C)(1)
+\]
+を与える．$C$のAS-Gorenstein条件からこれは$i=4$で$k(7)$，
+それ以外で零となり，右側も同様である．
+連結次数付き環において$k$の左右の射影次元が大域次元を検出する標準事実\cite[Proposition 3.18(3)]{RR}により，
+$A$の大域次元は4である．また$g$の正則性から
+$\Hilb_A=\Hilb_C/(1-t)$であり，有限GK次元4を持つ．
+従って$A$はAS指数7の4次元AS-regular代数である．
+
+$I=\ker\pi$と置く．$R$上で$g$が正則であることから
+\[
+ I\cap gA=gI.
+\]
+実際，$ga\in I$ならば$g\pi(a)=0$なので$a\in I$である．
+従って$g$で剰余を取った完全列は
+\[
+ 0\longrightarrow I/gI\longrightarrow C\longrightarrow B\longrightarrow0
+\]
+となり，$I/gI=(\Omega_0)$である．
+$\Omega_0$を斉次元$\Omega\in I_6$へ持ち上げる．
+$\Omega_0$の正規性から
+$I=A\Omega+gI=\Omega A+gI$となる．
+次数に関する帰納法，すなわちこの場合のgraded Nakayamaにより
+\[
+ I=A\Omega=\Omega A
+\]
+を得る．これで$\Omega$の正規性が示された．
+
+最後に$\Omega_0$と$g$の正則性から
+\[
+ \Hilb_B=(1-t^6)\Hilb_C,\qquad
+ \Hilb_R=\frac{\Hilb_B}{1-t},\qquad
+ \Hilb_I=t^6\Hilb_A.
+\]
+従って左・右それぞれの乗法による全射$A(-6)\twoheadrightarrow I$は
+全次数で同次元のベクトル空間の全射であり，同型である．
+$\Omega$は左右正則であり，\eqref{eq:recognized-hilbert}も従う．
+\end{proof}
+
+\begin{remark}[重みと最小生成元]
+定理の「重み$(1,1,2,3)$」は\eqref{eq:recognized-hilbert}のHilbert型を意味する．
+四つの元が必ず最小生成系になるとは主張していない．
+例えばStephenson型の境界被覆は次数$(1,2)$の二元と次数$(4,5)$の二関係式を持ち，
+その中心拡大の最小生成元は次数$(1,1,2)$になり得る．
+次数3の元を追加した非最小表示と，四元が最小であるという条件は区別する必要がある．
+また定理は$R$のHilbert級数だけから出発するものではなく，
+中心正則切断と\eqref{eq:boundary-cover}の被覆を仮定している．
+\end{remark}
+
+\subsection{中心性を得る十分条件}
+
+\begin{corollary}[負次数導分の消滅による中心性]
+\label{cor:central-sextic}
+定理\ref{thm:weighted-hypersurface-recognition}で，さらに$\Omega_0$が中心元であり，
+$B$の負次数の斉次導分が全て零であると仮定する．
+このとき持ち上げた$\Omega$も中心元である．
+\end{corollary}
+
+\begin{proof}
+正規正則元$\Omega$に対して，一意な次数付き自己同型$\nu$が
+\[
+ \Omega a=\nu(a)\Omega\qquad(a\in A)
+\]
+で定まる．$g$の中心性と$\Omega$の正則性から$\nu(g)=g$であり，
+$a=\Omega$を代入して$\nu(\Omega)=\Omega$を得る．
+また$\Omega_0$の中心性と正則性から$\nu\bmod g=\id_C$である．
+従って$\nu$は$R=A/(\Omega)$の自己同型$\nu_R$へ降り，
+$g$を固定して$B=R/gR$上では恒等になる．
+
+もし$\nu_R\ne\id$ならば，有限個の斉次生成元における
+$\nu_R(x)-x$の非零差分のうち最小の$g$進次数を$m\geq1$とする．
+積の差分公式から$(\nu_R-\id)(R)\subset g^mR$である．
+$g$は正則で$\nu_R(g)=g$なので
+\[
+ \delta(\overline a)
+ =\bigl(g^{-m}(\nu_R(a)-a)\bigr)\bmod g
+\]
+は$B$上でwell-definedである．
+ここで$g^{-m}$は$g^mR$における一意な割り算を表す．
+積の差分公式を$g^{m+1}$で剰余するとLeibniz則を得るため，
+$\delta$は次数$-m$の導分である．$m$の選び方から非零であり，仮定に反する．
+従って$\nu_R=\id$である．
+
+$A$は$g$と次数6未満の$\widetilde x_i$で生成され，
+$A_n\to R_n$は$n<6$で単射である．
+従って$\nu_R=\id$はこれらの生成元上で$\nu=\id$を意味し，
+$\nu=\id_A$となる．すなわち$\Omega$は中心元である．
+\end{proof}
+
+\begin{remark}[文献との関係と残る仮定]
+標数0の滑らかな楕円曲線$E$と平行移動$\sigma$に対する
+twisted homogeneous coordinate ringには負次数導分がない．
+これはRains\cite[Lemma~2.11 and the proof of Theorem~2.12]{RainsFiltered}で確認できる．
+従って$B=B(E,L,\sigma)$，$\deg L=1$の場合，
+中心的な境界被覆$C/(\Omega_0)$が上の正則性条件を満たすと確認できれば，
+系\ref{cor:central-sextic}も適用できる．
+
+Rains\cite[Example~3.1]{RainsFiltered}は次数1の楕円環の分解を
+$\sigma^2=\id$の場合とそれ以外に分けて計算し，
+最高次数の関係式を除いた代数のHilbert級数と中心的な最高次関係式を述べている．
+同論文第6節末では，rank~1，次数1または2の場合の全パラメータについて
+filtered deformationが曲面構成から生じることを計算で確認したと報告している．
+本稿は，そこから全ての境界に対するAS-regular被覆の存在を推測で補わず，
+定理\ref{thm:weighted-hypersurface-recognition}では$C$の存在とAS-regular性を
+明示的な追加仮定として保持する．
+
+Etingof--Ginzburg\cite[Theorem~3.3.2]{EG}のポテンシャルによる構成と，
+添付研究ノート\cite[Sections~8--9]{PoissonNote}のRees構成は，
+ambient代数と中心元を先に構成する方向の結果である．
+特に添付ノートの形式的平坦性から全ての特殊化のAS-regular性が従うわけではなく，
+同ノート第9節のAS-regular性の主張は追加条件を持つ．
+この節の定理は，既に与えられた$R$からambientの低次数関係式を持ち上げる逆方向を扱う．
+ただし，内在的公理から$g$と楕円境界，さらにそのAS-regular被覆を取り出す問題は残る．
+また本節の補題と条件付き定理は本文に証明を与えたが，独立の新規性は主張しない．
+\end{remark}
+
+
+\section{二つの具体的な障害}
+\subsection{構造対象だけでは順序付きblowdown標識は戻らない}
+\begin{proposition}\label{prop:marking}
+\eqref{eq:marked-avatar}の全標識を保つavatarの同型類と，
+構造対象だけを標識した$(\coh S,\OO_S)$の同型類の自然な対応は単射でない．
+\end{proposition}
+\begin{proof}
+$Q=\mathbb P^1\times\mathbb P^1$の一般の七点$q_1,\ldots,q_7$を爆発し，
+$H=-K_S$がampleになるようにする．
+$(h_1,h_2;E_1,E_2,E_3,\ldots,E_7)$と
+$(h_1,h_2;E_2,E_1,E_3,\ldots,E_7)$を考える．
+$R_j=H-E_j$は$H R_j=0$，$R_j^2=-2$を満たす．
+amplenessより$H^0(R_j)=0$であり，
+$H\cdot(K_S-R_j)=H\cdot(E_j-2H)=-1$より$H^2(R_j)=0$である．
+$\chi(R_j)=0$なので$H^1(R_j)=0$も従う．よって双方は古典型avatarである．
+
+両標識が同型なら，その同型は$Q$に降下し，$q_1,q_2$を交換して
+$q_3,\ldots,q_7$を固定するruling-preserving automorphismを与える．
+一般配置では各$\mathbb P^1$上で少なくとも三つの相異なる点を固定するので，
+両因子の自己同型は恒等である．これは$q_1,q_2$の交換に反する．
+他方，両者の$(\coh S,\OO_S)$は全く同じである．
+\end{proof}
+
+従ってavatar側で標識を忘れるか，category側にも同量の数値的・幾何学的標識を
+加える必要がある．後者でもquiverを選ぶ必要はないが，$\OO$のみのweak markingではない．
+境界を含む同値関係を，検証なしに全$W(E_8)$の商と同一視しない．
+effective rootsとheartを保つことを別に確認する．
+
+\subsection{weak del Pezzoの反標準作用は一般にampleでない}
+\begin{proposition}\label{prop:weak}
+滑らかなweak del Pezzo曲面$S$が$(-2)$曲線$C$を持つとする．
+$\tau=(-)\otimes\OO_S(-K_S)$に対して$(\OO_S,\tau)$はAZ-ampleでない．
+\end{proposition}
+\begin{proof}
+$H=-K_S$は$H C=0$を満たす．$C\simeq\mathbb P^1$なので
+$\OO_S(nH)|_C\simeq\OO_C$ for all $n$である．
+非零対象$F=i_{C*}\OO_C(-1)$について
+\[
+ \Hom(\tau^{-n}\OO_S,F)
+ =H^0(C,\OO_C(-1))=0
+ \quad(n\in\mathbb Z).
+\]
+従って$\tau^{-n}\OO_S$の有限直和から$F$への全射を作れず，
+AZの生成条件に反する．
+\end{proof}
+
+この例は反標準環が$(-2)$曲線を縮約することを圏論的に表す．
+定義案\ref{def:fano}は反標準ampleなクラスの候補であり，
+添付avatarが含むweak境界全体の定義ではない．
+Rainsの非可換曲面では，反標準類の\emph{数値的}amplenessの失敗は可換avatarの
+amplenessだけでは排除できない\cite[\S4]{RainsFiltered}．
+同文献は数値的amplenessから生成と高次消滅を導くが，その逆を本稿では仮定しない．
+数値的non-amplenessをAZ-amplenessの失敗や導来非同値と同一視しない．
+
+\section{直交部分圏のgluingによる直接構成}
+\subsection{構成}
+$S$を滑らかな射影有理曲面，$i:D\hookrightarrow S$を有効反標準Cartier因子とする．
+\begin{equation}\label{eq:residual}
+ \BB_S=\OO_S^\perp
+ =\{M\in\Db(\coh S):\RHom_S(\OO_S,M)=0\}
+\end{equation}
+をdg部分圏として取る．$P\in\Pic^0(D)$に対し，右dg module
+\begin{equation}\label{eq:glue-module}
+ B_{D,P}(M)=\RHom_D(Li^*M,P)
+ \simeq\RHom_S(M,i_*P)
+\end{equation}
+を定める．$\BB_S$に一つのexceptional object $e$を付け加え，
+\begin{equation}\label{eq:glue-category}
+ \RHom(e,M)=0,\quad
+ \RHom(M,e)=B_{D,P}(M),\quad
+ \RHom(e,e)=\mathbb C
+\end{equation}
+とするupper triangular dg categoryのpretriangulated idempotent completionを
+$\TT(S,D,P)$と書く．これは$\BB_S$とdg moduleを用いた標準的gluingであり，
+quiver，基底，例外コレクションを選ばない．
+
+Rains\cite[Theorem 4.30]{RainsBirational}は，
+非可換平面または非可換Hirzebruch曲面の反復blowupとして既に構成された対象を，
+この形で記述する．同定には規約の照合が必要であり，添付稿の$P$と
+gluing parameterの$P$を無検証に同一視しない．
+三角圏の構成と，ホモロジー次元2のabelian heartの構成は別段階である．
+
+\paragraph{内在的な逆向きのデータ．}
+逆に，smooth properな$\TT=\Db(\AA)$とexceptional object $\OO$から
+$\BB=\OO^\perp$と包含$j:\BB\hookrightarrow\TT$を作る．
+この包含はadmissibleなので，右随伴$j^!$を持ち，
+\begin{equation}\label{eq:intrinsic-gluing-object}
+ V_{\OO}=j^!\OO,\qquad
+ \RHom_{\BB}(M,V_{\OO})\simeq\RHom_{\TT}(jM,\OO)
+\end{equation}
+を得る．$\TT=\langle\BB,\OO\rangle$のgluingを決めるのは，
+このdg module全体である．Homの次元列だけを記憶するのではない．
+従って完全分類の幾何学的な核心は，内在的な$(\BB,V_{\OO})$を
+$(\BB_S,i_*P)$として認識し，その認識を同値と両立させることにある．
+
+\subsection{gluingを表す対象の復元}
+\begin{lemma}\label{lem:acyclic}
+$D$を被約連結射影Gorenstein曲線で，
+$\omega_D\simeq\OO_D$，$h^0(\OO_D)=1$とする．
+$P\in\Pic^0(D)$が非自明なら$H^\bullet(D,P)=0$である．
+\end{lemma}
+\begin{proof}
+$P$は各既約成分上で次数0である．その成分への非零な切断は，
+正規化へ引き戻すと次数0の可逆層の非零切断なので零点を持たない．
+従って成分の交点を通じて，ある成分で非零なら隣接成分でも非零である．
+連結性より非零切断は全成分上で至る所非零であり，$P$を自明化する．
+よって$P$が非自明なら$H^0(D,P)=0$．
+$\chi(P)=0$またはSerre双対性から$H^1(D,P)=0$も従う．
+\end{proof}
+
+\begin{theorem}[固定した幾何学的実現の下での復元]\label{thm:yoneda}
+$S$，$D$を上記の通りとし，$D$は補題\ref{lem:acyclic}の条件を満たすとする．
+$\BB_S\subset\Db(\coh S)$という\emph{具体的な幾何学的実現}を固定する．
+このとき$P\in\Pic^0(D)\setminus\{\OO_D\}$に対するdg module
+$B_{D,P}$から，$D$と$P$を同型を除いて一意に復元できる．
+\end{theorem}
+\begin{proof}
+補題\ref{lem:acyclic}より
+$\RHom_S(\OO_S,i_*P)=R\Gamma(D,P)=0$であるから，
+$V=i_*P$は$\BB_S$に属する．
+\eqref{eq:glue-module}は$\BB_S$上で$\RHom_{\BB_S}(-,V)$となる．
+dg Yonedaによりこの表現対象$V$は一意である．
+
+$P$は$D$上で可逆なので，局所的に$i_*P$は$\OO_S/\mathcal I_D$と同型である．
+従って
+\begin{equation}\label{eq:ann}
+ \Ann_{\OO_S}(V)=\mathcal I_D.
+\end{equation}
+これがscheme structureを含む$D$を定め，通常の引戻し$i^*V$が$P$を与える．
+ここで最後の$i^*$はunderivedである．
+\end{proof}
+
+\begin{remark}
+抽象的な$\BB\simeq\BB_S$の存在だけでは，
+この同定の選択からの独立性は証明されない．
+全てのdg autoequivalenceがsheafやsupportを保つとは限らない．
+定理\ref{thm:yoneda}の固定した幾何学的実現という仮定は本質的である．
+\end{remark}
+
+\subsection{古典型で因子を忘れる理由}
+\begin{proposition}\label{prop:classical}
+$P=\OO_D$の場合，gluing module $B_{D,\OO_D}$は$D$の選択に依存せず，
+$\TT(S,D,\OO_D)\simeq\Db(\coh S)$である．
+\end{proposition}
+\begin{proof}
+反標準列
+\[
+ 0\longrightarrow\omega_S\longrightarrow\OO_S
+ \longrightarrow i_*\OO_D\longrightarrow0
+\]
+と，$M\in\BB_S$に対するSerre双対性
+$\RHom_S(M,\omega_S[2])\simeq\RHom_S(\OO_S,M)^*=0$より，
+\[
+ B_{D,\OO_D}(M)\simeq\RHom_S(M,\OO_S).
+\]
+これは$\Db(\coh S)=\langle\BB_S,\OO_S\rangle$のgluingそのものである．
+\end{proof}
+
+従って，標識を減らしたavatarの候補は古典型$S$と，
+非古典型$(S,D,P)$，$P\ne\OO_D$を区別する．
+これは$P=\OO_D$でも$D$を記憶したまま全単射を主張できない理由を，
+quiverなしで説明する．
+
+\section{普遍点による次数1のdg族と成分認識}
+\label{sec:pointed-dg-family}
+
+この節では$S$を\emph{反標準束がampleな}滑らかな次数1 del Pezzo曲面とする．
+前節のgluingを，反標準曲線を先に選ばず，$S$上の一点から構成する．
+全ての点にわたるsmooth proper dg族，そのHochschild cohomology，
+Kodaira--Spencer写像を計算する．
+これらの計算と，abelian heartおよびArtin--Zhang amplenessの認識は区別する．
+特に，一般のdg変形を通常の非曲率Morita変形やabel圏の変形と同一視するための
+比較は，本節の結論に含めない．
+
+\subsection{普遍点からのgluingと古典的fiber}
+
+$H=-K_S$，$b\in S$を$|H|$の唯一の単純基点とする．
+$\BB_S$は\eqref{eq:residual}の直交部分圏で，
+$j:\BB_S\hookrightarrow\Db(\coh S)$を包含，
+$L=L_{\OO_S}$を左mutation，$r=j^!$を右随伴とする．
+各閉点$p\in S(\mathbb C)$に対し
+\begin{equation}\label{eq:universal-gluing-object}
+ N_p=L(\mathcal I_p(H))\in\BB_S
+\end{equation}
+と置く．ここでmutationには\emph{導来評価写像}
+\[
+ R\Gamma(S,\mathcal I_p(H))\otimes\OO_S\longrightarrow\mathcal I_p(H)
+\]
+を用いる．
+
+\begin{theorem}[次数1の普遍点によるdg gluing]
+\label{thm:universal-gluing}
+上の記号の下で，次が成り立つ．
+\begin{enumerate}
+\item $\SSer_{\BB_S}$を$\BB_S$のSerre functorとすると
+\begin{equation}\label{eq:Np-serre}
+ N_p\simeq\SSer_{\BB_S}^{-1}(\mathcal I_p)[2].
+\end{equation}
+従って全ての$p\in S$について
+\begin{equation}\label{eq:Np-ext}
+ \Hom(N_p,N_p)=\mathbb C,\qquad
+ \Ext^1(N_p,N_p)\simeq T_pS,\qquad
+ \Ext^i(N_p,N_p)=0\quad(i\ne0,1).
+\end{equation}
+\item 基点では
+\begin{equation}\label{eq:N-basepoint}
+ N_b\simeq r(\OO_S)
+ \simeq\operatorname{Cone}(\OO_S\xrightarrow{\eta}\omega_S[2])[-1],
+\end{equation}
+ただし$\eta$はSerre双対性に対応する非零元である．
+\item $p\ne b$とし，$p$を通る唯一の$D\in|H|$が$p$で滑らかとする．
+$i:D\hookrightarrow S$とすると
+\begin{equation}\label{eq:N-avatar}
+ N_p\simeq i_*P_p,\qquad
+ P_p=\OO_D(b-p)\in\Pic^0(D)\setminus\{\OO_D\}.
+\end{equation}
+\item 前節のgluingで右moduleを$\RHom_{\BB_S}(-,N_p)$に置き換えた圏を
+$(\TT_{S,p},e)$と書く．これは$p\in S$について代数的なsmooth proper dg族をなし，
+\[
+ (\TT_{S,b},e)\simeq(\Db(\coh S),\OO_S)
+\]
+である．\eqref{eq:N-avatar}の範囲では，幾何学的データ$(S,D,P_p)$から
+\eqref{eq:glue-module}で定めたgluingに一致する．
+この構成は滑らかな曲面族$\mathcal S\to U$上でも相対的に行える．
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+$H^{>0}(S,\OO_S)=0$と$H^0(\OO_S)\to H^0(k_p)$が同型であることから，
+$\mathcal I_p\in\BB_S$である．$L$は$j$の左随伴なので，
+admissible subcategoryの逆Serre functorの公式は
+\[
+ \SSer_{\BB_S}^{-1}=L\circ\SSer_{\Db(S)}^{-1}\circ j,
+ \qquad \SSer_{\Db(S)}^{-1}(M)=M(H)[-2]
+\]
+となる．これが\eqref{eq:Np-serre}を与える．
+
+従って$N_p$の自己Extは$\mathcal I_p$の自己Extに等しい．
+$\mathcal I_p$のreflexive hullは$\OO_S$であるから
+$\Hom(\mathcal I_p,\mathcal I_p)=\mathbb C$であり，
+\[
+ \Ext^2(\mathcal I_p,\mathcal I_p)
+ =\Hom(\mathcal I_p,\mathcal I_p(K_S))^*=0.
+\]
+最後のHomはreflexive hullを取ることで$H^0(K_S)=0$へ単射する．
+Riemann--Rochから$\chi(\mathcal I_p,\mathcal I_p)=-1$なので$\dim\Ext^1=2$である．
+普遍イデアルによる接写像
+$T_p\Hilb^1(S)=T_pS\to\Ext^1(\mathcal I_p,\mathcal I_p)$は同型である．
+実際，Hilbert接空間は$\Hom(\mathcal I_p,k_p)$である．
+ideal sequenceへ$\Hom(\mathcal I_p,-)$を適用すると，
+$\Hom(\mathcal I_p,\mathcal I_p)\to\Hom(\mathcal I_p,\OO_S)$が
+$\mathbb C\to\mathbb C$の同型なので，続く接写像は単射である．双方が2次元だから同型となる．
+$H^1(\OO_S)=0$なのでdeterminantを動かす方向もない．
+\eqref{eq:Np-serre}の固定した自己同値でこの同定を移すと\eqref{eq:Np-ext}を得る．
+
+基点$b$はpencilの二つの切断の完全交叉なので，そのKoszul列を$H$で捻ると
+\begin{equation}\label{eq:basepoint-koszul}
+ 0\longrightarrow\omega_S\longrightarrow\OO_S^{\oplus2}
+ \longrightarrow\mathcal I_b(H)\longrightarrow0
+\end{equation}
+となる．$L(\OO_S)=0$より$N_b=L(\omega_S)[1]$である．
+$R\Gamma(\omega_S)=\mathbb C[-2]$を用いると，これは\eqref{eq:N-basepoint}のconeである．
+大域切断では$R\Gamma(\OO_S)\to R\Gamma(\omega_S[2])$が同型なので，このconeは$\BB_S$に属する．
+また$M\in\BB_S$について
+$\RHom_S(M,\omega_S[2])=\RHom_S(\OO_S,M)^*=0$だから
+\[
+ \RHom_{\BB_S}(M,N_b)\simeq\RHom_S(M,\OO_S).
+\]
+従って$N_b=r(\OO_S)$であり，\eqref{eq:intrinsic-gluing-object}と整合する．
+
+$p\ne b$では$H^0(\mathcal I_p(H))$は1次元で，その切断が$D$を定める．
+$H\cdot D=1$と$H$のamplenessから$D$はintegralであり，随伴公式から算術種数1である．
+$p$が$D$で滑らかなら
+\[
+ 0\longrightarrow\OO_S\longrightarrow\mathcal I_p(H)
+ \longrightarrow i_*\OO_D(H-p)\longrightarrow0.
+\]
+別のpencilの切断を$D$へ制限すると$\OO_D(H)\simeq\OO_D(b)$となる．
+$p\ne b$より$P_p=\OO_D(b-p)$は非自明である．
+これはdegree-one line bundleの一意な切断の零点からも確認できる．
+補題\ref{lem:acyclic}により$R\Gamma(D,P_p)=0$なので，
+この列に$L$を作用させると\eqref{eq:N-avatar}を得る．
+
+族の構成には，$p_1,p_2:S\times S\to S$と対角イデアル$\mathcal I_\Delta$を用い，
+\begin{equation}\label{eq:relative-N-family}
+ \mathcal F=\mathcal I_\Delta\otimes p_1^*\OO_S(H),\qquad
+ \mathcal N=\operatorname{Cone}
+ \bigl(p_2^*Rp_{2*}\mathcal F\longrightarrow\mathcal F\bigr)
+\end{equation}
+と置く．これはperfect complexであり，導来base changeにより各fiberは$N_p$となる．
+従って$\BB_S$上のperfectなgluing moduleが代数的に変化する．
+smooth properなdg圏をperfect bimoduleでgluingすると，
+Homのperfectnessによりpropernessが保たれ，
+対角bimoduleの標準的な三角分解によりsmoothnessも保たれる
+（\cite[Proposition~3.22, Theorem~3.25]{OrlovGluing}参照）．
+基点での同値は$N_b=r(\OO_S)$から従い，
+avatarとの一致は\eqref{eq:N-avatar}と
+$\RHom_S(M,i_*P_p)=\RHom_D(Li^*M,P_p)$による．
+
+曲面族$\mathcal S\to U$の場合も
+$\mathcal S\times_U\mathcal S$，相対対角イデアル，相対反標準束を用いて同じ式を作る．
+$R f_*\OO_{\mathcal S}=\OO_U$であるため$\OO_{\mathcal S}$は相対的にexceptionalで，
+mutation，直交部分圏，gluingはいずれもbase changeと両立する．
+\end{proof}
+
+\begin{remark}[幾何点の一致と族の正規化]
+\eqref{eq:N-avatar}は各幾何点での同定である．
+従って本節は，対応するavatarの幾何点を補間する実際のdg族を与える．
+これを，Poincare bundleで定めた元のavatar族が全base上でそのまま収縮へ降りるという主張と
+同一視してはいけない．族の比較ではbaseからのline bundle twist，
+Poincare bundleの正規化，および指定した例外対象との両立性を処理する必要がある．
+この相対的な同値の構成は本節では行わない．
+\end{remark}
+
+\begin{remark}[基点では導来評価が必要である]\label{rem:derived-evaluation-b}
+基点では
+\[
+ h^0(\mathcal I_b(H))=2,\qquad h^1(\mathcal I_b(H))=1,
+ \qquad h^2(\mathcal I_b(H))=0.
+\]
+実際，$\OO_S(H)\to k_b$の大域切断上の写像は零であり，
+$H^{>0}(\OO_S(H))=0$だからである．
+従って$Rp_{2*}\mathcal F$を$H^0$のvector bundleで置き換えてはいけない．
+underived evaluationのconeは$\omega_S[1]$となり，正しい$N_b$を与えない．
+\eqref{eq:relative-N-family}はこの$H^1$の跳躍を含めて定義している．
+なお，$p$が$D$の特異点でも$N_p$とdg gluingは定義され，
+$N_p=i_*(\mathcal I_{p,D}\otimes\OO_D(H))$となる．
+これは$P$をline bundleに限るavatarからの拡張であり，heartの認識は別途必要である．
+また元の標識付きavatarを得るには，選んだblowdown標識に対する
+\eqref{eq:root-conditions}の条件も別途課す．全$p$で定義した本節のdg族には，
+それらの標識や条件を定義の一部として要求していない．
+\end{remark}
+
+\subsection{全fiberのHochschild計算とKodaira--Spencer写像}
+
+$C^\bullet_{\mathrm{HH}}$をHochschild cochain complexと書く．
+以下のcomplexの分解は，Gerstenhaber algebraの直積分解を意味しない．
+Kuznetsov\cite[Theorem~8.5とその証明]{Kuznetsov}から
+\begin{equation}\label{eq:residual-hochschild}
+ C^\bullet_{\mathrm{HH}}(\BB_S)
+ \simeq R\Gamma(S,\OO_S\oplus T_S[-1])
+\end{equation}
+を得る．同定の下で，$\Db(S)$から$\BB_S$へのHochschild restrictionは
+HKR分解の最高外積$\wedge^2T_S[-2]$を除くprojectionである．
+
+ここで$H^0(T_S)=H^2(T_S)=0$，$h^1(T_S)=8$であることを確認しておく．
+$S=\operatorname{Bl}_{p_1,\ldots,p_8}\mathbb P^2$と表示し，$\pi$をblowup写像とすると
+\[
+ 0\longrightarrow T_S\longrightarrow\pi^*T_{\mathbb P^2}
+ \longrightarrow\bigoplus_{i=1}^8\OO_{E_i}(1)\longrightarrow0.
+\]
+右端は各例外曲線上のtautological quotientである．
+Euler列と$R^{>0}\pi_*\OO_S=0$から
+$h^0(\pi^*T_{\mathbb P^2})=8$，$H^{>0}(\pi^*T_{\mathbb P^2})=0$を得る．
+右端の$h^0$は16，$H^1$は零である．
+大域切断の写像は各点でのvector fieldの評価であり，
+一般位置の四点を固定するinfinitesimal projective transformationは零なので単射である．
+これで上の三つのcohomology群が計算される．従って
+\begin{equation}\label{eq:residual-hh-values}
+ \operatorname{HH}^0(\BB_S)=\mathbb C,\quad
+ \operatorname{HH}^2(\BB_S)=H^1(T_S)\simeq\mathbb C^8,\quad
+ \operatorname{HH}^i(\BB_S)=0\quad(i\ne0,2).
+\end{equation}
+
+\begin{theorem}[全fiberのHochschild cohomologyと接写像]
+\label{thm:gluing-hh-ks}
+全ての$p\in S$について
+\begin{equation}\label{eq:gluing-hh-values}
+ \operatorname{HH}^0(\TT_{S,p})=\mathbb C,\qquad
+ \operatorname{HH}^1(\TT_{S,p})=0,\qquad
+ \dim\operatorname{HH}^2(\TT_{S,p})=10,\qquad
+ \operatorname{HH}^{i}(\TT_{S,p})=0\quad(i\geq3).
+\end{equation}
+より正確には，自然な完全列
+\begin{equation}\label{eq:gluing-hh-extension}
+ 0\longrightarrow\Ext^1_{\BB_S}(N_p,N_p)
+ \longrightarrow\operatorname{HH}^2(\TT_{S,p})
+ \longrightarrow\operatorname{HH}^2(\BB_S)\longrightarrow0
+\end{equation}
+がある．さらに$\mathcal S\to U$を，曲面のKodaira--Spencer写像が同型である
+滑らかな8次元基底上の次数1 del Pezzo族とする．
+定理\ref{thm:universal-gluing}の族の各点$(S,p)$で，Hochschild cochainsへ値を取る接写像
+\begin{equation}\label{eq:universal-KS}
+ T_{(S,p)}\mathcal S\longrightarrow\operatorname{HH}^2(\TT_{S,p})
+\end{equation}
+は同型である．
+\end{theorem}
+
+\begin{proof}
+triangular dg categoryのbar resolutionを対角blockとoff-diagonal blockに分けると
+\begin{equation}\label{eq:gluing-hh-triangle}
+ C^\bullet_{\mathrm{HH}}(\TT_{S,p})
+ \longrightarrow C^\bullet_{\mathrm{HH}}(\BB_S)\oplus\mathbb C
+ \longrightarrow\RHom_{\BB_S}(N_p,N_p)\longrightarrow
+\end{equation}
+を得る．幾何的なsemiorthogonal decompositionでは
+\cite[Theorem~7.7, Remark~7.8]{Kuznetsov}のgluing exact sequenceに当たる．
+このbar計算は一般のdg gluingにも適用でき，
+$\TT_{S,p}$を別の多様体の導来圏として実現する仮定は必要ない．
+次数0の写像$\mathbb C\oplus\mathbb C\to\End(N_p)=\mathbb C$は
+$(a,c)\mapsto(a-c)\id_{N_p}$である．従って全射であり，
+\eqref{eq:Np-ext}と\eqref{eq:residual-hh-values}を長完全列に代入すると
+\eqref{eq:gluing-hh-values}，\eqref{eq:gluing-hh-extension}を得る．
+
+接写像について，基底の接空間には完全列
+\[
+ 0\longrightarrow T_pS\longrightarrow T_{(S,p)}\mathcal S
+ \longrightarrow H^1(T_S)\longrightarrow0
+\]
+がある．$S$を固定した$p$の変形は
+\eqref{eq:Np-serre}と\eqref{eq:Np-ext}により
+$\Ext^1(N_p,N_p)$全体を与える．
+\eqref{eq:gluing-hh-triangle}のconnecting morphismは，
+gluing moduleを変形したときのHochschild Kodaira--Spencer写像である．
+chain levelでは，off-diagonal moduleの変形cochains
+$\RHom(N_p,N_p)[-1]$からtriangular categoryのHochschild cochainsへの写像として
+この対応を確認できる．
+一方，曲面を変形したときの$\BB_S$の接写像
+$H^1(T_S)\to\operatorname{HH}^2(\BB_S)$は
+\eqref{eq:residual-hochschild}のprojectionの記述から同型である．
+従って上の接空間列から\eqref{eq:gluing-hh-extension}への自然な図式で
+左右の縦写像が同型となり，中央も同型である．
+これは実際に構成した族の一次変形の計算であり，
+全てのdg変形がこの族から生じるという変形functorの比較は用いていない．
+\end{proof}
+
+\paragraph{未完成の変形比較．}
+\eqref{eq:gluing-hh-values}と\eqref{eq:universal-KS}だけから，
+全ての$p$でpointed dg圏の通常のMorita変形functorが
+10次元のformal diskに等しいとは結論しない．
+Hochschild cochainsが制御する変形，固定したモデルの非曲率$A_\infty$変形，
+Morita変形，abel圏の変形の間には比較が必要である．
+一般のdg圏では曲率の問題がある\cite{KellerLowen}．
+有限$A_\infty$表示を用いる場合も，その有限型structure schemeの成分と
+適切なcategorical moduliの成分を区別し，gaugeと自然同型の同値関係まで照合する必要がある．
+本稿ではこの全fiberにわたる比較補題は未完成である．
+
+古典点$(S,b)$に限れば，対応するGrothendieck圏$\operatorname{Qcoh}S$の
+標準的なflat abelian deformationに対してLowen--Van den Berghの理論
+\cite[Theorem~3.1およびHochschild比較]{LowenVdB}を使える．
+この変形問題の接空間は$\operatorname{HH}^2(S)$，small extensionの障害は
+$\operatorname{HH}^3(S)$に値を取る．
+上の計算とHKRから前者は10次元，後者は零である．
+また$\OO_S$の持上げの障害と同型類の自由度はそれぞれ
+$\Ext^2(\OO_S,\OO_S)$と$\Ext^1(\OO_S,\OO_S)$であり，ともに零である
+\cite{LowenObjects}．従ってこの比較済みのabel圏の変形問題では，
+$\OO_S$は各Artin厚化へ持上がり，持上げの同型類は一意である．
+同型そのものの一意性は主張しない．
+有理曲面のtilting bundleの存在\cite{HillePerling}も古典点での比較の手段となるが，
+それを全ての$\TT_{S,p}$へ無検証に拡張しない．
+
+\subsection{有限型moduliにおける条件付き成分判定}
+
+\begin{proposition}[条件付き成分判定]\label{prop:component-test}
+$X$を既約な10次元有限型parameter space，$f:X\to M$を実際の族から得た射とする．
+ここで$M$は，指定した同値関係とframingを表す，局所有限型のalgebraic spaceとする．
+stackを使う場合は，以下の仮定を満たす適切な局所atlasに移って考える．
+次を仮定する．
+\begin{enumerate}
+\item $f$はその像の上でgenerically finiteである．
+\item 一般像点$m$で，$M$の接空間と対象圏のHochschild接空間の比較により
+$\dim T_mM\leq10$が成り立つ．
+\end{enumerate}
+このとき$\overline{f(X)}$は$M$の既約成分であり，その一般点近傍では$M$は滑らかな10次元である．
+これは$X$自身とその成分との同型を主張するものではない．
+\end{proposition}
+
+\begin{proof}
+$Z=\overline{f(X)}$と置くと，第一の仮定から$Z$は既約で$\dim Z=10$である．
+一般の閉点$m\in f(X)$を取り，必要なら有限型な近傍に制限する．
+局所次元とembedding dimensionの標準不等式から
+\[
+ 10=\dim_m Z\leq\dim_m M\leq\dim T_mM\leq10.
+\]
+従って$\OO_{M,m}$は10次元のregular local ringであり，標数0の基礎体上で$M$は$m$の近傍で滑らかである．
+その近傍には既約成分が一つしかなく，$Z$は同じ次元の閉既約部分空間なのでその成分に一致する．
+従って$Z$の閉包は$M$の既約成分である．
+\end{proof}
+
+定理\ref{thm:gluing-hh-ks}は，この判定に必要な接方向を具体的な族で全て実現している．
+しかし，適切な有限型ambient moduliと比較写像，generic finitenessは上の命題では仮定である．
+Hochschildによる全変形functorの比較と有限型moduliへのeffectivityが得られれば，
+KS同型をformal étaleness，さらにalgebraic étalenessへ移す方法も使える．
+その比較を\eqref{eq:gluing-hh-values}の帰結として済ませてはいけない．
+
+% 2026-11-14 JST. 本文へ挿入する独立したsubsection fragment.
+% 使用する追加文献キー: KellerAinfty, MarklTransfer.
+% 主なラベル: lem:relative-directed-model,
+% prop:finite-directed-chart, thm:finite-chart-component.
+\subsection{有限な$A_\infty$構造chartにおける成分認識}
+\label{sec:finite-directed-chart}
+
+ここでは，内在的な非可換曲面のglobal moduli stackを構成することなく，
+前段のgluing族が有限型の圏の表示空間の一つの既約成分を支配することを示す．
+圏の構成そのものには例外コレクションを加えず，
+この節で選ぶ例外コレクションと基底は局所chartを作るための補助データとする．
+以下の主張は既知のhomotopy transferとHochschild変形論から証明するものであり，
+この定式化および次数1の族への適用の新規性は未確認である．
+係数体は引き続き$k=\mathbb C$とする．
+
+\begin{lemma}[有限な相対directed model]
+\label{lem:relative-directed-model}
+$U$を有限型$k$-scheme，$u\in U(k)$とし，
+$\mathcal C_U$を$U$線形なsmooth proper dg categoryの族とする．
+相対的なfull exceptional collection
+$(F_1,\ldots,F_r)$が与えられ，
+\[
+ \RHom_{\mathcal C_U/U}(F_i,F_i)\simeq\OO_U,\qquad
+ \RHom_{\mathcal C_U/U}(F_i,F_j)=0\quad(i>j)
+\]
+が成り立つとする．
+$u$のZariski近傍を取り直すと，
+有限次元graded $k$-vector spaces $V_{ij}$と，
+$V_{ij}\otimes_k\OO_U$上のstrictly unital $A_\infty$構造が存在する．
+ここで
+\[
+ V_{ii}=k[0],\qquad V_{ij}=0\quad(i>j)
+\]
+であり，この$A_\infty$ categoryのperfect envelopeは元の族を与える．
+さらに，$u$で$m_1=0$となるように選べる．
+一般の点では$m_1$の変化を許し，
+cohomology $\Ext^q(F_i,F_j)$の階数一定性は仮定しない．
+非単位入力に関する$m_n$は$n\geq r$で零である．
+\end{lemma}
+
+\begin{proof}
+$U$をaffineに縮めて$U=\operatorname{Spec}R$とする．
+propernessにより，各相対Homは$R$上のperfect complexである．
+有限個の添字$(i,j)$について同時に縮小し，
+これらを有界な有限自由complex $P_{ij}$で表す．
+$P_{ii}=R[0]$，$P_{ij}=0$ for $i>j$と選ぶ．
+$i<j$については，$u$で微分行列のある成分が可逆なら対応する
+contractibleな二項直和因子を消去する．
+有限回の消去と有限個の元の局所化の後，
+$P_{ij}\otimes_Rk(u)$の微分は零になる．
+各項の基底を選ぶと，$P_{ij}$の台となるgraded moduleは
+$V_{ij}\otimes_kR$と書ける．
+
+対象$F_i$からなるdg subcategoryに，対象と単位を固定する自由dg resolutionを取り，
+各Hom complex $Q_{ij}$がcofibrantな$R$-complexとなるモデルを選ぶ．
+単位の張る$R$はdiagonalのgraded direct summandとして保つ．
+$P_{ij}$と$Q_{ij}$は同じperfect complexを表し，両方とも
+homotopically projectiveであるから，Homごとのchain homotopy equivalence
+\[
+ Q_{ij}\ \mathop{\rightleftarrows}^{p_{ij}}_{\iota_{ij}}\ P_{ij}
+\]
+を取れる．diagonalでは$\iota_{ii}$を単位とする．
+$P_{ij}\otimes k(u)$の微分が零なので，
+$p_{ij}\iota_{ij}\simeq\id$は$u$で実際の等式になる．
+従って有限自由module $P_{ij}$の各次数で$p_{ij}\iota_{ij}$は，
+さらに有限個の行列式を局所化すれば可逆である．
+$\iota_{ij}$を
+$\iota_{ij}(p_{ij}\iota_{ij})^{-1}$で置き換えて
+$p_{ij}\iota_{ij}=\id$とする．
+これにより$Q_{ij}$は$P_{ij}$とcontractible complexの直和に分解される．
+contractible因子のcontractionを選び直すと，
+\[
+ \id-\iota p=dh+hd,\qquad
+ p\iota=\id,\qquad p h=h\iota=h^2=0
+\]
+を満たすHomごとのsplit contractionが得られる．
+diagonalの単位には$h=0$とする．
+
+このcontractionにhomotopy transferを適用する．
+ここで使うのは，体上でcohomologyを選ぶminimal-model定理だけではなく，
+可換環上のsplit contractionに沿うtransferである．
+Kellerのcontractible直和因子を除く構成
+\cite[\S8.1]{KellerAinfty}と，
+任意の可換環上の明示的transfer公式\cite{MarklTransfer}を参照されたい．
+具体的には，$m_1$を$P$の既存の微分とし，
+$n\geq2$について平面二分木の各頂点に$Q$の合成，
+内部辺に$h$，葉に$\iota$，根に$p$を置いた合成写像の符号付き和を$m_n$とする．
+$dh+hd=\id-\iota p$を各内部辺に代入すると，
+辺を縮約する項と木を二つに分割する項が対応し，Stasheff恒等式を得る．
+同じ公式は$P$から$Q$への$A_\infty$ quasi-isomorphismも与える．
+
+これらの公式は対象の添字を保つ．
+また，単位を入力した高次の木では$h\iota=0$，$h^2=0$または$p h=0$が現れるため，
+高次演算は消え，二項演算の単位則は$p\iota=\id$から従う．
+従って得られた構造はstrictly unitalである．
+単位以外の非零入力列は
+$i_0<i_1<\cdots<i_n$を必要とするので，$n\leq r-1$である．
+各$n$の木の数も有限であるから，ここでは無限和や形式的収束を用いない．
+すべての係数は$R$の元であり，構成は通常のbase changeと両立する．
+fullnessとHomごとのquasi-isomorphismからperfect envelopeは元の族に同値である．
+\end{proof}
+
+有限次元graded spaces $V_{ij}$を固定し，
+$K_0=\prod_{i=1}^rk\varepsilon_i$，
+$\overline V=\bigoplus_{i<j}V_{ij}$と置く．
+$V_{ij}$は始点$i$，終点$j$の$K_0$-bimoduleと解釈する．
+非単位入力を持つnormalized cochainsを
+\begin{equation}\label{eq:finite-directed-cochains}
+ C_+^q(V)=
+ \bigoplus_{n=1}^{r-1}
+ \Hom_{K_0\text{-}K_0}^{\,q-n}
+       \bigl(\overline V^{\otimes_{K_0}n},\overline V\bigr)
+\end{equation}
+と書く．右辺の上添字はgraded mapの次数である．
+このcochain spaceは各次数で有限次元であり，
+全体としても有限個の次数にしか非零部分を持たない．
+
+\begin{proposition}[有限directed構造chart]
+\label{prop:finite-directed-chart}
+上記の$V$に対して，次が成り立つ．
+\begin{enumerate}
+\item
+$V_{ii}=k[0]$をstrict unitsとするdirected $A_\infty$構造は，
+有限型affine $k$-scheme $Z$でparametrizeされる．
+$m_1$は固定せず変数に含める．
+\item
+対象とstrict unitsを固定し，一次成分がgraded isomorphismである
+$A_\infty$座標変換は，smoothかつ連結な有限型affine algebraic group $G$をなす．
+$G$は$Z$に代数的に作用する．
+\item
+$z\in Z(k)$に対応する構造を$m$，そのperfect envelopeを$\mathcal C_z$とする．
+$d_m=[m,-]$に関するcyclesとboundariesを$\mathrm Z_m^q,\mathrm B_m^q$と書くと，
+\[
+ T_zZ=\mathrm Z_m^2(C_+),\qquad
+ T_z(G\cdot z)=\mathrm B_m^2(C_+),\qquad
+ \frac{T_zZ}{T_z(G\cdot z)}
+       \simeq HH^2(\mathcal C_z).
+\]
+$HH^3(\mathcal C_z)=0$なら$Z$は$z$でsmoothである．
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+strict unitsとの二項積は既定のものとし，
+それ以外の演算は$m=(m_1,\ldots,m_{r-1})\in C_+^2(V)$で記述する．
+各$m_n$の次数は$2-n$である．
+Stasheff恒等式は
+\[
+ [m,m]=0
+\]
+という有限個の多項式方程式である．
+より厳密には，有限長のreduced tensor coalgebra
+\[
+ K_0\oplus
+ \bigoplus_{n=1}^{r-1}\bigl(\overline V[1]\bigr)^{\otimes_{K_0}n}
+\]
+上で$m$に対応する次数$1$のcoderivation $b_m$を取り，
+$b_m^2=0$と書けば符号も一意に定まる．
+したがって$Z$は有限次元affine space内の閉部分schemeである．
+
+座標変換は$f=(f_1,\ldots,f_{r-1})$，
+$\deg f_n=1-n$で与えられ，$f_1$の各graded blockを可逆とする．
+これは上記の有限coalgebraのgraded automorphismと同じである．
+合成は有限個のpartitionにわたる和であり，
+逆写像もarityに関する有限帰納法で求まる．
+従って$G$は有限型affine groupである．
+$f\mapsto f_1$は
+\[
+ G\longrightarrow
+ G_0:=\prod_{i<j,\,a}\operatorname{GL}(V_{ij}^a)
+\]
+へのsplit surjectionである．
+その核は$f_1=\id$を満たす高次成分$f_2,\ldots,f_{r-1}$を自由に指定する
+affine spaceであり，arity filtrationに関してunipotentな群となる．
+従って$G$はsmoothかつ連結である．
+$b_m\mapsto f b_m f^{-1}$は代数的であり，これが$Z$への作用を与える．
+
+一次変形$m+\epsilon c$のStasheff恒等式は$d_mc=0$である．
+また座標変換$\id+\epsilon a$は，符号を除いて$d_ma$だけ$m$を変える．
+従って接空間と軌道接空間についての二つの式を得る．
+標数$0$なので群作用の軌道は分離的であり，
+微分の像は実際の軌道の接空間に一致する．
+
+ここで$C_+$と全Hochschild complexを区別しておく．
+$K_0$は分離的代数なので，$K_0$に相対的なnormalized bar complexが
+Hochschild cohomologyを計算する．
+非単位入力が正の個数なら，strictly increasingな添字列の始点と終点は異なるため，
+出力は$\overline V$に入る．
+入力数$0$の項はdiagonalの$K_0$だけで，cohomological degree $0$に集中する．
+よってnormalized complex $C^\bullet_{\mathrm{rel}}$には完全列
+\[
+ 0\longrightarrow C_+^\bullet
+ \longrightarrow C^\bullet_{\mathrm{rel}}
+ \longrightarrow K_0[0]\longrightarrow0
+\]
+がある．最後の写像はcomplexの写像であるが，
+$K_0$から$C_{\mathrm{rel}}$へのgraded splittingは一般にはcomplexの写像ではない．
+この完全列から
+\[
+ H^q(C_+,d_m)\simeq HH^q(\mathcal C_z)\qquad(q\geq2)
+\]
+を得る．これが接空間の商についての主張を与える．
+
+最後に$HH^3(\mathcal C_z)=0$とする．
+Artin局所$k$-algebraのsmall extension $A'\twoheadrightarrow A$の核を$I$とし，
+$z$を特別fiberとする$A$上の構造$m_A$を考える．
+各係数を任意に$A'$へ持ち上げた$\widetilde m$に対し，
+Stasheff恒等式の誤差
+\[
+ o=\tfrac12[\widetilde m,\widetilde m]
+       \in C_+^3(V)\otimes_k I
+\]
+はJacobi恒等式により$d_m$-cocycleである．
+$H^3(C_+)=0$なので$o=d_mc$となる
+$c\in C_+^2(V)\otimes_kI$が存在する．
+$I^2=0$を用いると$\widetilde m-c$はStasheff恒等式を満たす．
+すなわち$Z$の$z$における変形はすべてのsmall extensionに対して持ち上がる．
+$Z$は有限型であるから，形式的smoothnessの判定法により$z$でsmoothである．
+\end{proof}
+
+\begin{theorem}[有限chartの既約成分を支配する判定]
+\label{thm:finite-chart-component}
+$U$をsmoothな既約有限型$k$-scheme，$u\in U(k)$とし，
+補題\ref{lem:relative-directed-model}の相対full exceptional collectionを持つ族
+$\mathcal C_U$を考える．
+局所モデルと基底を選んで得た射を
+\[
+ \varphi:U\longrightarrow Z,\qquad z=\varphi(u)
+\]
+とする．
+$HH^3(\mathcal C_u)=0$であり，圏の族のKodaira--Spencer写像
+\[
+ \kappa_u:T_uU\longrightarrow HH^2(\mathcal C_u)
+\]
+が同型なら，$U$を$u$の近傍へ縮小した後，
+\[
+ \alpha:G\times U\longrightarrow Z,\qquad
+             (g,v)\longmapsto g\cdot\varphi(v)
+\]
+はsmoothであり，その像は$z$を含む$G$不変な開部分集合である．
+特に
+\[
+ Z_0:=\overline{G\cdot\varphi(U)}_{\mathrm{red}}
+\]
+は$Z$の$z$を通る唯一の既約成分である．
+ここで既約成分には被約構造を入れている．
+さらに
+\[
+ \dim_z Z-\dim(G\cdot z)
+       =\dim HH^2(\mathcal C_u)=\dim U.
+\]
+\end{theorem}
+
+\begin{proof}
+相対$A_\infty$演算の係数の微分は，
+圏の族のKodaira--Spencer classをHochschild cocycleで表す．
+相対transferは元の族との$A_\infty$ quasi-isomorphismを与えるので，
+$d\varphi$を命題\ref{prop:finite-directed-chart}の商へ送ったものは
+ちょうど$\kappa_u$である．
+従って
+\[
+ d\alpha_{(1,u)}(a,v)=a\cdot m+d\varphi_u(v)
+\]
+は$T_zZ$への全射である：
+第一項が$\mathrm B_m^2$を張り，
+第二項がその商$HH^2(\mathcal C_u)$を全て覆うからである．
+命題\ref{prop:finite-directed-chart}によって$Z$は$z$でsmoothである．
+源$G\times U$もsmoothなので，接写像の全射性から
+$\alpha$は$(1,u)$でsmoothである．
+
+smooth locusは開集合であり，
+第一因子の左移動と$Z$の$G$作用に関して不変である．
+従って$U$を縮めれば$\alpha$は全ての$G\times U$でsmoothになる．
+smooth morphismは開写像なので，$G\cdot\varphi(U)$は$z$を含む開部分集合である．
+$G$と$U$が既約だから，その像の閉包も既約である．
+$Z$は$z$でsmoothであり，$z$を通る既約成分は一つだけである．
+その成分の非空な開部分集合を上の像が含むので，
+像の被約閉包は当該成分に等しい．
+最後の次元の式は，$Z$のsmoothnessと
+$T_zZ/T_z(G\cdot z)\simeq HH^2(\mathcal C_u)$から従う．
+\end{proof}
+
+\paragraph{次数1のgluing族への適用．}
+任意の滑らかな次数1 del Pezzo曲面$S$に対し，
+八本の互いに交わらない$(-1)$曲線を順序付きで選び，
+$S\to\mathbb P^2$というblowdownを一時的に固定する．
+これは幾何学的曲面に加える局所chart上の補助標識である．
+八点のうち最初の四点をprojective frameに固定すれば，
+残り四点の一般位置配置は滑らかな既約$8$次元の開parameter spaceをなす．
+その上の八点blowupのuniversal surfaceを取ると，
+$(S,p)$を含む滑らかな既約$10$次元parameter space $U$を得る．
+このchartは曲面の変形の全ての接方向を持ち，
+追加した離散標識を忘れる写像は局所的には
+通常のdel Pezzo moduli stackへの\'etaleなchartとして扱える．
+
+このbase上では八本の相対例外曲線とblowdownが実際に存在するので，
+相対blowup公式により
+\[
+ \bigl(
+ \OO_{E_1}(-1),\ldots,\OO_{E_8}(-1),
+ \pi^*\OO_{\mathbb P^2}(-2),
+ \pi^*\OO_{\mathbb P^2}(-1),\OO_S
+ \bigr)
+\]
+が相対full exceptional collectionを与える．
+最初の十個は$\BB=\OO_S^\perp$を生成する．
+前段の相対gluingで最後の$\OO_S$を新しい例外対象$e$に置き換えると，
+$\TT_{(S,p)}$の族に長さ$11$の相対full exceptional collectionを得る．
+従って補題\ref{lem:relative-directed-model}を適用でき，
+strong exceptional collectionへの変換を必要としない．
+特に$p=b$でのgluing objectのcohomologyの跳躍も，$m_1$を変数に含めれば支障にならない．
+
+既に証明した
+$HH^3(\TT_{(S,p)})=0$と
+$T_{(S,p)}U\simeq HH^2(\TT_{(S,p)})$に
+定理\ref{thm:finite-chart-component}を適用すると，
+この明示的な$10$次元族の$G$飽和像は，
+選んだ有限$A_\infty$構造chartの一つの既約成分を支配する．
+したがってこれはglobalな内在的moduli stackの存在を仮定しない，
+代数的な成分認識である．
+
+\begin{remark}[表示空間の商と圏のmoduliの区別]
+有限型Artin stack $[Z/G]$は構成できるが，
+ここで割ったのは一次成分が可逆な$A_\infty$座標変換である．
+functor間の自然同型やhigher homotopy，
+異なる例外コレクションの選択，および一般のMorita equivalenceまで
+この一つのquotientに組み込んだとは主張しない．
+特に$G_z$のLie algebraは
+$\mathrm Z_m^1(C_+)$であり，$HH^1(\mathcal C_z)$ではない．
+例えば次数$0$に集中するstrong modelでも，
+各対象のscalarの比による座標変換は自然同型でidentityになるが，
+表示のautomorphismとしては残る．
+非零Homのグラフが連結なら，この群には
+$(\mathbb G_m)^r/\mathbb G_m$が含まれる．
+従って$HH^1=0$から$[Z/G]$がDeligne--Mumfordであるとは結論しない．
+
+定理の$10$次元という値は
+$\dim_zZ-\dim(G\cdot z)$であり，
+raw quotient stackの次元
+$\dim_zZ-\dim G=10-\dim G_z$とは区別する．
+$Z_0$は$G$不変なので$[Z_0/G]$も表示stackの既約成分を与えるが，
+それをweakly markedな内在的abel圏のmoduliの既約成分と同一視するには，
+heart，反標準$t$-exactness，Artin--Zhang ampleness，rankの認識と，
+同値のgroupoidに関する比較がなお必要である．
+本節はこの比較を既証明とは扱わない．
+\end{remark}
+
+\begin{remark}[有限自己同型群とavatarのidentity]
+一般の次数1 del PezzoにもBertini involutionがある．
+これは$b$を固定して$T_bS$に$-1$として作用し，
+反標準curveを固定して$P\mapsto P^{-1}$とする．
+従ってweak markingが$\OO$だけの場合，coarseな横断模型には
+$\mathbb C^2/\{\pm1\}$が現れる．
+$\operatorname{HH}^2$をこのcoarse quotientのZariski接空間と同一視しない．
+また$(S,D,P)$のidentity sectionで全ての$D$が同じ$(S,b)$へ写ることは，
+命題\ref{prop:classical}と\eqref{eq:N-basepoint}に一致する．
+反標準pencilの基点をblowupした曲面のAbel写像
+$p\mapsto\OO_D(b-p)$により，このidentity sectionの収縮は幾何学的に記述できる．
+本節のdg族を，このblowupを用いたrelative Picardの幾何学的模型へ\emph{引き戻した族}の
+KSはidentity上でrank~9である．実際，blowdownの接写像はexceptional curve上で1方向を消し，
+普遍曲面上の\eqref{eq:universal-KS}は同型だからである．
+元のPoincare正規化付きavatar族について同じ結論を述べるには，
+上で区別した相対的な族の同値を追加で構成する必要がある．
+\end{remark}
+
+\subsection{古典点のArtin厚化における反標準Hilbert成分}
+
+\begin{proposition}[形式的な反標準Hilbert成分の保持]
+\label{prop:formal-hilbert}
+$\Lambda$を剰余体$\mathbb C$の可換Artin局所代数とする．
+$\mathcal C_\Lambda$をsmooth properな$\Lambda$線形dg圏とし，
+\[
+ \mathcal C_\Lambda\otimes_\Lambda^{\mathbf L}\mathbb C\simeq\Perf(S),
+ \qquad e_\Lambda\otimes_\Lambda^{\mathbf L}\mathbb C\simeq\OO_S
+\]
+を仮定する．相対Serre functor$\SSer_\Lambda$はbase changeと両立するとし，
+$\tau_\Lambda=\SSer_\Lambda^{-1}[2]$と置く．
+このとき全ての$n\geq0$について
+\begin{equation}\label{eq:formal-orbit-freeness}
+ \RHom_{\mathcal C_\Lambda}(e_\Lambda,\tau_\Lambda^ne_\Lambda)
+ \simeq\Lambda^{\oplus(1+n(n+1)/2)}[0].
+\end{equation}
+従って導来圏内で作るorbit ringの各次数成分は$\Lambda$上有限自由で，
+Hilbert級数は
+\begin{equation}\label{eq:formal-orbit-hilbert}
+ \sum_{n\geq0}\operatorname{rank}_\Lambda
+ \Hom(e_\Lambda,\tau_\Lambda^ne_\Lambda)t^n
+ =\frac{1-t+t^2}{(1-t)^3}.
+\end{equation}
+この結論にはheartの存在，$\tau_\Lambda$のt-exactness，AZ-amplenessを仮定しない．
+\end{proposition}
+
+\begin{proof}
+propernessにより左辺のcomplexを$Q_n$と書くと，$Q_n$は$\Lambda$上perfectである．
+Homと相対Serre functorのbase changeから
+\[
+ Q_n\otimes_\Lambda^{\mathbf L}\mathbb C
+ \simeq R\Gamma(S,\OO_S(-nK_S)).
+\]
+$-nK_S=K_S+(-(n+1)K_S)$と書き，後者の括弧内にKodaira vanishingを用いると，
+$n\geq0$で$H^{>0}(S,\OO_S(-nK_S))=0$となる．
+Riemann--Rochと$K_S^2=1$から
+\[
+ h^0(S,\OO_S(-nK_S))
+ =\chi(\OO_S)+\tfrac12(-nK_S)(-(n+1)K_S)
+ =1+\tfrac{n(n+1)}2.
+\]
+
+Artin局所環上のperfect complexは有界な有限自由complexで表せる．
+微分の行列に可逆成分があれば対応する二項contractible complexを取り除き，
+全ての微分が極大イデアルに値を取るminimal complexへ置き換える．
+剰余体への導来tensor後の微分は零である．
+そのcohomologyが次数0だけに集中するので，minimal complexの非零な項は次数0だけであり，
+そのrankは上の$h^0$に等しい．これが\eqref{eq:formal-orbit-freeness}である．
+各次数の$H^0$を取り，\eqref{eq:multiplication}の積を使えばorbit ringを得る．
+自由rankの母関数を計算すると\eqref{eq:formal-orbit-hilbert}となる．
+\end{proof}
+
+この命題は定理\ref{thm:universal-gluing}の族を古典点$(S,b)$でArtin厚化へ引き戻した場合にも適用できる．
+相対Serreのbase changeは，proper Homのperfect dualにSerre双対性を適用し，
+base change後の圏を生成する対象上で双対性を確認してSerre functorの一意性を用いることで得られる．
+命題は一つのArtin基底上の各$n$について述べているため，全ての$n$に対して成立する．
+これに対して代数的な族で，各固定$n$に対するopen条件を無限個交差させ，
+全次数を同時に制御する一つのZariski-open近傍を得たと結論することはできない．
+
+\paragraph{heart認識の適用範囲．}
+本節の全fiberのdg構成だけから，rank-one torsion-freeな構造対象を持つ
+homological dimension~2のnoetherian heartの存在はまだ従わない．
+ただし，次節の楕円領域では別稿\cite{Resonance}が反標準環によるheartを与える．
+特異な反標準境界と非局所自由gluing，および新しいheartの内在的rankについては
+独立した認識問題が残る．Rains\cite[\S4]{RainsFiltered}のdenseなroot resonanceは
+数値的amplenessに関する記述であり，その稠密性を導来特異化の稠密性へ移さない．
+また，全fiberのdg構成や$\operatorname{HH}^3=0$だけから
+無限個の高次切断条件が一つのZariski-open条件になるとも推論しない．
+
+\section{楕円領域の反標準モデルと導来比較}\label{sec:elliptic-comparison}
+この節の完全な証明は，現行bundle内の別稿
+\emph{楕円境界を持つ非可換del Pezzo曲面の反標準モデルと共鳴}
+\cite{Resonance}に置く．ここでは仮定，帰結，残る範囲を本稿と接続する．
+
+\begin{theorem}[楕円領域の反標準heart]\label{thm:elliptic-comparison}
+$S$を滑らかな可換del Pezzo曲面，$E\in|-K_S|$を滑らかな反標準曲線，
+$q\in\Pic^0(E)$とする．$\BB=\OO_S^\perp$にexceptional object $e$を
+$M\mapsto\RHom_E(Li^*M,q)$でglueしたRains型圏を$\TT_q$とする．
+$\tau=\SSer_{\TT_q}^{-1}[2]$，$R_q=\bigoplus_{n\geq0}\Hom(e,\tau^ne)$と置く．
+導来切断は$e$と反標準作用を保つdg equivalence
+\[
+ \TT_q\simeq\Db(\qgr R_q),\qquad e\mapsto\pi R_q,\qquad \tau\mapsto(1)
+\]
+を与える．$\qgr R_q$はnoetherian，Ext-finite，ホモロジー次元2であり，
+$(\pi R_q,(1))$はAZ-ample，$\pi R_q$はexceptionalである．
+次数1なら反標準Hilbert級数は$(1-t+t^2)/(1-t)^3$である．
+有限位数の$q$や境界平行移動も除外しない．
+\end{theorem}
+\begin{proof}[証明の所在と要点]
+別稿\cite[定理1.1，第3--4節]{Resonance}．
+Ind-completionでSerre orbitの右直交を
+\[
+ \{G\in D_{\mathrm{qc}}(S):R\Gamma(S,G)=0,\ Li^*G=0\}
+\]
+と同定する．$S\setminus E$がaffineなのでこれは零となり，orbitが生成する．
+導来切断の完全忠実性は，orbit間のExt計算と境界$H^1(E,\OO_E)$のtraceの保存から示す．
+全射性はsourceのsmooth proper性によるpseudo-perfect moduleの表現可能性と，
+ターゲットの切断の有限cohomological dimensionを使う．
+ターゲットのsmoothnessやorbitによるthick generationを先に仮定していない．
+\end{proof}
+
+この定理は数値的amplenessの失敗を排除するのではない．
+元のblowup heartと$\qgr R_q$のheartは一致するとは限らず，
+それでも同じ導来圏に属することを示している．
+rank-zeroの類$v$について$\alpha=c_1(v)$，$m=\chi(e,v)$と書けば，
+境界restrictionの消滅が要求するperiod条件は
+\[
+ \OO_E(\alpha)\otimes q^m\simeq\OO_E.
+\]
+全orbitに導来的に直交する対象にはさらに$m=0$が必要である．
+稠密な非零指数の共鳴と，この零指数条件を区別する．
+これはsheafの存在の十分条件ではなく，詳細は別稿第5節を参照する．
+
+次数1の普遍点族では，$p\ne b$を通る唯一の反標準曲線$E$が滑らかなら
+$q=\OO_E(b-p)$により定理を適用できる．
+この非空開部分では反標準qgrへの移行による導来非同値や特異化はない．
+従ってこの族でそのような現象が起こるlocusは全体に稠密ではない．
+ただし，特異な反標準曲線上やweak avatarを含む全領域でのclosednessは未証明である．
+また，$\pi R_q$のGabriel--Krull rank-one性・torsion-freenessの内在的な認識は，
+この定理に自動的に含めない．
+
+
+\section{一点Hilbert schemeと次数1での数値類}
+\subsection{可換曲面の復元に関する既知結果}
+Rains\cite[Proposition 11.48]{RainsElliptic}の滑らかな反標準曲線を持つ構成族では，
+\begin{equation}\label{eq:hilb1}
+ \Hilb^1(X_{\rho;q;D})\simeq X_{\rho;1;D}
+\end{equation}
+が成立する．左辺はrank-one torsion-freeで
+$c_1=0$，$\chi=0$の対象のmoduliである．
+一般の対象は$\OO$の部分対象とは限らず，
+単純に$\OO$の長さ1 quotientのQuot schemeを取るのではない．
+一般化された構成族のHilbert schemeは
+\cite[Theorem 10.26とその直後]{RainsBirational}でも扱われている．
+本稿は特異境界における全ての仮定を再監査したものではない．
+
+\subsection{点の数値類を基底なしで書く}
+\begin{proposition}\label{prop:point-class}
+$S$を滑らかな有理曲面で$H=-K_S$，$H^2=d$とする．
+$\tau=(-)\otimes\OO_S(H)$の数値$K$群への作用を$\tau_*$とすると
+\begin{equation}\label{eq:delta}
+ (\tau_*-1)^2[\OO_S]=d[\mathrm{pt}]
+ \quad\text{in }K_{\mathrm{num}}(S).
+\end{equation}
+特に$d=1$では
+\begin{equation}\label{eq:ideal-class}
+ \delta=(\tau_*-1)^2[\OO_S]=[\mathrm{pt}],\qquad
+ v_I=[\OO_S]-\delta
+     =2\tau_*[\OO_S]-\tau_*^2[\OO_S].
+\end{equation}
+この等式は，数値$K$群・Euler形式・Serre作用・構造対象の類が
+同定された非可換変形族にも移る．
+\end{proposition}
+\begin{proof}
+$\ch(\tau_*[\OO_S])=e^H$だから，次元2で打ち切って
+\[
+ \ch((\tau_*-1)^2[\OO_S])
+ =e^{2H}-2e^H+1=H^2=d[\mathrm{pt}].
+\]
+数値的Chern characterとRiemann--Rochより\eqref{eq:delta}が従う．
+\eqref{eq:ideal-class}は展開である．
+変形族への移送には，主張に記した数値構造の同定を用いる．
+\end{proof}
+
+従って既知の次数1の幾何学的クラスでは，
+\begin{equation}\label{eq:intrinsic-hilb}
+ S_{\AA,\OO}
+ =
+ \mathcal M_{\AA}^{\mathrm{tf}}
+ \left(2\tau_*[\OO]-\tau_*^2[\OO]\right)
+\end{equation}
+を直接復元の候補にできる．
+ただしmoduliの存在・有界性・滑らかさ・射影性，
+この数値類がrank-one torsion-freeの正しい型であることは，
+抽象的な定義案\ref{def:fano}だけから証明されたわけではない．
+Hilbert seriesの一致と全数値$K$構造の一致も別である．
+
+\subsection{反標準因子をHomの跳躍で検出する}
+\begin{proposition}\label{prop:jump}
+$S$は滑らかな射影曲面，$D$は有効Cartier因子，
+$P$は$D$上の可逆層で$R\Gamma(D,P)=0$とする．
+$x\in S(\mathbb C)$を閉点とする．
+$\AA$に対象$I_x^{\mathrm{nc}}$があり，Rains型の同定$\kappa$が
+\[
+ \kappa(I_x^{\mathrm{nc}})\simeq I_x,\qquad
+ \RHom_{\AA}(N,\OO)\simeq\RHom_S(\kappa N,i_*P)
+\]
+を与えると仮定する．このとき閉点集合として
+\begin{equation}\label{eq:jump}
+ |D|=\{x\in S:\Hom_{\AA}(I_x^{\mathrm{nc}},\OO)\ne0\}.
+\end{equation}
+$x\in D$では$\Hom$と$\Ext^1$の次元はともに1，
+他の$\Ext$は零である．$x\notin D$では全て零である．
+\end{proposition}
+\begin{proof}
+$M=i_*P$と置く．点のideal sequenceと$R\Gamma(M)=0$より
+\[
+ \RHom_S(I_x,M)\simeq\RHom_S(k(x),M)[1].
+\]
+$x\notin D$では右辺は零である．
+$x\in D$では$R=\OO_{S,x}$は正則2次元局所環で，
+$P$の局所自明化により$M_x\simeq R/(f)$である．
+$0\to R\xrightarrow{f}R\to R/(f)\to0$に$\Hom_R(k,-)$を適用する．
+$\Ext_R^i(k,R)$は$i=2$のときだけ$k$であり，そこへの$f\in\mathfrak m$の作用は零なので，
+$\Ext_R^1(k,R/(f))=\Ext_R^2(k,R/(f))=k$を得る．
+shift $[1]$を適用して結論が従う．
+\end{proof}
+
+この命題の局所計算は$D$の滑らかさや被約性を必要としない．
+一方，大域的なacyclicityと$\kappa$の適合性は仮定である．
+式\eqref{eq:jump}は集合としての回収であり，
+scheme structureと$P$まで内在的に回収するには，
+universal familyの正規化とそのdg functorの同定を行う必要がある．
+固定した幾何学的実現の下では定理\ref{thm:yoneda}がその役割を果たす．
+
+\section{heartをSerre orbitから特徴付ける}
+\begin{proposition}[条件付きheart認識]\label{prop:heart}
+$\TT=\Db(\AA)$，$\tau=\SSer^{-1}[2]$は$\AA$を保つとし，
+$(\OO,\tau)$はAZ-ampleであるとする．さらに全ての$F\in\AA$に対し
+\begin{equation}\label{eq:serre-vanishing}
+ \Ext_{\AA}^p(\OO,\tau^nF)=0
+ \quad(p>0,\ n\gg0)
+\end{equation}
+を仮定する．このとき
+\begin{align}
+ \TT^{\leq0}
+ &=\{M:\Hom_{\TT}(\OO,\tau^nM[i])=0
+       \text{ for }i>0,\ n\gg0\},\label{eq:heart-upper}\\
+ \TT^{\geq0}
+ &=\{M:\Hom_{\TT}(\OO,\tau^nM[i])=0
+       \text{ for }i<0,\ n\gg0\}.\label{eq:heart-lower}
+\end{align}
+従ってこれらの仮定を満たすheartが存在すれば，
+$(\TT,\OO)$から一意に定まる．
+\end{proposition}
+\begin{proof}
+有界な$M$の有限個のcohomology objectsに\eqref{eq:serre-vanishing}を同時に適用する．
+hyper-Ext spectral sequenceは十分大きい$n$で退化し，
+\[
+ \Hom_{\TT}(\OO,\tau^nM[i])
+ \simeq\Hom_{\AA}(\OO,\tau^nH^i(M))
+\]
+を得る．非零$F$に対して右辺が全ての十分大きい$n$で零にはならない：
+AZ生成条件を$\tau^NF$に適用して$\tau^{-N-l_j}\OO$から$F$への全射を得れば，
+$N$を任意に大きくできるからである．
+従って表示条件はそれぞれ$H^{>0}(M)=0$，$H^{<0}(M)=0$に等しい．
+\end{proof}
+
+本稿は\eqref{eq:serre-vanishing}が定義案\ref{def:fano}から自動的に従うとは主張しない．
+またこの命題はheartの\emph{一意性}であり，任意のgluing圏での\emph{存在}を与えない．
+weak境界では命題\ref{prop:weak}の対象が全反標準twistで検出されず，
+同じ議論が使えない．
+
+\section{成分認識と内在的完全分類に残る問題}
+定義案\ref{def:fano}のrankの部分は第\ref{sec:intrinsic-rank}節で閉じた．
+当面の主目標は第\ref{sec:pointed-dg-family}節の10次元族について，
+有限な局所表示での成分性を構造対象だけの標識へ降ろし，
+楕円領域で得た反標準qgr heartを内在的rankと結び付け，
+特異境界を含む部分関手との関係を明らかにすることである．
+完全分類へ向かう超曲面ルートに残る課題は，$R_1$の非零元を選ぶことではなく，
+$Z(R)_1\ne0$を内在的に導き，その商の楕円幾何性を認識することである．
+この自動性を否定する反例は本稿では得ていない．
+avatar分類へ進むには，さらに次を別々に示す必要がある．
+\begin{enumerate}
+\item \textbf{反標準境界の認識．}
+$Z(R)_1\ne0$と$R/(g)$の種数1幾何性を導くこと．
+境界のAS-regular被覆の存在・適用範囲を一次文献と照合して，
+定理\ref{thm:weighted-hypersurface-recognition}へ接続すること．
+$g$と被覆の補助的な選択が最終avatarに残らないことも必要である．
+\item \textbf{幾何性・全射性．}
+$\OO^\perp$がある可換有理曲面の$\OO_S^\perp$となること，または
+\eqref{eq:intrinsic-hilb}が適切な曲面を与えること．
+\item \textbf{gluing対象の幾何性．}
+内在的なmodule $M\mapsto\RHom(M,\OO)$を表す対象が，
+非古典型では$i_*P$，古典型では古典的gluing対象となること．
+Hilbert seriesだけで正則な中心元や楕円商の存在を仮定しない．
+\item \textbf{同値に対する自然性．}
+moduli曲面のuniversal familyから適合的な$\kappa$を得て，
+復元される$D,P$がその選択に依存しないこと．
+\item \textbf{heartと内在的rank，退化境界．}
+定理\ref{thm:elliptic-comparison}で得たqgr heartのGabriel--Krull rankを認識すること．
+特異な反標準曲線と非局所自由gluingへ比較を拡張し，
+weak境界で非零となるorbit直交圏と特異性を判定すること．
+\item \textbf{添付avatarとの比較．}
+ruling・例外曲線の標識忘却，七つのroot条件，
+$P$と$P^{-1}$を含む規約を照合すること．
+\end{enumerate}
+
+関連する最新の結果として，
+Lin--Rampazzo--Zhang\cite[Theorem 1.2]{LRZ}は，
+滑らかな複素del Pezzo曲面の次数が4以下なら，
+enhanced $\OO_S^\perp$が$S$の同型類を決めると述べる．
+本稿では定理の記述と仮定を確認したが，証明全体は独立に監査していない．
+また，この定理は「$\OO^\perp$が幾何的である」ことを与えず，
+任意の同値が$i_*P$を幾何的に移すとも述べていない．
+weak del Pezzo境界への適用も別である．
+
+\paragraph{現在の定理と研究目標の区別．}
+定理\ref{thm:az}は既知の再構成定理の適用である．
+補題\ref{lem:weighted-central-extension}，定理\ref{thm:weighted-hypersurface-recognition}，
+系\ref{cor:central-sextic}は追加仮定の下で本文に証明を与え，行列計算と
+正則性・中心性の議論を独立に点検した．既知の手法を組み合わせた命題であり，
+文献に対する新規性は未確認である．
+命題\ref{prop:generic-semisimple}，\ref{prop:orbit-domain-negative}，
+\ref{prop:rank-leading-hom}，\ref{prop:rank-ext-two-vanishing}，
+命題\ref{prop:marking}，\ref{prop:weak}，
+定理\ref{thm:yoneda}，命題\ref{prop:classical}，
+\ref{prop:point-class}，\ref{prop:jump}，\ref{prop:heart}は，
+記載した仮定の下で本文に証明を与えた．
+既知のRains構成族に関する\eqref{eq:hilb1}は文献を入力として用いる．
+任意の内在的対象とavatarの全単射，境界までの標識商，
+及び完成した新しい分類定理はまだ得られていない．
+定理\ref{thm:universal-gluing}と定理\ref{thm:gluing-hh-ks}は，
+普遍点の族に対する構成と無限小変形を本文で証明し，独立に点検した．
+有限構造係数の局所表示とその成分判定は定理\ref{thm:finite-chart-component}で扱う．
+これら単独では所望のabelian heartの存在を含まない．
+楕円領域におけるheartの存在と導来比較は定理\ref{thm:elliptic-comparison}と別稿の証明で扱う．
+この新しい比較の証明を今回点検したが，本稿の既存の全証明を今回再監査したわけではない．
+元の完全分類目標は維持し，有限表示の成分から内在的なweak markingへの比較を
+その最初の到達目標とする．
+
+\begingroup
+\small
+\begin{thebibliography}{99}
+\bibitem{Resonance}
+本研究，\emph{楕円境界を持つ非可換del Pezzo曲面の反標準モデルと共鳴}，
+2026年11月14日・版1.0．現行bundle内の
+\nolinkurl{papers/dp1_anticanonical_models.tex}．
+定理1.1，第3--5節．本文に証明を記載し点検済み，新規性・独立査読は未確認．
+\bibitem{Kuznetsov}
+A.~Kuznetsov,
+\emph{Hochschild homology and semiorthogonal decompositions},
+arXiv:0904.4330v1 (2009), Theorem 7.7, Remark 7.8, Theorem 8.5.
+\url{https://arxiv.org/abs/0904.4330}.
+\bibitem{OrlovGluing}
+D.~Orlov,
+\emph{Smooth and proper noncommutative schemes and gluing of DG categories},
+arXiv:1402.7364v5, Theorems 3.25, 4.15.
+\url{https://arxiv.org/abs/1402.7364}.
+\bibitem{LowenObjects}
+W.~Lowen,
+\emph{Obstruction theory for objects in abelian and derived categories},
+arXiv:math/0407019, Theorems A--B.
+\url{https://arxiv.org/abs/math/0407019}.
+\bibitem{LowenVdB}
+W.~Lowen and M.~Van den Bergh,
+\emph{Hochschild cohomology of abelian categories and ringed spaces},
+arXiv:math/0405227, Theorem 3.1, Remark 3.5.
+\url{https://arxiv.org/abs/math/0405227}.
+\bibitem{KellerLowen}
+B.~Keller and W.~Lowen,
+\emph{On Hochschild cohomology and Morita deformations},
+Int. Math. Res. Not. IMRN (2009), no.~17, 3221--3235.
+\url{https://doi.org/10.1093/imrn/rnp050}.
+\bibitem{HillePerling}
+L.~Hille and M.~Perling,
+\emph{Tilting bundles on rational surfaces and quasi-hereditary algebras},
+arXiv:1110.5843, Theorem 1.1.
+\url{https://arxiv.org/abs/1110.5843}.
+\bibitem{KellerAinfty}
+B.~Keller,
+\emph{Introduction to A-infinity algebras and modules},
+arXiv:math/9910179v2 (2001), Sections 3, 8.
+\url{https://arxiv.org/abs/math/9910179}.
+\bibitem{MarklTransfer}
+M.~Markl,
+\emph{Transferring $A_\infty$ (strongly homotopy associative) structures},
+arXiv:math/0401007v3 (2009), Situation 1, Theorem 5, Proposition 6.
+\url{https://arxiv.org/abs/math/0401007}.
+\bibitem{OU}
+S.~Okawa and K.~Ueda,
+\emph{Marked Artin--Schelter surfaces of del Pezzo types},
+arXiv:2508.04986v1 (2025), Definition 6.1, Theorem 6.4.
+\url{https://arxiv.org/abs/2508.04986}.
+\bibitem{AZ}
+M.~Artin and J.~J.~Zhang,
+\emph{Noncommutative Projective Schemes},
+Adv. Math. \textbf{109} (1994), 228--287.
+Theorem 4.5(1).
+\url{https://doi.org/10.1006/aima.1994.1087}.
+\bibitem{Orbifold}
+T.~Abdelgadir, D.~Chan, S.~Okawa, and K.~Ueda,
+\emph{Degenerations of orbifold curves as noncommutative varieties},
+Nagoya Math. J. \textbf{261} (2026), e4, Theorem 7.3
+(Artin--Zhang Theorem 4.5(1)の再掲).
+\url{https://doi.org/10.1017/nmj.2025.10067};
+\url{https://arxiv.org/abs/2401.14798}.
+\bibitem{RainsBirational}
+E.~M.~Rains,
+\emph{The birational geometry of noncommutative surfaces},
+arXiv:1907.11301v1 (2019).
+Introduction, Lemma 4.9, Theorem 4.30と直後のRemarks,
+Theorem 10.26.
+\url{https://arxiv.org/abs/1907.11301}.
+\bibitem{RainsElliptic}
+E.~M.~Rains,
+\emph{The noncommutative geometry of elliptic difference equations},
+arXiv:1607.08876v4 (2019).
+Proposition 11.48.
+\url{https://arxiv.org/abs/1607.08876}.
+\bibitem{RainsFiltered}
+E.~M.~Rains,
+\emph{Filtered deformations of elliptic algebras},
+arXiv:2107.13540v2 (2022).
+Lemma 2.11，Theorem 2.12の証明，Example 3.1，\S4，Proposition 5.1，\S6.
+\url{https://arxiv.org/abs/2107.13540}.
+\bibitem{LRZ}
+X.~Lin, M.~Rampazzo, and S.~Zhang,
+\emph{Categorical reconstruction of del Pezzo surfaces:
+Hochschild--Serre algebras and spinor modifications},
+arXiv:2609.10344v1 (2026), Theorem 1.2.
+\url{https://arxiv.org/abs/2609.10344}.
+\bibitem{Attached}
+提供研究ノート，
+\emph{次数1の正則ポテンシャルと標識付き反標準対}，
+2026年11月12日，版1.0，第10--11節．
+ファイル名：
+\texttt{del\_pezzo\_degree1\_regularity\_geometric\_avatar\_20261112.pdf}.
+未公刊資料．本bundleは旧原稿の複製を含めず，
+比較に必要な定義を第1節に記載する．
+\bibitem{AOUCompact}
+T.~Abdelgadir, S.~Okawa, and K.~Ueda,
+\emph{Compact moduli of noncommutative projective planes},
+arXiv:1411.7770v1 (2014), Appendix A,
+Definitions A.3--A.4, Propositions A.5--A.6, Corollary A.7.
+\url{https://arxiv.org/abs/1411.7770}.
+\bibitem{CS}
+T.~Cassidy and B.~Shelton,
+\emph{PBW-deformation theory and regular central extensions},
+arXiv:math/0603375v2 (2006), Section 3, Theorems 3.6--3.7.
+原典の生成元は次数1であり，本稿では必要な正の重み付きの場合の証明を記す．
+\url{https://arxiv.org/abs/math/0603375}.
+\bibitem{RR}
+M.~Reyes and D.~Rogalski,
+\emph{Graded twisted Calabi--Yau algebras are generalized Artin--Schelter regular},
+Nagoya Math. J. \textbf{245} (2022), 100--153,
+Proposition 3.18(3).
+\url{https://doi.org/10.1017/nmj.2020.32}.
+\bibitem{EG}
+P.~Etingof and V.~Ginzburg,
+\emph{Noncommutative del Pezzo surfaces and Calabi--Yau algebras},
+arXiv:0709.3593v4 (2010), Lemma 7.4.2, Proposition 8.1.1(i),
+Theorems 3.3.2, 3.4.4--3.4.5.
+\url{https://arxiv.org/abs/0709.3593}.
+\bibitem{PoissonNote}
+提供研究ノート，
+\emph{次数1・2・4のdel Pezzo manifoldとPoisson構造}，
+2026年11月11日，版2，第7--9節，定理1.2，命題9.1．
+ファイル名：\texttt{del\_Pezzo\_1\_2\_4\_Poisson\_quantization\_20261111\_v2.pdf}.
+未公刊資料．本稿はその形式量子化の存在と，任意の抽象圏の認識を区別する．
+\end{thebibliography}
+\endgroup
+\end{document}
+

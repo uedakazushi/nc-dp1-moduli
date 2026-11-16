@@ -1,0 +1,587 @@
+\RequirePackage{fix-cm}
+\documentclass[11pt,a4paper]{ltjsarticle}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,enumitem,booktabs}
+\usepackage[unicode,hidelinks]{hyperref}
+\setlength{\emergencystretch}{2em}
+\setlist{nosep}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{注意}
+\newcommand{\OO}{\mathcal O}
+\newcommand{\BB}{\mathcal B}
+\newcommand{\TT}{\mathcal T}
+\renewcommand{\AA}{\mathcal A}
+\newcommand{\SSer}{\mathbb S}
+\newcommand{\Db}{D^{\mathrm b}}
+\newcommand{\Dqc}{D_{\mathrm{qc}}}
+\newcommand{\RHom}{\operatorname{RHom}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Perf}{\operatorname{Perf}}
+\newcommand{\coh}{\operatorname{coh}}
+\newcommand{\qgr}{\operatorname{qgr}}
+\newcommand{\QGr}{\operatorname{QGr}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\thick}{\operatorname{thick}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\id}{\operatorname{id}}
+\title{楕円境界を持つ非可換del Pezzo曲面の\\反標準モデルと共鳴}
+\author{}
+\date{2026年11月15日 JST・統合版1.1\\研究原稿：楕円境界上の導来比較と未解決の退化境界}
+\hypersetup{pdftitle={楕円境界を持つ非可換del Pezzo曲面の反標準モデルと共鳴}}
+\begin{document}
+\maketitle
+\begin{abstract}
+反標準類が数値的にampleでない共鳴軌跡の稠密性と，反標準環の
+非可換Projへの移行で導来圏が変わることを区別する．
+滑らかな可換del Pezzo曲面$S$と滑らかな反標準曲線$E$から得られる
+Rains型gluing $\TT_q$について，構造対象$e$のSerre orbitが$\TT_q$を生成することを示す．
+反標準環$R_q$の導来切断関手が，$e$を$\pi R_q$に送る同値
+$\TT_q\simeq\Db(\qgr R_q)$を与えることを，境界のtraceと飽和性を用いて証明する．
+$\qgr R_q$のホモロジー次元は2となる．有限位数の境界自己同型も除外しない．
+数値的な共鳴式の指数は，固定した規約の下でEuler標数に対応する．
+したがって稠密な非零指数の共鳴は，この範囲で導来特異性の稠密な発生を意味しない．
+weak del Pezzoの$(-2)$曲線，特異な反標準境界，非局所自由なgluingに関する
+問題は別に残す．原稿中の新しい組合せの証明を点検したが，文献に対する新規性と
+独立した第三者による検証は未確認である．
+\end{abstract}
+
+\section{問題，結果の範囲，先行研究}
+係数体を$k=\mathbb C$とする．本稿の問題は，同じパラメータにおいて
+滑らかな非可換曲面の圏$\AA$から反標準環
+\[
+ R=\bigoplus_{n\geq0}\Hom_{\AA}(e,\tau^n e),\qquad
+ \tau=\SSer^{-1}[2]
+\]
+を取り，$\Db(\AA)$と$\Db(\qgr R)$を比較することである．
+異なるパラメータの圏どうしが全て同値であるという主張ではない．
+
+Rains\cite[\S4, pp.~34--35]{RF}は，effective rootが生じる
+共鳴軌跡が稠密な超曲面の族になることを述べる．
+そこでのample divisorはeffective coneの双対の内部という\emph{数値的}定義であり，
+数値的amplenessから生成と高次消滅を得ている．
+これを，構造対象と反標準自己同値からなるArtin--Zhang pairのamplenessと
+無条件に同一視しない．特に数値的non-amplenessから，abel圏の不一致や
+導来非同値を直ちに推論することはできない．
+
+本稿の主結果は，Rainsのgluingと反標準環に関する既知結果
+\cite[\S4, Proposition~5.1, Corollary~3.8]{RF}を入力とし，
+古典的avatar $S$の反標準因子が\emph{ample}である場合に，導来比較を閉じることである．
+重要なのは，非可換側の元のheartでの反標準amplenessを仮定しない点である．
+Rogalski--Sierra--Stafford\cite[Lemma~6.8]{RSSDown}の開部分による滑らかさ判定は
+近接する既知結果だが，同論文の全体仮定はdegree $\geq3$と無限位数を含むため，
+次数1へそのまま適用しない．以下の証明では，次数1も許す
+\cite[Proposition~2.4]{RSSBlow}とbalanced dualizing complexの結果\cite{YZ}を使う．
+
+\begin{theorem}[主結果]\label{thm:main}
+$S$を滑らかな可換del Pezzo曲面，$E\in|-K_S|$を滑らかな曲線とし，
+$q\in\Pic^0(E)$とする．第\ref{sec:data}節の規約のRains型圏を
+$\TT_q=\Db(\AA_q)$，その構造対象を$e$とする．
+$R_q=\bigoplus_{n\geq0}\Hom(e,\tau^n e)$と置く．
+このとき導来切断によるdg functorが同値
+\[
+ \Phi_q:\TT_q\xrightarrow{\sim}\Db(\qgr R_q),\qquad
+ \Phi_q(e)=\pi R_q,\quad \Phi_q\tau\simeq(1)\Phi_q
+\]
+を与える．さらに$\qgr R_q$はホモロジー次元2を持ち，
+その有界導来dg圏はsmooth properである．
+この結論は$q$や境界に誘導される平行移動の位数に制限を課さない．
+\end{theorem}
+
+主結果の仮定におけるdel Pezzoは$-K_S$がampleである意味である．
+滑らかな\emph{weak} del Pezzoで$(-2)$曲線を持つ場合を含めない．
+また$E$の特異性や，$q$を非局所自由なrank-one torsion-free sheafへ置き換える場合を
+本定理の適用範囲に含めない．これらの制限は第\ref{sec:limits}節で整理する．
+
+\section{Rains型gluingのデータと反標準環}\label{sec:data}
+$S$を滑らかな射影有理曲面，$i:E\hookrightarrow S$を滑らかな反標準曲線の埋込みとする．
+この節では$H=-K_S$はnef and big，$d=H^2>0$としてよい．
+\[
+ \BB=\OO_S^\perp=\{M\in\Perf(S):R\Gamma(S,M)=0\}
+\]
+と置く．$q\in\Pic^0(E)$に対し$\BB$へexceptional object $e$をglueし，
+\begin{equation}\label{eq:gluing}
+ \RHom_{\TT_q}(e,M)=0,\qquad
+ \RHom_{\TT_q}(M,e)=\RHom_E(Li^*M,q)\quad(M\in\BB)
+\end{equation}
+とする．$\BB$とgluing moduleはsmooth properかつperfectであり，
+$\TT_q$はsmooth properである\cite[Theorem~3.25]{Orlov}．
+Rainsの構成によりnoetherian heart $\AA_q$があり，$e$と全ての$\tau^n e$は
+そのline bundleである．$\theta=\SSer_{\TT_q}[-2]$と$\tau=\theta^{-1}$はheartを保つ．
+このheartは補助的なblowdown構造に依存してよい．
+
+以下のデータをRains\cite[Theorem~4.30, \S5]{RB}，
+\cite[\S4, (4.4), (4.7), Proposition~5.1]{RF}から用いる．
+境界restriction $F_q:\TT_q\to\Perf(E)$とその右随伴$i_{q*}$があり，
+\begin{equation}\label{eq:restriction}
+ F_q(e)=\OO_E,\qquad F_q(M)=Li^*M\otimes q^{-1}\quad(M\in\BB).
+\end{equation}
+またfunctorial triangleと両立性
+\begin{equation}\label{eq:divisor}
+ \theta X\longrightarrow X\longrightarrow i_{q*}F_qX\longrightarrow,
+ \qquad F_q\tau\simeq\Psi F_q
+\end{equation}
+があり，$\Psi$は$E$の平行移動と次数$d$のline bundleによるtensor積の合成である．
+自然変換の非零スカラー倍は固定する．これから
+\[
+ g:e\longrightarrow\tau e
+\]
+を得る．積は右加群の規約で
+$a*b=\tau^{\deg b}(a)\circ b$とする．
+Rainsの逆側の積規約を用いる場合には，全ての加群規約も同時に交換する．
+
+\begin{proposition}[環とorbitのコホモロジー]\label{prop:ring-orbit}
+$R=R_q$は連結局所有限次数付き整域で，$g\in R_1$は中心正則元であり，
+\begin{equation}\label{eq:boundary-ring}
+ R/gR=B(E,L,\sigma)=:B,\qquad\deg L=d.
+\end{equation}
+また全ての整数$a,b$について
+\begin{equation}\label{eq:orbit-ext}
+ \Ext^j_{\TT_q}(\tau^ae,\tau^be)=
+ \begin{cases}
+ R_{b-a}&j=0,\ b\geq a,\\
+ R_{a-b-1}^*&j=2,\ b<a,\\
+ 0&\text{それ以外}
+ \end{cases}
+\end{equation}
+が成り立つ．$d=1$では$\dim R_n=1+n(n+1)/2$である．
+\end{proposition}
+\begin{proof}
+$e$のexceptionality，torsion-freeness，$F_qe=\OO_E$により
+\cite[Proposition~5.1]{RF}を適用できる．これが\eqref{eq:boundary-ring}と$g$の性質を与える．
+$\tau^n e$への$g$の単射とSerre双対性から，負のHomと正の$\Ext^2$が消える．
+$H^1(E,\Psi^n\OO_E)=0$ ($n>0$)を用いて\eqref{eq:divisor}を帰納的に適用すると，
+$\Ext^{>0}(e,\tau^ne)=0$ ($n\geq0$)となる．
+負の$n$についてはSerre双対性で\eqref{eq:orbit-ext}を得る．
+負のcohomological degreeはheart内の対象間なので消える．
+$R_n/gR_{n-1}=H^0(E,\Psi^n\OO_E)$の次元は$n>0$で$nd$であり，
+$\dim R_n=1+dn(n+1)/2$が従う．
+$B$が整域であり$g$が中心正則元なので，$g$進initial termの積により$R$も整域である．
+固定した全次数で$g$進次数は有界であるため，この議論に完備化を必要としない．
+\end{proof}
+
+\begin{lemma}[全位数での有限性]\label{lem:finiteness}
+$R$は左右noetherianで，左右の$\chi$条件と有限cohomological dimensionを持つ．
+従って各$M\in\Db(\qgr R)$と各整数$a$について
+$\RHom_{\qgr R}(\pi R(a),M)$は有限次元の有界cohomologyを持つ．
+\end{lemma}
+\begin{proof}
+$B$はtwisted homogeneous coordinate ringでありnoetherianである．
+$\operatorname{gr}_{(g)}R=B[g]$を用い，斉次イデアルのinitial generatorsを持ち上げると
+$R$も左右noetherianとなる．固定次数における$g$進簡約は有限回で停止する．
+$\sigma$が無限位数なら，degree $\geq1$を許す
+\cite[Proposition~2.4]{RSSBlow}が$\chi$，cohomological dimension 2，
+balanced dualizing complexを与える．
+
+$\sigma$が有限位数$r$の場合を別に確認する．$L$を関数体上で自明化すると
+$B$は$k(E)[t,t^{-1};\sigma]$へ埋め込まれる．
+このskew Laurent環は$\sigma^r=1$によりPIであり，$B$もPIである．
+したがって\cite[Theorem~5.13]{YZ}により$B$はbalanced dualizing complexを持つ．
+さらに\cite[Theorem~5.1(1)]{YZ}を中心元$g$へ適用して$R$もbalanced dualizing complexを持つ．
+\cite[Theorem~4.5]{YZ}より，左右の$\chi$条件とlocal cohomology functorの有限次元性を得る．
+local cohomologyと$R\omega\pi$の標準三角により，$\QGr R$上の$\pi R$の
+cohomological dimensionも有限である．最後の主張は$\chi$による各Extの有限次元性と
+この有界性から従う．これは一般の二対象間のExtの一様な消滅をまだ主張しない．
+\end{proof}
+
+$\OO_R(a)=\pi R(a)$と書く．Rains\cite[Corollary~3.8とその証明]{RF}から
+\begin{equation}\label{eq:target-ext}
+ \Ext^j_{\qgr R}(\OO_R(a),\OO_R(b))=
+ \begin{cases}
+ R_{b-a}&j=0,\ b\geq a,\\
+ R_{a-b-1}^*&j=2,\ b<a,\\
+ 0&\text{それ以外}
+ \end{cases}
+\end{equation}
+を得る．Homの同定は自然な乗法写像によるものである．
+具体的には，$n>0$で
+$0\to\OO_R(n-1)\xrightarrow{g}\OO_R(n)\to\mathcal J(\Psi^n\OO_E)\to0$
+に$\Hom(\OO_R,-)$を適用する．上式の$\Ext^1$消滅により大域切断の列は完全である．
+これを$0\to R_{n-1}\xrightarrow{g}R_n\to H^0(E,\Psi^n\OO_E)\to0$と比較し，
+$n=0$で$\End(\OO_R)=k$であることから帰納すると，自然な写像
+$R_n\simeq\Hom(\OO_R,\OO_R(n))$を得る．ここで$\mathcal J$は境界の包含である．
+同系はRees環と$\deg L>0$を仮定するが，$\deg L\geq3$や$\sigma$の無限位数は仮定しない．
+$R$は$R/(g-1)$のRees環なので適用できる．
+
+\section{Serre orbitの直交圏と古典的avatar}\label{sec:generation}
+\begin{theorem}[見えない対象の記述]\label{thm:null}
+$\mathcal C_q=\Ind(\TT_q)$とする．全てのSerre orbitに直交する部分圏は，
+古典的埋込み$\Ind(\BB)\subset\Dqc(S)$の下で
+\begin{equation}\label{eq:null}
+ \{X\in\mathcal C_q:\RHom(\tau^ne,X)=0\ (n\in\mathbb Z)\}
+ \simeq
+ \{G\in\Dqc(S):R\Gamma(S,G)=0,\ Li^*G=0\}
+\end{equation}
+となる．特に右辺は$q$に依存しない．
+$H=-K_S$がampleなら右辺は零であり，
+\begin{equation}\label{eq:generation}
+ \TT_q=\thick\{\tau^ne:n\in\mathbb Z\}.
+\end{equation}
+\end{theorem}
+\begin{proof}
+restriction，随伴，$\theta,\tau$，\eqref{eq:divisor}をInd-completionへ延長する．
+コンパクト対象を保つ関手から得られるので，必要なfunctorとtriangleは余極限と両立する．
+$X$が左辺に属するとする．$\theta X$も同じ直交条件を満たす．
+\eqref{eq:divisor}と随伴性から
+\[
+ 0=\RHom(\tau^ne,i_{q*}F_qX)
+   =\RHom_E(\Psi^n\OO_E,F_qX)\quad(n\in\mathbb Z)
+\]
+となる．$\deg L>0$であるから$\{\Psi^n\OO_E\}$は$\Dqc(E)$のコンパクト生成族であり，
+$F_qX=0$である．
+$\RHom(e,X)=0$なので$X\in\Ind(\BB)$である．
+その古典的実現を$G$と書くと，$R\Gamma(S,G)=0$かつ
+$Li^*G\otimes q^{-1}=0$を得る．逆にこの二条件を満たす$G$から得られる$X$には
+$F_qX=0$が成り立ち，\eqref{eq:divisor}より$\theta X\simeq X$である．
+従って全てのorbitからのRHomが$\RHom(e,X)=0$に一致する．
+これが\eqref{eq:null}である．
+
+$H$がampleとする．$U=S\setminus E$はaffineである．
+開埋込みを$j:U\hookrightarrow S$と書く．$Li^*G=0$なら
+$G(-E)\to G$が同型なので，Cartier divisorによる局所化から
+\[
+ G\simeq\underset{n}{\operatorname{hocolim}}G(nE)
+   \simeq Rj_*j^*G.
+\]
+従って$R\Gamma(U,j^*G)=R\Gamma(S,G)=0$である．
+affine scheme上の準連接複体では大域切断が保守的だから$G=0$となる．
+よってコンパクト対象$\tau^ne$の右直交はInd-completion全体で零であり，これらは
+コンパクト生成族である．コンパクト生成の定理によりコンパクト対象全体は
+そのthick closureであり，\eqref{eq:generation}を得る．
+ここで，コンパクト対象内だけで右直交が零であることから生成性を推論してはいない．
+\end{proof}
+
+\begin{remark}
+$S$がweak del Pezzoで$(-2)$曲線$C$を持つ場合，滑らかな反標準曲線$E$は$C$と交わらない．
+従って$G=\OO_C(-1)$は\eqref{eq:null}の非零対象であり，全ての$q$で残る．
+ただし自然なorbitの非生成性だけから，別の構成による導来同値の不存在や
+$\qgr R$の特異性まで結論しない．本稿はその強化を未解決として扱う．
+\end{remark}
+
+\section{導来切断による比較}\label{sec:comparison}
+以下$S$はgenuine del Pezzo，$E$は滑らかとする．
+元のRains heartのInd-categoryでinjective resolutionを取り，
+\begin{equation}\label{eq:derived-section}
+ \mathbf R\Gamma_*(X)_n=\RHom_{\TT_q}(e,\tau^nX)\quad(n\geq0),
+ \qquad \Phi(X)=\pi\mathbf R\Gamma_*(X)
+\end{equation}
+と置く．実際のheart上で$\tau$はexactであり，orbitの射はheart内の射であるため，
+この構成は次数付き右$R$加群の複体を与える．必要な$\mathbb Z$作用のstrictificationを
+固定してよく，その選択は得られる導来functorの同型類を変えない．
+最初は$D(\QGr R)$へのdg functorとして定義する．
+
+\begin{lemma}[orbitと境界の像]\label{lem:images}
+$\Phi$は$\TT_q$を$\Db(\qgr R)$へ送り，
+\[
+ \Phi(\tau^ae)\simeq\OO_R(a),\qquad \Phi\tau\simeq(1)\Phi
+\]
+を満たす．$\mathcal J:\coh E\simeq\qgr B\to\qgr R$を境界の包含とすると，
+$V\in\coh E$について$\Phi(i_{q*}V)=\mathcal J(V)$であり，この同定は
+$V$の短完全列に関してexactである．
+\end{lemma}
+\begin{proof}
+\eqref{eq:orbit-ext}より，$\mathbf R\Gamma_*(\tau^ae)$の次数0 cohomologyは
+$R(a)$と有限個の低い内部次数を除いて一致し，次数2 cohomologyは有限次元である．
+従って$\pi$を取れば$\OO_R(a)$になる．
+$\TT_q$はorbitのthick closureなので，像のcohomologyが有界かつnoetherianであることは
+有限cone，shift，direct summandについて保たれ，全ての対象で成立する．
+局所noetherian Grothendieck圏におけるcoherent objectsの有界導来圏の標準的な同定を使った．
+
+境界では随伴性から
+\[
+ (\mathbf R\Gamma_*i_{q*}V)_n\simeq R\Gamma(E,\Psi^nV).
+\]
+作用もrestriction $R\to B$による作用に一致する．楕円曲線上のSerre消滅により，
+高次cohomologyは内部次数について右有界である．
+従って$\pi$を取ると通常のtwisted section functorの像である．
+これは$\coh E\simeq\qgr B$というexact equivalenceだから，短完全列も保つ．
+$\tau$との両立性は内部次数を一つずらすことであり，切り捨てた低次数は$\pi$で消える．
+\end{proof}
+
+\begin{lemma}[境界traceの保存]\label{lem:trace}
+$\Phi$による写像
+\[
+ \Ext^2_{\TT_q}(e,\theta e)\longrightarrow
+ \Ext^2_{\qgr R}(\OO_R,\OO_R(-1))
+\]
+は同型であり，両辺を境界の$H^1(E,\OO_E)$で同定すると恒等になる．
+\end{lemma}
+\begin{proof}
+$0\ne u\in H^1(E,\OO_E)$を，短完全列
+\[
+ 0\longrightarrow\OO_E\longrightarrow V\longrightarrow\OO_E\longrightarrow0
+\]
+で表す．$i_{q*}$で送り，restriction morphism $e\to i_{q*}\OO_E$に沿って引き戻すと，
+随伴同型の下で$u$に対応する元$\widetilde u\in\Ext^1(e,i_{q*}\OO_E)$を得る．
+\eqref{eq:divisor}と$e$のexceptionalityから，境界写像
+\[
+ \Ext^1(e,i_{q*}\OO_E)\xrightarrow{\sim}\Ext^2(e,\theta e)
+\]
+は同型である．
+
+補題\ref{lem:images}は，上の短完全列を境界$\qgr B$の同じ拡大へ移す．
+また$e\to i_{q*}\OO_E$は$\OO_R\to\pi B$へ移る．
+ターゲットのderived restrictionは$\OO_R$を$\OO_E$へ送るので，
+$\Ext^1(\OO_R,\pi B)=H^1(E,\OO_E)$であり，引戻した拡大の類はやはり$u$である．
+$\OO_R$のexceptionalityにより
+\[
+ \Ext^1(\OO_R,\pi B)\xrightarrow{\sim}
+ \Ext^2(\OO_R,\OO_R(-1))
+\]
+も同型である．$\Phi$は$g$によるtriangleとconnecting morphismを保つため，
+結論が従う．単に両辺が一次元であるという次元比較ではなく，非零元の像を確認した．
+\end{proof}
+
+\begin{proposition}[完全忠実性]\label{prop:ff}
+$\Phi:\TT_q\to\Db(\qgr R)$は完全忠実である．
+\end{proposition}
+\begin{proof}
+orbit間のdegree0の射への作用は，$R$の定義と自然な飽和写像により恒等である．
+双方の$\Ext^1$は零で，$\Ext^2$以外の残りの次数も\eqref{eq:orbit-ext}，
+\eqref{eq:target-ext}で消える．$\Ext^2(\tau^ae,\tau^be)$はSerre双対性により
+$\Hom(\tau^be,\tau^{a-1}e)$と完全にpairingする．
+ターゲットの同じpairingは\cite[Corollary~3.8の証明]{RF}で境界traceを用いて構成される．
+補題\ref{lem:trace}，その全ての$\tau$-shift，および$\Phi$のYoneda積との両立性から，
+$\Ext^2$への写像もdegree0の同型の双対として同型である．
+従ってorbitの全ての組についてRHomがquasi-isomorphismとなる．
+定理\ref{thm:null}のthick generationを両変数に適用すれば完全忠実性が従う．
+これはgraded Ext空間の次元一致から$A_\infty$構造の一致を推論する議論ではない．
+\end{proof}
+
+\begin{proposition}[全射性]\label{prop:ess}
+$\Phi$は本質的に全射である．
+\end{proposition}
+\begin{proof}
+任意の$M\in\Db(\qgr R)$について，$\TT_q$上の右dg module
+\[
+ X\longmapsto\RHom_{\qgr R}(\Phi X,M)
+\]
+を考える．補題\ref{lem:finiteness}とthick generationから，これはpseudo-perfectである．
+$\TT_q$はsmooth properなので，pseudo-perfect moduleはperfectかつ表現可能である
+\cite[Theorem~3.18, Corollary~3.19]{Orlov}．
+これにより$\Phi$の右随伴$\Phi^!$が得られる．
+完全忠実性より，counitのcone
+\[
+ \Phi\Phi^!M\longrightarrow M\longrightarrow K\longrightarrow
+\]
+は像の右直交に入り，特に全ての$a,i$について
+$\Hom(\OO_R(a),K[i])=0$である．
+$\qgr R$で$(\OO_R,(1))$は標準的なample pairであり，$\chi$と有限cohomological
+dimensionによりSerre消滅が使える．有界な$K$のcohomology sheavesへ同時に高いtwistを施すと
+hyper-Ext spectral sequenceが退化する．
+非零cohomology sheafがあれば，高いtwistの大域切断は非零なので矛盾する．
+従って$K=0$であり$M$は像に属する．
+
+この段階では，$\Db(\qgr R)$が既にsmoothであることや，$\OO_R(a)$がその全体を
+thickに生成することを仮定していない．その循環を避けるために，sourceの飽和性を用いた．
+\end{proof}
+
+\begin{proof}[定理\ref{thm:main}の証明]
+命題\ref{prop:ff}，\ref{prop:ess}が同値を与える．
+Serre functorは同値で運ばれるから，ターゲット全体で
+\[
+ \SSer_{\Db(\qgr R)}=(-1)[2]
+\]
+である．$(-1)$は$\qgr R$のexact autoequivalenceなので，そのheartの対象$M,N$には
+\[
+ \Ext^i(M,N)=\Hom(N,M(-1)[2-i])^*=0\qquad(i>2)
+\]
+が成り立つ．一方$\Ext^2(\OO_R,\OO_R(-1))=k$であり，ホモロジー次元はちょうど2である．
+smooth proper性はdg equivalenceによって$\TT_q$から移る．
+\end{proof}
+
+\section{共鳴指数，Euler標数，導来的な消失}\label{sec:period}
+$K_0(\TT_q)\simeq K_0(S)$は$\BB$上で恒等，$[e]\mapsto[\OO_S]$とする．
+$v\in K_0(\TT_q)$に対し$r=\rk(v)$，$\alpha=c_1(v)$，
+$m=\chi(e,v)$と書く．
+\begin{proposition}[restrictionの行列式]\label{prop:det}
+規約\eqref{eq:gluing}，\eqref{eq:restriction}で
+\begin{equation}\label{eq:det}
+ \det F_q(v)=\OO_E(\alpha)\otimes q^{m-r}.
+\end{equation}
+特にrank-zeroの類では，restrictionが零であるための必要条件は
+\begin{equation}\label{eq:resonance}
+ \OO_E(\alpha)\otimes q^m\simeq\OO_E.
+\end{equation}
+\end{proposition}
+\begin{proof}
+半直交分解で$v=v_{\BB}+m[e]$と書ける．$v_{\BB}$のrankは$r-m$，
+第一Chern類は$\alpha$である．$F_q$は$\BB$上で古典的restrictionに$q^{-1}$をtensorし，
+$F_q(e)=\OO_E$であるから，複体のdeterminantの公式が\eqref{eq:det}を与える．
+$F_q(v)=0$ならrankとdeterminantはそれぞれ0と$\OO_E$であり，最後の主張を得る．
+\end{proof}
+
+root $\alpha^2=-2$，$H\alpha=0$について，模式的なroot sheaf
+$\OO_C(\ell)$のEuler標数は$\ell+1$である．
+従って共鳴条件の指数はこの規約では$m=\ell+1$で，
+$\OO_E(\alpha)=q^{-m}$となる．$q$の逆元を量子化パラメータとする規約なら符号も変わる．
+この式だけから特定のsheafの存在や，restriction複体の消滅を十分条件として推論しない．
+Rainsのeffective rootの存在結果と，この数値的必要条件は区別する．
+
+\begin{corollary}[Euler標数0の条件]\label{cor:zero-index}
+全ての反標準orbitに導来的に直交するrank-zero対象の類は
+$m=0$であり，従って$\OO_E(\alpha)\simeq\OO_E$を満たす．
+$S$がgenuine del Pezzoなら，非零rootについてこの条件は成立しない．
+\end{corollary}
+\begin{proof}
+直交性は$\RHom(e,X)=0$を含むので$m=0$である．定理\ref{thm:null}により$F_qX=0$であり，
+命題\ref{prop:det}を適用する．
+後半は古典的な消滅で直接確認できる．amplenessから
+$H^0(S,\OO_S(\alpha))=H^0(S,\OO_S(-\alpha))=0$である．
+$\chi(\OO_S(\alpha-H))=0$，$H^0(\alpha-H)=0$，
+$H^2(\alpha-H)=H^0(-\alpha)^*=0$なので$H^1(\alpha-H)=0$．
+\[
+ 0\to\OO_S(\alpha-H)\to\OO_S(\alpha)\to\OO_E(\alpha)\to0
+\]
+から$H^0(E,\OO_E(\alpha))=0$となり，自明束ではない．
+\end{proof}
+
+\begin{remark}[稠密な条件と有限な零指数条件]
+$E$と$\lambda=\OO_E(\alpha)\ne\OO_E$を固定する．
+$[m]q=\lambda^{-1}$ ($m\ne0$)の解の和集合は無限集合であり，曲線$\Pic^0(E)$でZariski denseである．
+実際$[m]$は次数$m^2$のisogenyで，各fiberは$m^2$点を持つ．
+一方，導来的な直交が要求する零指数条件は$\lambda=\OO_E$である．
+有限root systemについてこれらは有限個のperiod条件である．
+しかし，この必要条件の比較だけでderived equivalenceを証明したわけではない．
+主結果には第\ref{sec:comparison}節の完全忠実性と全射性の証明が必要である．
+\end{remark}
+
+\begin{proposition}[境界の外にある対象の検出]\label{prop:outside}
+$X\in\TT_q$が$F_qX=0$を満たすとする．このとき$\tau X\simeq X$であり，
+$\Phi(X)$のcohomologyは反標準境界の外にある対象である．
+その内部次数について十分高い部分の各cohomologyは
+$\Ext^j(e,X)$という一定の有限次元空間で，$g$の作用は同型である．
+特に$\chi(e,X)\ne0$なら$\Phi(X)\ne0$である．
+\end{proposition}
+\begin{proof}
+\eqref{eq:divisor}より$\theta X\to X$が同型であり，その逆を用いて$\tau X\simeq X$を得る．
+導来切断の定義からcohomologyの表示と$g$作用が従う．
+非零cohomology空間の元は$g$の任意の冪で消えないので，torsion quotient $\pi$で消えない．
+Euler標数非零なら少なくとも一つのcohomology空間は非零である．
+\end{proof}
+
+従って「effective rootがある」ことと「その対象が反標準モデルで消える」ことは異なる．
+元のheartの対象$X$で$\Ext^1(e,X)\ne0$なら，$\Phi(X)$が高いcohomological degreeを持つこともある．
+そのときは$\Phi$は元のheartに関して$t$-exactではない．
+ただし全ての共鳴点でheartが必ず変わるとは主張しない．
+数値的ampleness，AZ-ampleness，二つのheartの一致は別々に判定する．
+
+\section{モジュライへの帰結と残る境界}\label{sec:limits}
+滑らかなdel Pezzo $S$，滑らかな$E\in|-K_S|$，$q\in\Pic^0(E)$を動かす
+elliptic avatarのパラメータ空間において，定理\ref{thm:main}は
+\[
+ \Sigma_{\mathrm{der}}
+ =\{(S,E,q):\TT_q\not\simeq\Db(\qgr R_q)\}=\varnothing,
+ \qquad
+ \Sigma_{\mathrm{sing}}
+ =\{(S,E,q):\operatorname{hdim}\qgr R_q=\infty\}=\varnothing
+\]
+を与える．ここでは同じパラメータにおける比較であり，
+量子化パラメータを変えても全ての圏が同じになるという意味ではない．
+この範囲の稠密なroot resonanceを，導来特異化の稠密な発生の根拠にはできない．
+
+次数1では，反標準pencilの基点を$b$とし，$p\ne b$が滑らかなメンバー$E$上にあるとき
+$q=\OO_E(b-p)$と置くと，普遍点によるgluing
+$N_p=L_{\OO_S}(I_p(-K_S))$と本稿の構成が一致する．
+したがって既存の10次元普遍点族の，$p$を通る反標準曲線が滑らかな非空開部分で
+同じ結論が成立する．基点$p=b$は古典的場合であり別途良好である．
+\emph{これだけから基点の周りで全条件が一様なZariski開条件であると推論しない．}
+
+次の問題は本稿に含めない．
+\begin{enumerate}
+\item 特異な反標準因子上の可逆$q$に対する比較の拡張．
+  orbit生成のaffine補集合による部分は一般化できるが，境界のExt・trace・有限性の入力を
+  その一般性で組み直す必要がある．
+\item 特異な反標準曲線の特異点に対応する非局所自由なgluing．
+  tensor $q^{-1}$というrestrictionの式をそのまま使用できない．
+\item weak del Pezzo avatarの$(-2)$曲線による非零直交圏から，
+  $\qgr R$の特異性や別の導来同値の不存在を導くこと．
+\item これらを含む\emph{全}パラメータ空間で$\Sigma_{\mathrm{der}}$や
+  $\Sigma_{\mathrm{sing}}$がZariski closedであるかの判定．
+\end{enumerate}
+従って本稿は，稠密な共鳴に対する主要な滑らかな楕円領域での判定を与えるが，
+全退化境界を含むclosedness定理はまだ与えていない．
+
+\paragraph{内在的定義への位置付け．}
+$\qgr R$はnoetherian，Ext-finite，homological dimension 2であり，
+$\OO_R$はexceptional，反標準作用は$(1)$，そのpairはAZ-ampleで，
+反標準Hilbert seriesも所定のものになる．
+ただし，既存原稿のGabriel--Krull filtrationによるrank-one条件とtorsion-freenessの認識を
+本稿の証明に自動的な結論として追加しない．元のRainsの数値的rankと
+新しいheartの内在的rankの比較は別の課題である．
+
+\paragraph{singularという語の注意．}
+本稿は$\qgr R$の有限homological dimensionを滑らかさの判定として用いた．
+一般の特異scheme $Y$では，$\Perf(Y)$のdg smoothnessと
+$\Db(\coh Y)$のdg smoothnessを混同してはいけない．
+後者は$Y$が特異でもsmoothになり得ることが知られる
+\cite[Theorem~1.2]{Efimov}．
+可換な特異性は$\Perf(Y)\ne\Db(\coh Y)$，非零singularity category，
+無限に続くExtなどで区別する．smooth properなsourceとの非同値の説明に
+「$Y$が特異だから$\Db(\coh Y)$はdg smoothでない」という推論は使わない．
+
+\section{証明状態と再開箇所}
+本稿の新しい推論は定理\ref{thm:null}，第\ref{sec:comparison}節の比較，
+命題\ref{prop:det}，系\ref{cor:zero-index}である．
+入力となるRainsの構成，Ext計算，graded algebraの有限性，飽和性は一次資料の
+定理と仮定を照合した．特に有限位数を無限位数の文献で処理せず，
+補題\ref{lem:finiteness}で別に扱った．
+本文には完全な論証を記したが，独立の第三者査読や形式検証は実施していない．
+文献上すでに同値な形の結果が存在するかは未確認であり，新規性を主張しない．
+
+研究の次の焦点は，elliptic領域での稠密共鳴ではなく，
+特異反標準曲線と非局所自由gluing，およびweak avatarの直交圏である．
+既存のintrinsic原稿のrank・weighted sextic認識・10次元族の成分問題は保持し，
+本稿をそれらのheart比較の入力として使う．
+
+\begin{thebibliography}{99}
+\bibitem{RF}
+E.~M.~Rains, \emph{Filtered deformations of elliptic algebras},
+arXiv:2107.13540v2 (2022).
+使用箇所：\S4，Corollary~3.8とその証明，Proposition~5.1．
+\url{https://arxiv.org/abs/2107.13540}.
+\bibitem{RB}
+E.~M.~Rains, \emph{The birational geometry of noncommutative surfaces},
+arXiv:1907.11301v1 (2019).
+使用箇所：Theorem~4.30，\S5--6のheart・有限性，\S9の反標準環．
+\url{https://arxiv.org/abs/1907.11301}.
+\bibitem{RSSBlow}
+D.~Rogalski, S.~J.~Sierra, J.~T.~Stafford,
+\emph{Noncommutative Blowups of Elliptic Algebras},
+arXiv:1308.2216v2 (2015), Proposition~2.4.
+同命題は$\deg L\geq1$，$\sigma$無限位数を仮定する．
+\url{https://arxiv.org/abs/1308.2216}.
+\bibitem{RSSDown}
+D.~Rogalski, S.~J.~Sierra, J.~T.~Stafford,
+\emph{Ring-theoretic blowing down. I},
+J. Noncommut. Geom. \textbf{11} (2017), 1465--1520.
+Definition~4.1直後のdegree仮定とLemma~6.8を区別する．
+\url{https://doi.org/10.4171/JNCG/11-4-9}.
+\bibitem{YZ}
+A.~Yekutieli and J.~J.~Zhang,
+\emph{Rings with Auslander Dualizing Complexes},
+J. Algebra \textbf{213} (1999), 1--51.
+使用箇所：Theorems~4.5, 5.1(1), 5.13.
+\url{https://www.math.bgu.ac.il/~amyekut/publications/aus-gor/journal.pdf}.
+\bibitem{Orlov}
+D.~Orlov, \emph{Smooth and proper noncommutative schemes and gluing of DG categories},
+arXiv:1402.7364v5 (2015), Theorem~3.18, Corollary~3.19, Theorem~3.25.
+\url{https://arxiv.org/abs/1402.7364}.
+\bibitem{AZ}
+M.~Artin and J.~J.~Zhang,
+\emph{Noncommutative Projective Schemes},
+Adv. Math. \textbf{109} (1994), 228--287.
+\url{https://doi.org/10.1006/aima.1994.1087}.
+\bibitem{Efimov}
+A.~I.~Efimov, \emph{Homotopy finiteness of some DG categories from algebraic geometry},
+arXiv:1308.0135v3 (2018), Theorem~1.2 (Luntsの結果の再掲), \S3.
+\url{https://arxiv.org/abs/1308.0135}.
+\end{thebibliography}
+\end{document}
