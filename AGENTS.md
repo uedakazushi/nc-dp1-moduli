@@ -1,25 +1,22 @@
 # Codex研究指示：次数1の非可換del Pezzoモジュライ
 
-2026-11-16 / dp1-codex-v3。最初に `00_research_plan.md`、`research/dp1_research_plan.md`、現行研究ノート、両論文、検証・再現資料を読む。研究全体の数学的価値を最優先にする。完全分類の完成を待って独立した成果の公表を停滞させない。
+2026-11-18 / dp1-codex-v4。最初に `00_research_plan.md`、`research/artin_deformation_notes.md`、`research/dp1_research_plan.md`、現行原稿・検証情報を読む。全体の既存資産は `research/dp1_research_notes.md` も参照する。
 
-## 現在閉じた部分
+## 現在の確立範囲
 
-`papers/dp1_anticanonical_models.tex` §6（`papers/sections/elliptic_rank_filtration.tex`）は、中心正則一次元と整なGorenstein種数1 THCR境界からHilbert多項式、Gabriel–Krull filtration、πRのrank-one/torsion-free性、rank=2/d×二次係数を証明する。σの位数、ASregular被覆、導来比較を仮定しない。整なnodal/cuspidal境界を含む。これを再び未解決と扱わない。独立の新規性は未確定。
+体上の種数1境界によるGK-rank認識は反標準モデル論文§6。Artin原稿§4–5は次数ごとflatな環のnilpotent基底でのfiltration、flat tail、relative rank、torsion-free持上げ、base changeを証明する。中心g_Aの持上げを仮定しない。新規性未確定。
 
-既存Rains環・全q導来比較を入力した内在的公理と数値rank一致は、入力を明示した帰結である。既存導来比較全体の独立監査は未完了。今回の環論的証明で上流を検証済みにしてはいけない。
+Artin原稿§6は指定e/relative Serre/RHom base changeを入力して平坦反標準環を構成し、既知のDe Deken–Lowen定理で外部のflat Abel変形を得る。元圏へのheart埋込み、全Morita同値、moduli成分性を得たとはしない。
 
-## 次の作業
+## 最優先の作業
 
-1. 主稿の楕円qgr-rank未解決表示を反標準モデル論文§6への参照に整理し、有効な既存証明は保持する。
-2. Rains環構成、finite-orderのYZ入力、Ind orbit生成、trace、pseudo-perfect表現可能性の一次資料を監査する。
-3. Artin基底上の相対flat ring/qgr、基底変更、heart、指定OとSerre作用、同型groupoid・fpqc降下を構成する。総圏の絶対GK長さを相対rankに使わない。二重数自明族のgeneric lengthが2となる例を試験に使う。
-4. 全Morita変形とfinite directed A∞ chartの比較、curvature、inner stabilizer、Bertini quotientを処理する。
-5. 特異境界での環の存在・導来比較・非局所自由gluingを調べる。rank認識の拡張済み範囲と混同しない。
+1. 比較先を全Db(qgr R_A)ではなく有限A-Tor振幅部分とし、導来切断・右随伴・unit/counitの基底変更を構成する。二重数自明族のPerf≠Dbを必ず試験に使う。
+2. Z-代数の同時添字移動のcoherence、e/Serreの持上げと変形groupoid、full exceptional collectionとの比較を処理する。反標準軌道はExt²(τe,e)=kなのでgeometric helixの有限thread定理を直接使わない。
+3. 既存のRains全q導来比較、finite-order入力、HH/KS・finite A∞ chartを独立監査する。主稿に残る特殊楕円qgr-rank未解決表示を現行結果への参照へ整理し、有効な証明を削除しない。
+4. 一般公理からの中心境界認識、特異境界での導来比較、非局所自由gluing、weak壁と標識忘却は別課題として保持する。
 
-numerical ampleness / AZ-ampleness、derived / abelian equivalence、finite chart / intrinsic成分、stack / coarseを常に区別する。HH²=10・HH³=0・KS同型だけで全分類を宣言しない。Rains、Okawa–Ueda、EGの既知構成との差分を確認する。
+## 作業原則
 
-## 検証と保存
+研究価値の最大化を優先し、完全分類待ちで独立した成果の公表を止めない。原稿は日本語LuaLaTeX。証明・引用の適用・今回の検算・組版・新規性を区別する。全局所Artin基底に関する主張と有限型Zariski開条件を混同しない。
 
-日本語LuaLaTeX。rootで `python scripts/check_elliptic_rank.py` と必要な `latexmk` を実行し、成功・未実施を区別する。SymPy検算は圏論的証明ではない。研究の区切り、目安15分のcheckpointで方針・ノート・原稿・検証情報を整合させ、mainへ直接通常のfast-forwardで保存し、remote SHAを確認する。PR、GitHub Actions、force pushは使わない。他者の並行変更は取得して統合する。
-
-GitではPDF、ZIP、中間物、旧版、履歴、キャッシュを追跡しない。GitHub mainが正本で、LibraryはGitHub保存失敗時の緊急避難のみ。背景の自動作業は約束しない。
+区切りで `python scripts/check_artin_rank.py` と必要な `latexmk` を実行し、方針・ノート・原稿・検証を整合させる。mainへ通常のfast-forwardで直接保存、remote SHA確認。PR、Actions、force pushを使わず、並行変更は取得して統合する。GitにはPDF/ZIP/中間物を追跡しない。現行の自己完結したbundleを追加承諾なしでLibraryへ保存し、その範囲と成功状態を明記する。旧Library資料を削除しない。背景作業は約束しない。

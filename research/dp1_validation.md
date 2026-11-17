@@ -1,40 +1,31 @@
-# dP1：現行の検証状態
+# 検証状態
 
-2026-11-16 / validation-v3。証明の記載、今回の点検、機械的検算、組版、外部査読を区別する。
+2026-11-18 / validation-v4。新Artin原稿と既存原稿の検証を分離する。
 
-## 今回証明を構成・点検した事項
+## 今回の数学的点検
 
-反標準モデル論文§6、`papers/sections/elliptic_rank_filtration.tex`：
-- `lem:elliptic-hilbert-polynomial`：Ann_M(g)を含む完全列からHilbert多項式を得る。g-torsion-freeを仮定していない。
-- `thm:elliptic-filtration`：有限長対象と商圏の単純対象への中心gの作用から、GK filtrationと多項式次数filtrationを一致させる。
-- `thm:elliptic-rank`：斉次右イデアル内のaR、商の一次増大度、generic simple generatorからrank one、torsion-free、二次係数との一致を証明する。
-- 整なGorenstein種数1境界に一般化した。σ-ampleness、RR、ω_E≅O_E、境界の単純層を確認し、nodal/cuspidalを含める。可約・非被約境界や非中心normal元を含めない。
-- `prop:elliptic-numerical-rank`：境界triangleからEuler差分を導く。数値rankと内在的rankの比較には既存導来同値を明示的に入力する。
+`papers/dp1_artin_deformations.tex` の特殊fiber入力、nilpotent noetherian性、GK filtration、絶対長さ公式、flat tail判定、socleを使ったtorsion-free性の持上げ、flat基底変更、反標準環の自由性と自然性、二重数障害、随伴付き同値の持上げの各証明を本文で構成・点検した。
 
-ここでの点検は本文中の推論の数学的点検であり、独立した第三者査読・形式証明ではない。結果の独立の新規性は未確定である。
+平坦Abel変形の一般理論はDe Deken–LowenとLowen–Van den Berghの既知結果を入力する。前者arXiv版Proposition4.4/Theorem4.5/Proposition4.6と後者Theorem8.8を本文・ページ画像で確認。Stacksのflatness/perfect/二重数例も確認した。原著全体の独立再証明ではない。GLSV arXiv:2411.15359はabstractの確認にとどまり、証明入力ではない。
 
-## 一次資料の確認範囲
+新しい原稿の結果の独立の新規性、第三者査読、形式証明は未確認・未実施。相対e/Serreと基底変更は明示的な入力である。全Morita/Abel変形の同値、元圏と相対perfect部分の比較、finite-type moduli、fpqc降下は未証明。
 
-AOU arXiv:1411.7770v1 Appendix AのDefinitions A.3–A.4、Propositions A.5–A.6を本文・ページ画像で確認。非可換射影平面の定理を楕円環へそのまま適用せず別証明を与えた。
+## 今回実行した検査
 
-RSS arXiv:1308.2216v2 Proposition2.4を本文・ページ画像で確認。無限位数仮定を確認し、新しいrank証明には用いていない。既存導来比較での有限位数の扱いは依然独立監査対象。
+`python scripts/check_artin_rank.py`：
+- 重み付き反標準Hilbert数をn=0,…,40の41次数で厳密計算。
+- k[ε]/ε^ellとその商に関する長さ・Hilbert公式を875組で検算（ell=2,…,8）。
+- 二重数の周期分解に由来するExt計算を次数0,…,12で有限次元線形代数として検算。
+- 31個の一意なlabel、23件の参照、9種類の引用キーの閉包を確認。
 
-Keeler arXiv:math/9912051v2 Theorem1.2を本文・ページ画像で確認。整な曲線の数値因子類はdegreeで決まり、自己同型の作用が自明なので正次数Lはσ-ample。
+これらは圏論的証明の機械検証ではなく、正規化・符号・参照の検査である。
 
-Artin–Van den Berghの原論文全体は今回取得・監査していない。Theorems1.3–1.4の再掲をChirvasitu–Kanda–Smith, Forum Math. Sigma9(2021)e4, Theorem2.4で本文確認し、Corollary2.8の境界圏埋込みも確認した。同論文PDFのwebページ画像取得は502で失敗したため、この資料は本文テキストでの確認にとどまる。引用は原論文と確認した再掲を併記した。
+`latexmk papers/dp1_artin_deformations.tex`：LuaLaTeXで9ページPDF、終了コード0。最終ログにundefined/multiply-defined/Overfull/Underfull/Warningは検出されなかった。全9ページを画像化し、一覧と代表ページで配置を確認した。PDFは334348 bytes（最終組版時）。ビルド生成物・ログ・画像はGit/bundleに含めない。
 
-## 今回実行した機械的検査・組版
+## 今回未実施
 
-`python scripts/check_elliptic_rank.py` をSymPy1.14.0で実行：4件の多項式恒等式、38個の一意なlabel、52件の参照、11種類の引用keyの閉包を確認した。これは有限長性や導来同値を機械的に証明するものではない。
+既存主稿と反標準モデル論文の再組版・独立全面監査、主稿内に残る旧rank未解決表示の横断修正は未実施。以前の14ページ反標準モデル論文の検証を今回再実行したとは報告しない。既存の体上rank定理は現行の有効な入力として保持した。
 
-`latexmk papers/dp1_anticanonical_models.tex` をLuaLaTeXで実行し、版1.2の14ページPDFを生成、終了コード0を確認した。最終ログにundefined/multiply-defined/overfull/underfullの警告は検出しなかった。PDFのページ画像をレンダリングし、本文・新rank節の配置を確認した。PDFと中間生成物はGitに含めない。
+既存の記録：2026-11-15の主稿31ページ・旧反標準稿9ページ、2026-11-16の反標準稿14ページの組版と検算は、それぞれ当時の検査結果である。今回の成功範囲は上記Artin原稿と新スクリプトのみ。
 
-## 今回実行していないこと
-
-主稿全体の再組版・独立全面監査、全q導来比較の一次入力を通した全面再検証、Morita変形との全比較、相対heart・降下、全intrinsic成分性、網羅的な新規性調査は未実施・未完了である。主稿に残る特殊楕円qgr-rankの未解決表示の横断的参照整理も残る。現行のrank結果は反標準モデル論文§6が正本。
-
-## 保持する既存検証情報
-
-既往の2026-11-15検証では主稿31ページ、反標準モデル論文9ページのLuaLaTeX組版成功とlabel/refの閉包が記録されている。これは今回の主稿の再検査を意味しない。既存のgluing、HH/KS、有限chart、weighted認識、全q導来比較には証明が記載されているが、今回新たに全て検証したとはしない。
-
-ファイル生成・検算・組版とGitHubへの保存は別の状態である。保存の成否は実際のcommit/main到達確認により報告し、この文書だけから推定しない。
+GitHub保存・Library保存・ZIP整合性は実際の各操作後に別途確認する。この文書の存在だけから保存成功と推定しない。

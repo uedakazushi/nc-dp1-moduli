@@ -1,27 +1,29 @@
-# dP1：再現手順
+# 再現手順
 
-2026-11-16 / reproduction-v2。リポジトリrootを作業ディレクトリにする。
+2026-11-18 / reproduction-v3。全コマンドはリポジトリまたはbundleのrootで実行する。
 
-## 原稿
+## Artin方向（今回のbundle単独で実行可能）
 
 ```sh
-latexmk papers/dp1_anticanonical_models.tex
-latexmk papers/nc_del_pezzo_degree1_moduli.tex
+python scripts/check_artin_rank.py
+latexmk papers/dp1_artin_deformations.tex
 ```
 
-`.latexmkrc`によるLuaLaTeXを使用する。必要なTeXパッケージはltjsarticle/LuaTeX-ja、amsmath、amssymb、amsthm、mathtools、enumitem、booktabs、hyperref、geometry、fix-cm。PDF/aux/SyncTeX等はbuild/へ生成し、Gitで追跡しない。
+Python3標準ライブラリのみ。LuaLaTeX、latexmk、LuaTeX-ja/ltjsarticle、amsmath、amssymb、amsthm、mathtools、enumitem、booktabs、geometry、hyperref、fix-cmを使用する。`.latexmkrc`でbuild/へ出力。外部bib・画像・データは不要。本文§2に必要な体上rank証明を含み、旧bundleの取得は不要。
 
-反標準モデル論文は `papers/sections/elliptic_rank_filtration.tex` を読み込む。この依存ファイルを省略しない。外部bibliographyファイルや画像は不要。二つの公表原稿は数学的内容を削らず保持し、rankの完全な証明は反標準モデル論文§6に置く。
+検算は41次数のHilbert数、875組のArtin加群、二重数Ext、label/ref/citeを検査し、圏論的証明を形式化しない。結果の範囲は `research/dp1_validation.md` を参照。
 
-## 厳密な多項式検算と参照検査
+## GitHub上の既存原稿
 
 ```sh
 python -m pip install -r requirements-research.txt
 python scripts/check_elliptic_rank.py
+latexmk papers/dp1_anticanonical_models.tex
+latexmk papers/nc_del_pezzo_degree1_moduli.tex
 ```
 
-Python3とSymPy1.14.0を使用。Hilbert差分、principal quotientの多項式、Euler差分、rank二次係数を記号計算し、反標準モデル論文のinputを展開してlabel/ref/citeの閉包を検査する。固定入力データは不要。この計算は圏論的証明・有限長性・導来同値の機械検証ではない。
+既存rank検算はSymPy1.14.0を使用する。反標準稿は `papers/sections/elliptic_rank_filtration.tex` を必要とする。これらの既存資産はGitHubに保持されるが、Artin方向のbundleは全repoの複製ではないため含めない。既存原稿の今回の再検査は未実施。
 
-## 再開
+## 配布
 
-`00_research_plan.md` → `research/dp1_research_plan.md` → `research/dp1_research_notes.md` → 両TeX → `research/dp1_validation.md`。旧ZIP・過去会話・外部の旧ノートを前提にしない。必要な既知入力の書誌と適用範囲は本文と研究ノートにある。実際に完了した組版・検証はvalidationを参照し、未実施分を実施済みと扱わない。
+今回のbundleには現行方針、Artin研究ノート、Artin原稿TeX/PDF、新検算、再現・検証情報のみを入れる。build/、ログ、aux、SyncTeX、旧PDF、旧ZIP、外部文献PDFを含めない。GitではPDF/ZIPを追跡しない。書誌・確認箇所は原稿とノートに記載する。

@@ -1,0 +1,526 @@
+\RequirePackage{fix-cm}
+\documentclass[11pt,a4paper]{ltjsarticle}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,enumitem,booktabs}
+\usepackage[unicode,hidelinks]{hyperref}
+\setlength{\emergencystretch}{2em}
+\setlist{nosep}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{remark}[theorem]{注意}
+\newtheorem{example}[theorem]{例}
+\newcommand{\OO}{\mathcal O}
+\newcommand{\CC}{\mathcal C}
+\newcommand{\DD}{\mathcal D}
+\newcommand{\TT}{\mathcal T}
+
+\newcommand{\UU}{\mathcal U}
+\newcommand{\mm}{\mathfrak m}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\RHom}{\operatorname{RHom}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\qgr}{\operatorname{qgr}}
+\newcommand{\QGr}{\operatorname{QGr}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\gr}{\operatorname{gr}}
+\newcommand{\coh}{\operatorname{coh}}
+\newcommand{\Perf}{\operatorname{Perf}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\len}{\operatorname{length}}
+\newcommand{\soc}{\operatorname{soc}}
+\newcommand{\Db}{D^{\mathrm b}}
+\newcommand{\SSer}{\mathbb S}
+\title{非可換射影曲面のArtin変形と内在的rank\\反標準環による平坦Abel変形の構成}
+\author{}
+\date{2026年11月18日・版1.0\\研究原稿：相対導来比較と新規性の確認は未完成}
+\hypersetup{pdftitle={非可換射影曲面のArtin変形と内在的rank}}
+\begin{document}
+\maketitle
+\begin{abstract}
+体上の非可換射影曲面のGabriel--Krull filtrationとHilbert多項式を，
+局所Artin環上の次数付き平坦変形へ移す．特殊fiberで有限長filtrationが
+Hilbert多項式の次数に一致し，generic quotientが単一の単純対象を持つと仮定する．
+このとき総圏でもfiltrationは多項式次数と一致し，genericな長さは二次係数から定まる．
+基底に平坦な対象について，この長さは基底環の長さと特殊fiberのrankの積である．
+平坦性のtailによる判定と，特殊fiberのtorsion-freenessの持上げも証明する．
+さらに，次数1 del Pezzo曲面の構造対象と相対Serre関手を持つproper dg変形から，
+基底変更と両立する平坦な反標準環を構成する．De Deken--Lowenの既知定理により，
+その非可換Projは平坦Abel変形を与える．この構成を元のdg圏へのheartの埋込みや
+変形functorの同値と同一視しない．二重数基底の自明族によって，
+比較先を全有界導来圏とする定式化が誤ることを明示する．
+一般変形理論は既知入力であり，ここでの応用・rankの整理の独立の新規性は未確定である．
+\end{abstract}
+
+\section{目的と既知結果との関係}\label{sec:intro}
+係数体を$k=\mathbb C$とする．本稿は次数1の非可換del Pezzo研究のうち，
+幾何点ごとのrank認識をArtin基底上の変形に接続する部分を扱う．
+全内在的モジュライの存在，10次元普遍点族の成分性，任意のdg変形とAbel変形の同値は主張しない．
+
+Lowen--Van den Bergh\cite{LVdB}は平坦Abel変形と局所化の一般理論を構成した．
+De Deken--Lowen\cite[Proposition 4.4]{DDL}により，平坦な$\mathbb Z$-代数の変形から
+平坦Abel変形が得られる．同論文Theorem 4.5は適切な正方向の$\Ext^{1,2}$消滅の下で
+逆向きの比較を与えるが，Theorem 5.15の有限threadとの比較にはgeometric helixという追加条件がある．
+本稿の反標準軌道は前者に適合し，後者には一般に適合しないことを明示する．
+これらの一般定理を本稿の新規成果として扱わない．
+$t$構造を指定した導来変形の関連理論としてGenovese--Lowen--Symons--Van den Bergh\cite{GLSV}がある．
+本稿ではその比較定理を入力せず，proper dg圏と全有界導来圏の相違を明示的に扱う．
+
+体上のrankに関してはAbdelgadir--Okawa--Ueda\cite[Appendix A]{AOU}が
+非可換射影平面で内在的filtrationを扱う．種数1境界の場合の必要な入力は
+第\ref{sec:field}節に証明を記し，別稿\cite{RankPaper}なしでも本稿の議論を追えるようにする．
+本稿の中心は第\ref{sec:nilpotent}--\ref{sec:flat}節のnilpotentな基底の扱いと，
+第\ref{sec:envelope}節の反標準環による平坦Abel変形への写像である．
+
+\section{特殊fiberの仮定と種数1境界}\label{sec:field}
+$R$を連結局所有限な右noetherian $\mathbb N$次数付き$k$代数，
+$\CC=\qgr R$とする．$\CC_0$を有限長対象のSerre部分圏とし，
+$\CC_1$を$\CC/\CC_0$で有限長になる対象のSerre部分圏とする．
+以下の条件を\textup{(H)}と呼ぶ：
+\begin{enumerate}
+\item 有限生成次数付き$R$加群のHilbert関数は最終的に二次以下の多項式に一致し，
+  それは$\CC$上の加法的不変量$p_F$となる．$p_F=0$は$F=0$と同値である．
+\item $\CC_i=\{F:\deg p_F\leq i\}$ for $i=0,1$．
+\item $\CC/\CC_1$は単一の単純対象$\overline{\OO}$を持つsemisimple length圏であり，
+  $\OO=\pi R$は$\CC_1$に関してtorsion-freeである．ある$d>0$について
+\begin{equation}\label{eq:special-rank}
+ \rk(F):=\len_{\CC/\CC_1}(F)=\frac2d[n^2]p_F(n),\qquad \rk(\OO)=1.
+\end{equation}
+\end{enumerate}
+零多項式の次数は$-\infty$とする．torsion-freeとは$\CC_1$に属する非零部分対象を持たないことをいう．
+
+\begin{proposition}[種数1境界による入力]\label{prop:field-input}
+$R$が中心正則元$g\in R_1$を持ち，
+$R/gR=B(E,L,\sigma)$，$E$が整な射影Gorenstein曲線，$p_a(E)=1$，
+$\deg L=d>0$であるとする．このとき\textup{(H)}が成立し，
+$p_{\OO}(n)=1+dn(n+1)/2$である．$\sigma$の位数は任意である．
+\end{proposition}
+\begin{proof}
+整な曲線では自己同型の数値因子類への作用はdegreeを保つ．
+Keeler\cite[Theorem 1.2]{Keeler}の判定により$L$は$\sigma$-ampleであり，
+Artin--Van den Berghの再構成\cite{AV}により$\qgr B\simeq\coh E$である．
+使用する再構成と境界埋込みは\cite[Theorem 2.4, Corollary 2.8]{CKS}にも記載される．
+曲線上のRiemann--Rochと高次消滅により，有限生成$B$加群のHilbert関数は
+最終的に一次以下の多項式となる．
+
+有限生成$R$加群$M$に対して$T=\operatorname{Ann}_M(g)$，$V=M/Mg$と置くと
+\[
+ 0\longrightarrow T(-1)\longrightarrow M(-1)\xrightarrow{g}M
+ \longrightarrow V\longrightarrow0.
+\]
+$T,V$は有限生成$B$加群だから，$h_M(n)-h_M(n-1)=h_V(n)-h_T(n-1)$を足し合わせれば
+$p_M$の存在を得る．有限次元の変更に不変なので$p_F$が定まる．
+加法性，非零多項式の最高次係数の正値性，$p_F=0\Leftrightarrow F=0$も従う．
+$\omega_E\simeq\OO_E$と正次数可逆層の$H^1$消滅から$\dim B_n=nd$ for $n>0$，
+従って$p_{\OO}$も上式のとおりである．
+
+$\DD_i=\{F:\deg p_F\leq i\}$と置く．$\DD_0$の定数値と
+$\DD_1/\DD_0$の一次係数は正整数であり，加法性によって部分対象列の長さを抑える．
+よって$\DD_0\subset\CC_0$，$\DD_1\subset\CC_1$である．
+逆に$\CC$の単純対象$F$では中心元の射$F(-1)\to F$が零か同型となる．
+同型なら$p_F(n)=p_F(n-1)$，零なら$F$は境界の単純層に由来する．
+いずれも定数多項式なので$\CC_0=\DD_0$である．
+商$\CC/\DD_0$の単純対象にも同じ射を用いる．同型なら核と余核が定数増大度なので
+$p_F(n)-p_F(n-1)$は定数，零なら像が定数増大度で余核は境界に由来する．
+いずれも$\deg p_F\leq1$となり，$\CC_1=\DD_1$を得る．
+
+$B$は整域であり，$g$進initial termの積から$R$も整域となる．
+$\OO$の非零部分対象は斉次右イデアル$I$で表せ，$0\ne a\in I_s$を選べば
+$R(-s)\simeq aR\subset I$である．$R/aR$のHilbert多項式は一次以下だから，
+$I$は二次増大度，$R/I$は一次以下となる．これで$\OO$のtorsion-freenessと
+商圏での単純性を得る．$g$の余核が境界に由来するため，商圏では全ての$\OO(n)$が同型である．
+有限生成性から商圏の任意の対象はその有限直和の商，従って半単純である．
+商圏での基底となる成分を有限自由表示から選ぶと，
+$\bigoplus_{j=1}^r\OO(-a_j)\to F$の核はtorsion-freenessにより零，余核は$\CC_1$に属する．
+二次係数を比較して\eqref{eq:special-rank}を得る．
+\end{proof}
+
+\section{Artin変形の有限性と平坦Abel圏}\label{sec:abelian}
+$(A,\mm,k)$を可換局所Artin $k$代数，$\ell=\len_A A=\dim_k A$とする．
+$R_A=\bigoplus_{n\geq0}(R_A)_n$を中心的な$A$作用を持つ次数付き代数とし，
+$(R_A)_0=A$，各$(R_A)_n$は有限自由$A$加群，$R_A\otimes_A k\simeq R$と仮定する．
+$\CC_A=\qgr R_A$と置く．ここで商にするのは有限次元$k$加群であり，
+有限生成・局所有限の範囲では右有界な次数付き加群と同じである．
+
+\begin{lemma}[nilpotentな持上げ]\label{lem:noetherian-lift}
+$R_A$は右noetherianかつ有限生成$A$代数である．任意の有限生成次数付き$R_A$加群$M$は
+有限の$\mm$進filtrationを持ち，各$\gr_{\mm}^jM$は有限生成$R$加群である．
+\end{lemma}
+\begin{proof}
+$R_A$の$A$-flatnessから
+$\mm^jR_A/\mm^{j+1}R_A\simeq(\mm^j/\mm^{j+1})\otimes_kR$である．
+各項は有限個の右noetherian $R$加群の直和であり，$R_A$加群としてもnoetherianである．
+有限filtrationの拡大として$R_A$自身が右noetherianとなる．
+$R$の有限個の斉次代数生成元を持ち上げ，それらが生成する$A$部分代数を$T$とする．
+$R_A=T+\mm R_A$を$\mm$の冪について反復すると$R_A=T$となる．
+最後に，$\mm^jM$は有限生成で，その隣接商では$\mm$が零作用する．
+\end{proof}
+
+\begin{proposition}[既知の変形定理の適用]\label{prop:abelian-lift}
+$\QGr R_A$は$\QGr R$の平坦Abel変形であり，$\CC_A$は$\CC$の平坦Abel変形である．
+特に，$\mm$で殺される対象の圏を取ることで
+\begin{equation}\label{eq:closed-fiber}
+ (\CC_A)_k\simeq\CC
+\end{equation}
+を得る．これは全対象が$A$-flatであるという主張ではない．
+\end{proposition}
+\begin{proof}
+$\check R_A(i,j)=(R_A)_{i-j}$ for $i\geq j$，それ以外は零と置く．
+これは$\check R$の平坦$\mathbb Z$-代数変形である．
+\cite[Proposition 4.4]{DDL}により$\operatorname{Qmod}(\check R_A)$は平坦Abel変形である．
+補題\ref{lem:noetherian-lift}のnoetherian性からtails位相の層圏は通常のtorsion quotientであり，
+$\operatorname{Qmod}(\check R_A)=\QGr R_A$となる．
+局所noetherian性と\cite[\S8.5, Theorem 8.8]{LVdB}のcoherent objectsとの比較により
+小さい圏$\CC_A$についても結論を得る．
+
+閉fiberの同定は直接にも確認できる．restriction of scalarsは$\qgr R\to\qgr R_A$に
+完全忠実なexact functorを誘導する．部分対象と商対象も保存される．
+$\pi_A M$に$\mm$が零作用するなら，$\mm$の有限生成系の各作用の像は有限次元であり，
+$\mm M$も有限次元である．従って$\pi_A M\simeq\pi_A(M/\mm M)$となる．
+射についてはSerre商のroofを十分高いtailで表せばよい．
+\end{proof}
+
+\section{総圏のGabriel--Krull filtration}\label{sec:nilpotent}
+$\CC_{A,0}$を$\CC_A$の有限長対象，$\CC_{A,1}$を$\CC_A/\CC_{A,0}$で有限長になる対象とする．
+$F\in\CC_A$の$\mm$進隣接商を$F_j=\mm^jF/\mm^{j+1}F\in\CC$と書く．
+
+\begin{theorem}[nilpotent基底でのfiltrationと長さ]\label{thm:artin-rank}
+特殊fiberが\textup{(H)}を満たすとする．任意の$F=\pi_A M$に対し，
+$\dim_k M_n$は最終的に二次以下の多項式$p_F^A(n)$となり，
+\begin{equation}\label{eq:artin-poly}
+ p_F^A=\sum_jp_{F_j},\qquad
+ \CC_{A,i}=\{F:\deg p_F^A\leq i\}\quad(i=0,1)
+\end{equation}
+が成り立つ．商$\CC_A/\CC_{A,1}$は単純対象の同型類を一つだけ持つlength圏であり，
+\begin{equation}\label{eq:absolute-length}
+ \lambda_A(F):=\len_{\CC_A/\CC_{A,1}}(F)
+ =\sum_j\rk(F_j)=\frac2d[n^2]p_F^A(n).
+\end{equation}
+この商圏が半単純であることは一般に主張しない．
+\end{theorem}
+\begin{proof}
+補題\ref{lem:noetherian-lift}と特殊fiberの多項式を用い，$M$の有限filtrationに沿って
+Hilbert関数を足すと\eqref{eq:artin-poly}の第一式を得る．
+有限次元の変更に不変であり，短完全列に加法的である．
+非零隣接商の最高次係数は正なので，次数の相殺は起こらない．
+$\DD_{A,i}=\{F:\deg p_F^A\leq i\}$はSerre部分圏となる．
+
+$\CC_A$の単純対象には各$a\in\mm$がnilpotent endomorphismとして作用する．
+単純対象の自己準同型環は除法環だから，これらの作用は零である．
+従って単純対象は全て閉fiberに由来し，閉fiberの単純対象も単純のままである．
+$\DD_{A,0}$では正整数の定数値が部分対象列を抑えるので有限長であり，
+逆に全ての単純対象の多項式は定数である．これで$\CC_{A,0}=\DD_{A,0}$を得る．
+
+$\CC/\CC_0\to\CC_A/\CC_{A,0}$は完全忠実かつexactであり，像は部分対象・商対象について閉じる．
+実際，閉fiberの対象の部分対象・商対象は閉fiberに留まり，Serre商のroofにも同じことを適用できる．
+$\CC_A/\CC_{A,0}$の単純対象を$\overline F$とする．ここでも$\mm$の作用は零だから，
+$\mm F\in\CC_{A,0}$であり，$\overline F\simeq\overline{F/\mm F}$となる．
+後者は閉fiberの商圏の単純対象である．よって$\deg p_{F/\mm F}\leq1$であり，
+$\deg p_F^A\leq1$を得る．逆に$\DD_{A,1}/\DD_{A,0}$では正整数の一次係数が
+部分対象列の長さを抑えるので全対象が有限長である．これで第二のfiltration等式を得る．
+
+同じroofの議論で$\CC/\CC_1\to\CC_A/\CC_{A,1}$も完全忠実かつexactであり，
+像は部分対象・商対象について閉じる．各$F_j$の像は特殊fiberのgeneric simpleの有限直和となる．
+有限filtrationによって$F$の像も有限長となり，その長さは$\sum_j\rk(F_j)$である．
+全ての単純対象は再び$\mm$に殺されるため，その同型類は一つしかない．
+多項式の二次係数を取れば\eqref{eq:absolute-length}を得る．
+\end{proof}
+
+\section{flat tail，相対rank，torsion-free性}\label{sec:flat}
+対象$F\in\CC_A$が$A$-flatであるとは，有限$A$加群上のfunctor
+$X\mapsto X\otimes_AF$がexactであることをいう．有限表示を使ってこのtensor積を定義する．
+
+\begin{lemma}[flat tailの判定]\label{lem:flat-tail}
+$F=\pi_A M$について次は同値である：
+\begin{enumerate}
+\item $F$は$A$-flatである．
+\item $\pi_A\Tor_1^A(k,M)=0$である．
+\item ある$N$が存在し，全ての$n\geq N$で$M_n$は有限自由$A$加群である．
+\end{enumerate}
+従ってflat対象は次数ごとに有限自由なtailで表せる．
+\end{lemma}
+\begin{proof}
+有限自由項からなる$k$の$A$加群分解を$M$にtensorし，exactな$\pi_A$を適用すれば
+$\Tor_1^A(k,F)=\pi_A\Tor_1^A(k,M)$となる．
+$R_A$のnoetherian性から，右辺に現れる次数付きTor加群は有限生成である．
+その$\pi_A$像が零なら，高い次数の$\Tor_1^A(k,M_n)$は零である．
+Artin局所環のflatness判定\cite[Tag 051E, Lemmas 10.101.2--10.101.3]{Stacks}により
+各$M_n$は有限自由となる．これで(1)$\Rightarrow$(2)$\Rightarrow$(3)を得る．
+(3)なら$M_{\geq N}$は$A$-flatであり，tensorのexactnessを$\pi_A$で移せば(1)となる．
+\end{proof}
+
+\begin{theorem}[相対rankとpureな対象の持上げ]\label{thm:relative-rank}
+\textup{(H)}の下で$F\in\CC_A$を$A$-flatとし，$F_0=k\otimes_AF$と置く．このとき
+\begin{equation}\label{eq:relative-rank}
+ p_F^A=\ell p_{F_0},\qquad
+ \lambda_A(F)=\ell\rk(F_0).
+\end{equation}
+相対rankを$\rk_A(F)=\rk(F_0)=\lambda_A(F)/\ell$と定義できる．
+さらに$F_0$が$\CC_1$に関してtorsion-freeなら，$F$も$\CC_{A,1}$に関してtorsion-freeである．
+特に$\pi_A R_A$はtorsion-free，$\lambda_A(\pi_A R_A)=\ell$，$\rk_A(\pi_A R_A)=1$である．
+\end{theorem}
+\begin{proof}
+flatnessを$0\to\mm^{j+1}\to\mm^j\to\mm^j/\mm^{j+1}\to0$に適用すると
+\[
+ F_j\simeq(\mm^j/\mm^{j+1})\otimes_kF_0.
+\]
+これを定理\ref{thm:artin-rank}に代入し，$\sum_j\dim_k(\mm^j/\mm^{j+1})=\ell$を用いれば
+\eqref{eq:relative-rank}を得る．
+
+$\mm$の生成元を$a_1,\ldots,a_s$とする．$A\to A^s$，$x\mapsto(a_1x,\ldots,a_sx)$の
+核は$\soc A=\operatorname{Ann}_A(\mm)$である．flatnessから
+\[
+ \operatorname{Ann}_F(\mm)
+ \simeq(\soc A)\otimes_AF
+ \simeq(\soc A)\otimes_kF_0
+\]
+を得る．非零$T\subset F$，$T\in\CC_{A,1}$があると仮定し，
+$\mm^jT\ne0$となる最大の$j$を取る．$\mm^jT$は閉fiberに属し，
+$\CC_1$の対象として$(\soc A)\otimes_kF_0$へ単射する．これは$F_0$のtorsion-freenessに反する．
+最後に$\pi_A R_A$は$A$-flatで，特殊fiberが$\OO$なので全ての主張が従う．
+\end{proof}
+
+\begin{proposition}[flat対象の基底変更]\label{prop:flat-base-change}
+$A\to A'$を剰余体$k$を保つ局所Artin $k$代数の射とする．
+$R_{A'}=R_A\otimes_AA'$も同じ特殊fiberの次数付き平坦変形である．
+flat対象$F$のflat tail $M_{\geq N}$を用いて
+\[
+ F_{A'}=\pi_{A'}(M_{\geq N}\otimes_AA')
+\]
+と置けば，tailの選択に依存せず，反復基底変更と両立する．$F_{A'}$は$A'$-flatであり，
+$\rk_{A'}F_{A'}=\rk_AF$である．
+\end{proposition}
+\begin{proof}
+Serre商の射と同型を十分高いtailの射で表せば，異なる代表の差は有限次元の核・余核だけである．
+有限次元加群のtensorおよび$A$上のTorは有限次元なので，この差は$\qgr$で消える．
+$M_{\geq N}$の各次数は有限自由であり，基底変更後も有限自由である．
+結合律はtensor積の結合律から，相対rankの不変性は閉fiberが変わらないことから従う．
+この議論は任意の非flat対象について通常のtensorがexactであるとは主張しない．
+\end{proof}
+
+\begin{example}[flatでない対象を長さで正規化しない]\label{ex:nonflat}
+$A=k[\varepsilon]/(\varepsilon^\ell)$，$R_A=A\otimes_kR$とし，
+$1\leq j<\ell$について$F=\pi_A(R_A/\varepsilon^jR_A)$とする．
+$F_0=\OO$であるが$\lambda_A(F)=j$なので，$\lambda_A(F)/\ell=j/\ell$は整数ではない．
+従って\eqref{eq:relative-rank}のflatness仮定は不可欠である．
+また$\ell>1$では$\CC_A/\CC_{A,1}$は半単純でない．
+実際，中心的な$\varepsilon$は全ての単純対象には零作用するが，
+$\pi_A R_A$への作用はgeneric quotientで非零である．
+\end{example}
+
+\section{proper dg変形から平坦Abel変形へ}\label{sec:envelope}
+この節の結論は，既存の形式的反標準Hilbert計算を平坦Abel変形へ接続するものである．
+反標準境界の中心元がArtin基底へ持ち上がることは仮定しない．
+
+\begin{lemma}[perfect complexの特殊fiberによる判定]\label{lem:perfect-fiber}
+$K\in\Perf(A)$とし，$K\otimes_A^{\mathbf L}k$が次数0に集中し次元$r$であるとする．
+このとき$K\simeq A^r[0]$であり，その$H^0$は任意の$A\to A'$による基底変更と両立する．
+\end{lemma}
+\begin{proof}
+有界有限自由complexで$K$を表し，微分行列の可逆成分を含むcontractibleな二項因子を除く．
+有限回で微分の全成分が$\mm$に入るminimalなcomplexを得る．
+$k$へtensorすると微分は零になるので，次数0以外の項は全て零であり，次数0のrankは$r$である．
+基底変更の主張も従う．これはperfectnessを必要とし，単なる有限cohomologyからは従わない．
+\end{proof}
+
+\begin{theorem}[反標準環による平坦Abel変形の構成]\label{thm:abelian-envelope}
+$S$を滑らかな次数1 del Pezzo曲面とする．次のデータを仮定する：
+\begin{enumerate}
+\item $A$線形のproper dg圏$\TT_A$と特殊fiberの同値$\TT_A\otimes_A^{\mathbf L}k\simeq\Perf(S)$．
+\item $\OO_S$を持ち上げる対象$e_A$と，相対Serre自己同値$\SSer_A$．
+\item $\tau_A=\SSer_A^{-1}[2]$および対象間のRHomが導来基底変更と両立すること．
+\end{enumerate}
+ここでproperとは対象間のRHomが$A$-perfectであることを意味する．
+$\tau_A$の冪の合成および基底変更の同型には，互いに両立する同型を指定する．
+\begin{equation}\label{eq:formal-orbit-ring}
+ R_A=\bigoplus_{n\geq0}\Hom_{\TT_A}(e_A,\tau_A^ne_A),\qquad
+ a*b=\tau_A^{\deg b}(a)\circ b
+\end{equation}
+と置くと，次が成り立つ．
+\begin{enumerate}
+\item 各$(R_A)_n$はrank $1+n(n+1)/2$の有限自由$A$加群であり，
+  $R_A$は$R(S,-K_S)$の次数付き平坦変形である．
+\item 任意の局所Artin基底変更について$R_A\otimes_AA'\simeq R_{A'}$が次数付き代数として成り立つ．
+\item $\QGr R_A$，およびそのnoetherian対象の圏$\qgr R_A$は，それぞれ
+  $\operatorname{Qcoh}S$，$\coh S$の平坦Abel変形である．
+  $\pi_A R_A$は基底にflatかつtorsion-freeで，相対rankは1である．
+\end{enumerate}
+これらの構成は指定データを保つ同値と基底変更に関して自然である．
+\end{theorem}
+\begin{proof}
+$H=-K_S$と置く．$n\geq0$ではKodaira消滅とRiemann--Rochにより
+\[
+ R\Gamma(S,\OO_S(nH))\simeq k^{1+n(n+1)/2}[0].
+\]
+$n=0$では有理曲面の$H^{>0}(\OO_S)=0$を用いる．
+$K_n=\RHom_{\TT_A}(e_A,\tau_A^ne_A)$はpropernessからperfectであり，
+その特殊fiberは上のcomplexである．補題\ref{lem:perfect-fiber}によって各$K_n$は次数0の自由加群となる．
+$n=0$の単位写像$A\to\End(e_A)$は剰余体上で同型なので，同型である．
+
+基底変更の同定はRHomのものから得られ，合成と$\tau_A$の作用に両立する．
+従って各次数だけでなく積を含めて\eqref{eq:formal-orbit-ring}の環の同定を得る．
+全ての$n$について同じArtin基底上で成り立つので，ここでは無限個のZariski開集合の共通部分を取っていない．
+特殊fiberの反標準環はnoetherianだから，補題\ref{lem:noetherian-lift}と
+命題\ref{prop:abelian-lift}を適用する．
+$\qgr R(S,H)\simeq\coh S$はample line bundleのSerre再構成である．
+$\coh S$は\textup{(H)}を満たし，構造層はrank oneでtorsion-freeだから，
+定理\ref{thm:relative-rank}を適用すれば最後の主張を得る．
+自然性は各段階の構成と\cite[\S4]{DDL}の変形functorの自然性による．
+\end{proof}
+
+\begin{remark}[構成したものと未構成のもの]\label{rem:scope}
+定理\ref{thm:abelian-envelope}は平坦なAbel圏を\emph{外部に構成する}．
+$\qgr R_A$を$\TT_A$のheartとして埋め込む関手も，
+二つの変形問題の同値も，この証明では構成していない．
+相対Serreの存在と両立性，$e_A$の持上げは明示的な入力である．
+また，中心的な$g_A$，AS-regular被覆，有限型代数化，fpqc降下を自動的には与えない．
+一般の非可換特殊fiberにも，同じ正方向のRHom消滅と\textup{(H)}を入力すれば同じ証明を適用できるが，
+その上流入力の証明・検証は別に必要である．
+\end{remark}
+
+\section{全Abel変形との比較と反標準軌道の障害}\label{sec:periodicity}
+\begin{proposition}[既知の$\mathbb Z$-代数比較の適用範囲]\label{prop:z-deformation}
+$S$が滑らかなdel Pezzo曲面なら，$\OO(n)=\OO_S(-nK_S)$から作る
+$\mathbb Z$-代数$\mathfrak a(i,j)=\Hom(\OO(-i),\OO(-j))$ for $i\geq j$について，
+\cite[Theorem 4.5]{DDL}が適用できる．従って$\operatorname{Qcoh}S$の平坦Abel変形は，
+この$\mathbb Z$-代数の線形平坦変形によって記述される．
+ただし全ての変形$\mathfrak a_A$が通常の次数付き代数$R_A$の$\check R_A$として表せることは，
+この定理だけからは従わない．
+\end{proposition}
+\begin{proof}
+反標準束はampleなので軌道は$\mathbb Z$-generatingである．
+$m\leq n$では$\Ext^{1,2}(\OO(m),\OO(n))=H^{1,2}(\OO((n-m)(-K_S)))=0$であり，
+有限次元$k$加群とのtensor後も同じである．これは引用定理の仮定を満たす．
+通常の次数付き代数へ戻すには，添字を同時に一つ移す同型とその合成との両立性が要る．
+引用定理はその周期性をデータにしていない．
+\end{proof}
+
+\begin{lemma}[反標準軌道はexceptional helixではない]\label{lem:not-helix}
+$e$をexceptional，$\tau=\SSer^{-1}[2]$とすると
+\[
+ \Ext^2(\tau^{i+1}e,\tau^ie)\simeq k\qquad(i\in\mathbb Z).
+\]
+従って増加順の反標準軌道は二項のexceptional sequenceさえなさない．
+\end{lemma}
+\begin{proof}
+Serre双対性と$\SSer=\tau^{-1}[2]$から
+$\Ext^2(\tau e,e)\simeq\Hom(e,e)^*=k$となる．$\tau^i$を作用させればよい．
+\end{proof}
+このため，\cite[Theorem 5.15]{DDL}のgeometric helixと有限threadの比較を，
+反標準軌道へ直接適用して有限型moduliや全Morita比較を結論してはいけない．
+別途のfull exceptional collectionは使えるが，それと反標準$\mathbb Z$-代数との比較が残る．
+
+\section{非被約基底での導来比較の正しい定式化}\label{sec:perfect-warning}
+\begin{example}[二重数基底の自明族]\label{ex:dual-numbers}
+$A=k[\varepsilon]/(\varepsilon^2)$，$S_A=S\times\operatorname{Spec}A$とする．
+$\Perf(S_A)$は相対的にsmooth properな$A$線形dg圏だが，
+\begin{equation}\label{eq:perf-not-db}
+ \Perf(S_A)\ne\Db(\coh S_A).
+\end{equation}
+また$\Db(\coh S_A)$の標準$t$-structureは$\Perf(S_A)$へ制限されない．
+\end{example}
+\begin{proof}
+$G=\OO_{S_A}\otimes_A k$を取る．$A$加群$k$の分解
+\[
+ \cdots\xrightarrow{\varepsilon}A\xrightarrow{\varepsilon}A
+ \xrightarrow{\varepsilon}A\longrightarrow k\longrightarrow0
+\]
+から$\Ext_A^j(k,k)=k$ for $j\geq0$である．この標準例は\cite[Tag 0A5Q]{Stacks}にも記載される．
+$R\Gamma(S,\OO_S)=k$なので，この分解を$\OO_{S_A}$にtensorして計算すれば
+$\Ext_{S_A}^j(G,G)=k$ for $j\geq0$を得る．
+従って$G$は$A$上で有限Tor振幅を持たず，$S_A$上のperfect対象でもない．
+一方$G\in\coh S_A$であるから\eqref{eq:perf-not-db}が従う．
+
+二項complex$[\OO_{S_A}\xrightarrow{\varepsilon}\OO_{S_A}]$はperfectだが，
+その二つの非零cohomologyはいずれも$G$と同型である．
+従って標準切断はperfect部分を保たない．
+この議論は$\Perf(S_A)$に任意のbounded heartが存在しないという主張ではない．
+\end{proof}
+
+適切な比較候補は，全有界導来圏ではなく
+\[
+ \Db_{A\text{-}\mathrm{perf}}(\qgr R_A)
+ :=\{X\in\Db(\qgr R_A):X\text{ は }A\text{ 上有限Tor振幅を持つ}\}
+\]
+である．自明な可換smooth族ではこれは$\Perf(S_A)$に一致する．
+このことはsmooth affine chart $B/A$で確認できる．$B$の対角は
+$B\otimes_A B$上で局所的に有限長の有限射影分解を持つ．
+これを$A$上有限Tor振幅のcomplexに作用させると，$B$上のTor振幅も有限となる．
+有界coherent complexはnoetherianな$B$上pseudo-coherentだからperfectである．
+逆向きは$B$の$A$-flatnessによる．相対perfectの定義と基底変更については
+\cite[Tag 0DHZ]{Stacks}を参照されたい．
+一般の非可換変形での一致・smoothness・比較関手の存在は別途検証すべきである．
+
+\begin{lemma}[基底変更と両立する比較の持上げ]\label{lem:lift-equivalence}
+$\TT_A,\UU_A$を対象間のRHomが$A$-perfectで，その導来基底変更が成り立つ
+idempotent-completeなpretriangulated $A$線形dg圏とする．
+exact $A$線形functor $F_A:\TT_A\to\UU_A$が右随伴$G_A$を持ち，
+随伴・単位・余単位が$k$への基底変更と両立すると仮定する．
+$F_k$が同値なら$F_A$も同値である．
+\end{lemma}
+\begin{proof}
+単位$X\to G_AF_AX$と余単位$F_AG_AY\to Y$のconeを取る．
+各coneの特殊fiberは零である．その自己RHomは$A$-perfectで特殊fiberが零なので，
+補題\ref{lem:perfect-fiber}の$r=0$の場合により零となる．恒等射が零なのでcone自身が零である．
+従って単位・余単位は同型であり，$F_A$は同値である．
+\end{proof}
+この補題は比較functorと随伴の存在を仮定しており，それらを構成した代わりにはならない．
+しかし，今後必要な比較先と証明すべき基底変更条件を明確にする．
+
+\section{確実性と残る研究課題}\label{sec:status}
+第\ref{sec:nilpotent}--\ref{sec:flat}節は仮定\textup{(H)}の下で本文に証明を与えた結果である．
+第\ref{sec:envelope}節は指定された相対Serreデータ付きproper dg変形を入力し，
+既知のAbel変形定理へ接続する条件付きの構成である．
+新しい中心境界元の持上げやAS被覆を必要としない点が，現在の次数1研究で有用である．
+
+未完成なのは，元のdg族と構成したAbel変形の相対perfect部分との比較functor，
+全Morita変形との同値，相対Serre作用のheart保存，有限型代数化，
+一般のfpqc降下，モジュライ成分性である．
+また，文献上の新規性の網羅的確認，独立した第三者査読，形式証明は実施していない．
+記号計算・有限次元モデルの検算は研究bundleのスクリプトで再現するが，
+それらは上記の圏論的証明の機械検証ではない．
+
+\begin{thebibliography}{99}
+\bibitem{DDL} O.~De Deken and W.~Lowen,
+\emph{Abelian and derived deformations in the presence of $\mathbb Z$-generating geometric helices},
+J. Noncommut. Geom. \textbf{5} (2011), 477--505.
+\url{https://doi.org/10.4171/JNCG/83}.
+参照番号はarXiv:1001.4265v3，Propositions 4.4, 4.6，Theorems 4.5, 5.15による．
+\bibitem{LVdB} W.~Lowen and M.~Van den Bergh,
+\emph{Deformation theory of abelian categories},
+Trans. Amer. Math. Soc. \textbf{358} (2006), 5441--5483.
+\url{https://arxiv.org/abs/math/0405226}.
+本稿で確認したarXiv版の\S8.5, Theorem 8.8を用いる．
+\bibitem{GLSV} F.~Genovese, W.~Lowen, J.~Symons and M.~Van den Bergh,
+\emph{Deformations of triangulated categories with t-structures via derived injectives},
+arXiv:2411.15359 (2024).
+\url{https://arxiv.org/abs/2411.15359}.
+関連する変形問題の位置付けに用い，本文の証明の入力とはしない．
+\bibitem{AOU} T.~Abdelgadir, S.~Okawa and K.~Ueda,
+\emph{Compact moduli of noncommutative projective planes}, arXiv:1411.7770.
+\url{https://arxiv.org/abs/1411.7770}.
+\bibitem{AV} M.~Artin and M.~Van den Bergh,
+\emph{Twisted homogeneous coordinate rings}, J. Algebra \textbf{133} (1990), 249--271.
+\url{https://doi.org/10.1016/0021-8693(90)90269-T}.
+\bibitem{CKS} A.~Chirvasitu, R.~Kanda and S.~P.~Smith,
+\emph{Maps from Feigin and Odesskii's elliptic algebras to twisted homogeneous coordinate rings},
+Forum Math. Sigma \textbf{9} (2021), e4.
+\url{https://doi.org/10.1017/fms.2020.60}.
+\bibitem{Keeler} D.~S.~Keeler, \emph{Criteria for $\sigma$-ampleness},
+arXiv:math/9912051v2, Theorem 1.2.
+\url{https://arxiv.org/abs/math/9912051}.
+\bibitem{Stacks} The Stacks Project Authors, \emph{The Stacks Project},
+Tags 051E (Artin環上のflatness), 0656 (perfect complex),
+0A5Q (二重数環の例), 0DHZ (相対perfect).
+\url{https://stacks.math.columbia.edu/tag/051E}.
+\bibitem{RankPaper} 本研究の現行研究原稿，
+\emph{楕円境界を持つ非可換del Pezzo曲面の反標準モデル，内在的rankと共鳴}，版1.2，2026年11月16日，\S6．
+\texttt{papers/dp1\_anticanonical\_models.tex}，GitHub commit \texttt{adcf17e81478}．
+\url{https://github.com/uedakazushi/nc-dp1-moduli}.
+\end{thebibliography}
+\end{document}
