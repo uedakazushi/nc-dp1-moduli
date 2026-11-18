@@ -129,7 +129,7 @@ R: `thm:main` の既存証明はsmooth genuine S、smooth E、q∈Pic⁰(E)に�
 
 数値規約はv=v_B+m[e]、r=rankv、α=c₁v、m=χ(e,v)。detF_q(v)=O_E(α)⊗q^{m-r}。rank0のrestriction消滅の必要条件はO_E(α)q^m=O_E。全orbitから見えない対象にはさらにm=0が必要。genuine Sの非零rootαはO_E(α)非自明（RRとrestrictionで直接確認）。非零mのisogeny fiberの和集合はdenseでも、derived kernelのdense性を意味しない。
 
-境界外FはτF=F。χ(e,F)≠0なら導来切断で残る。元heartでExt¹が残ればqgr側ではcomplexになり得る。全共鳴でheartが必ず変わるとも言わない。一般次数の共鳴と混合拡大の研究は `nc-cubic-moduli` が外部正本で、未固定の最新版を無条件に入力しない。
+境界外FはτF=F。χ(e,F)≠0なら導来切断で残る。元heartでExt¹が残ればqgr側ではcomplexになり得る。全共鳴でheartが必ず変わるとも言わない。一般次数の共鳴と混合拡大の研究は `nc-cubic-classification` が外部正本で、未固定の最新版を無条件に入力しない。
 
 weak Sの(-2)曲線Cはsmooth Eと交わらず、O_C(-1)が全qで共通の非零orbit直交。これだけでは別のderived equivalenceの不存在やqgrの特異性は出ない。特異schemeでもDbcohがdg smoothになり得るので、Perf≠Db、singularity category、total Extのproperness、有限hdimを区別する。
 
