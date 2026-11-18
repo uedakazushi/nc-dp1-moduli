@@ -29,4 +29,4 @@ latexmk papers/dp1_artin_deformations.tex
 
 新検算はPython3標準ライブラリのみ。既存検算は `requirements-research.txt` のSymPyを使用する。PDF、ZIP、ビルド生成物はGit追跡しない。既存二稿の今回の再組版・独立全面監査は行っていない。
 
-一般次数の共鳴・heart比較は `uedakazushi/nc-cubic-moduli` の外部正本を、参照版と仮定を確認して用いる。
+一般次数の共鳴・heart比較は `uedakazushi/nc-cubic-classification` の外部正本を、参照版と仮定を確認して用いる。
